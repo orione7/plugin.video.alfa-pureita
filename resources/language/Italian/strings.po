@@ -1,0 +1,264 @@
+# Kodi Media Center language file
+# strings 30000 thru 30999 reserved for plugins and plugin settings
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: KODI Main\n"
+"Report-Msgid-Bugs-To: http://trac.kodi.tv/\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Kodi Translation Team\n"
+"Language-Team: Italiano (Italy) ()\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: es_ES\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+# empty string with id 30000
+
+msgctxt "#30001"
+msgid "Check for updates:"
+msgstr "Controlla aggiornamenti:"
+
+msgctxt "#30002"
+msgid "Enable adult mode:"
+msgstr "Visualizza canali per adulti"
+
+msgctxt "#30003"
+msgid "Enable debug logging:"
+msgstr "Generare log:"
+
+msgctxt "#30043"
+msgid "Force view mode:"
+msgstr "Forza visualizzazione:"
+
+msgctxt "#30004"
+msgid "Automatic update channels:"
+msgstr "Aggiornare i canali automaticamente:"
+
+msgctxt "#30005"
+msgid "Default play setting:"
+msgstr "Default play setting:"
+
+msgctxt "#30006"
+msgid "Ask"
+msgstr "Chiedi"
+
+msgctxt "#30007"
+msgid "Watch in low quality"
+msgstr "Guarda in bassa qualita'"
+
+msgctxt "#30008"
+msgid "Watch in high quality"
+msgstr "Guarda in alta qualita'"
+
+# empty string with id 30009
+
+msgctxt "#30010"
+msgid "Channel icons view:"
+msgstr "Logo dei canali:"
+
+msgctxt "#30011"
+msgid "Poster (vertical)"
+msgstr "Poster (verticale)"
+
+msgctxt "#30012"
+msgid "Banner (horizontal)"
+msgstr "Banner (orizontale)"
+
+msgctxt "#30200"
+msgid "Square"
+msgstr "Quadrato"
+
+# empty string with id 30013
+
+msgctxt "#30014"
+msgid "Username:"
+msgstr "Nome Utente:"
+
+msgctxt "#30015"
+msgid "Password:"
+msgstr "Password:"
+
+# empty string with id 30016
+
+msgctxt "#30017"
+msgid "Download path:"
+msgstr "Percorso download:"
+
+msgctxt "#30018"
+msgid "Download list path:"
+msgstr "Percorso lista download:"
+
+msgctxt "#30067"
+msgid "Videolibrary path:"
+msgstr "Percorso libreria:"
+
+msgctxt "#30019"
+msgid "Filter channels by language:"
+msgstr "Filtra canali per lingua:"
+
+msgctxt "#30044"
+msgid "Play mode:"
+msgstr "Modo di riproduzione:"
+
+msgctxt "#30068"
+msgid "Filter by servers:"
+msgstr "Filtra per server:"
+
+msgctxt "#30050"
+msgid "Server connection error"
+msgstr "Impossibile connettersi con il server"
+
+msgctxt "#30051"
+msgid "Website error message (http code %d)"
+msgstr "Il sito web non funziona correttamente (error http %d)"
+
+msgctxt "#30055"
+msgid "Video not available"
+msgstr "Vídeo non disponibile"
+
+msgctxt "#30057"
+msgid "The video has been removed from %s"
+msgstr "Impossibile accedere al vídeo en %s"
+
+msgctxt "#30058"
+msgid "Try another server or channel"
+msgstr "Prova un'altro server un'altro canale"
+
+msgctxt "#30065"
+msgid "Unsopported Server"
+msgstr "Server non supportato"
+
+msgctxt "#30100"
+msgid "Configuration"
+msgstr "Configurazione"
+
+msgctxt "#30101"
+msgid "Downloads"
+msgstr "Downloads"
+
+msgctxt "#30102"
+msgid "Favorites"
+msgstr "Preferiti"
+
+msgctxt "#30103"
+msgid "Global search"
+msgstr "Ricerca Globale"
+
+msgctxt "#30104"
+msgid "Help"
+msgstr "Aiuto"
+
+msgctxt "#30105"
+msgid "Removed from favorites"
+msgstr "Rimosso dai preferiti"
+
+msgctxt "#30108"
+msgid "added to favorites"
+msgstr "Aggiunto ai preferiti"
+
+msgctxt "#30109"
+msgid "added to download list"
+msgstr "Aggiunto alla lista download"
+
+msgctxt "#30112"
+msgid "Enter title to search"
+msgstr "Introdurre il titolo nella ricerca"
+
+msgctxt "#30135"
+msgid "added to the videolibrary"
+msgstr "Aggiunto alla libreria"
+
+msgctxt "#30130"
+msgid "Recent"
+msgstr "Novita'"
+
+msgctxt "#30118"
+msgid "Channels"
+msgstr "Canali"
+
+msgctxt "#30119"
+msgid "Choose a Category"
+msgstr "Categorie"
+
+msgctxt "#30121"
+msgid "All"
+msgstr "Tutti i Canali"
+
+msgctxt "#30122"
+msgid "Movies"
+msgstr "Film"
+
+msgctxt "#30123"
+msgid "TV Shows"
+msgstr "Serie TV"
+
+msgctxt "#30124"
+msgid "Anime"
+msgstr "Anime"
+
+msgctxt "#30125"
+msgid "Documentaries"
+msgstr "Documentari"
+
+msgctxt "#30136"
+msgid "Original version"
+msgstr "Versioni in Lingua originale"
+
+msgctxt "#30126"
+msgid "Adult"
+msgstr "Adulti"
+
+msgctxt "#30137"
+msgid "Direct"
+msgstr "Diretto"
+
+msgctxt "#30131"
+msgid "Videolibrary"
+msgstr "Libreria"
+
+msgctxt "#30151"
+msgid "Watch the video"
+msgstr "Guarda il Video"
+
+msgctxt "#30153"
+msgid "Download"
+msgstr "Download"
+
+msgctxt "#30154"
+msgid "Remove from favorites"
+msgstr "Rimuovi dai preferiti"
+
+msgctxt "#30155"
+msgid "Add to favorites"
+msgstr "Aggiungi ai preferiti"
+
+msgctxt "#30161"
+msgid "Add to videolibrary"
+msgstr "Aggiungi alla Libreria"
+
+msgctxt "#30162"
+msgid "Search for trailer"
+msgstr "Cerca trailer"
+
+msgctxt "#30163"
+msgid "Choose an option"
+msgstr "Scegli un'opzione"
+
+msgctxt "#30164"
+msgid "Delete this file"
+msgstr "Cancella questo file"
+
+msgctxt "#30501"
+msgid "Paths"
+msgstr "Percorso"
+
+msgctxt "#30998"
+msgid "Shortcut"
+msgstr "Accesso diretto"
+
+msgctxt "#30999"
+msgid "Add key to open Shortcut"
+msgstr "Aggiungi Key per l'accesso diretto"
