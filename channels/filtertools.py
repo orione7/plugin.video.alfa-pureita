@@ -119,7 +119,7 @@ def context(item, list_language=None, list_quality=None, exist=False):
         _context = []
 
     if access():
-        dict_data = {"title": "FILTRO: Configurar", "action": "config_item", "channel": "filtertools"}
+        dict_data = {"title": "FILTRO: Configura", "action": "config_item", "channel": "filtertools"}
         if list_language:
             dict_data["list_language"] = list_language
         if list_quality:
@@ -138,10 +138,10 @@ def context(item, list_language=None, list_quality=None, exist=False):
 
         if item.action == "play":
             if not exist:
-                _context.append({"title": "FILTRO: Añadir '%s'" % item.language, "action": "save_from_context",
+                _context.append({"title": "FILTRO: Aggiungere '%s'" % item.language, "action": "save_from_context",
                                  "channel": "filtertools", "from_channel": item.channel})
             else:
-                _context.append({"title": "FILTRO: Borrar '%s'" % item.language, "action": "delete_from_context",
+                _context.append({"title": "FILTRO: Cancellare '%s'" % item.language, "action": "delete_from_context",
                                  "channel": "filtertools", "from_channel": item.channel})
 
     return _context
@@ -149,7 +149,7 @@ def context(item, list_language=None, list_quality=None, exist=False):
 
 def show_option(itemlist, channel, list_language, list_quality):
     if access():
-        itemlist.append(Item(channel=__channel__, title="[COLOR %s]Configurar filtro para series...[/COLOR]" %
+        itemlist.append(Item(channel=__channel__, title="[COLOR %s]Configurare filtro per le SerieTV...[/COLOR]" %
                                                         COLOR.get("parent_item", "auto"), action="load",
                              list_language=list_language,
                              list_quality=list_quality, from_channel=channel))
@@ -299,18 +299,18 @@ def get_links(list_item, item, list_language, list_quality=None, global_filter_l
             for i in list_item:
                 list_item_all.append(i.tourl())
 
-            _context = [{"title": "FILTRO: Borrar '%s'" % _filter.language, "action": "delete_from_context",
+            _context = [{"title": "FILTRO: Cancellare '%s'" % _filter.language, "action": "delete_from_context",
                          "channel": "filtertools", "to_channel": "seriesdanko"}]
 
             if _filter.quality_allowed:
-                msg_quality_allowed = " y calidad %s" % _filter.quality_allowed
+                msg_quality_allowed = " e qualità %s" % _filter.quality_allowed
             else:
                 msg_quality_allowed = ""
 
             new_itemlist.append(Item(channel=__channel__, action="no_filter", list_item_all=list_item_all,
                                      show=item.show,
-                                     title="[COLOR %s]No hay elementos con idioma '%s'%s, pulsa para mostrar "
-                                           "sin filtro[/COLOR]"
+                                     title="[COLOR %s]Nessun elemento in lingua '%s'%s, clicca per visualizzare "
+                                           "senza filtro[/COLOR]"
                                            % (COLOR.get("error", "auto"), _filter.language, msg_quality_allowed),
                                      context=_context))
 
@@ -379,14 +379,14 @@ def mainlist(channel, list_language, list_quality):
         activo = " (desactivado)"
         if dict_series[tvshow][TAG_ACTIVE]:
             activo = ""
-        title = "Configurar [COLOR %s][%s][/COLOR]%s" % (tag_color, name, activo)
+        title = "Configura [COLOR %s][%s][/COLOR]%s" % (tag_color, name, activo)
 
         itemlist.append(Item(channel=__channel__, action="config_item", title=title, show=name,
                              list_language=list_language, list_quality=list_quality, from_channel=channel))
 
     if len(itemlist) == 0:
-        itemlist.append(Item(channel=channel, action="mainlist", title="No existen filtros, busca una serie y "
-                                                                       "pulsa en menú contextual 'FILTRO: Configurar'"))
+        itemlist.append(Item(channel=channel, action="mainlist", title="Non ci sono filtri, cerca una serie e "
+                                                                       "clicca sul menu contestuale 'FILTRO: Configura'"))
 
     return itemlist
 
@@ -417,7 +417,7 @@ def config_item(item):
     if item.show.lower().strip() in dict_series:
         allow_option = True
         active = dict_series.get(item.show.lower().strip(), {}).get(TAG_ACTIVE, False)
-        custom_button = {'label': 'Borrar', 'function': 'delete', 'visible': True, 'close': True}
+        custom_button = {'label': 'Cancellare', 'function': 'delete', 'visible': True, 'close': True}
 
     list_controls = []
 
@@ -425,7 +425,7 @@ def config_item(item):
         active_control = {
             "id": "active",
             "type": "bool",
-            "label": "¿Activar/Desactivar filtro?",
+            "label": "Attivare/Disattivare filtro?",
             "color": "",
             "default": active,
             "enabled": allow_option,
@@ -450,7 +450,7 @@ def config_item(item):
             {
                 "id": "textoCalidad",
                 "type": "label",
-                "label": "Calidad permitida",
+                "label": "Qualità consentita",
                 "color": "0xffC6C384",
                 "enabled": True,
                 "visible": True,
@@ -469,7 +469,7 @@ def config_item(item):
         # concatenamos list_controls con list_controls_calidad
         list_controls.extend(list_controls_calidad)
 
-    title = "Filtrado de enlaces para: [COLOR %s]%s[/COLOR]" % (COLOR.get("selected", "auto"), item.show)
+    title = "Filtraggio di collegamenti per: [COLOR %s]%s[/COLOR]" % (COLOR.get("selected", "auto"), item.show)
 
     platformtools.show_channel_settings(list_controls=list_controls, callback='save', item=item,
                                         caption=title, custom_button=custom_button)
@@ -482,9 +482,9 @@ def delete(item, dict_values):
         dict_series = jsontools.get_node_from_file(item.from_channel, TAG_TVSHOW_FILTER)
         tvshow = item.show.strip().lower()
 
-        heading = "¿Está seguro que desea eliminar el filtro?"
-        line1 = "Pulse 'Si' para eliminar el filtro de [COLOR %s]%s[/COLOR], pulse 'No' o cierre la ventana para " \
-                "no hacer nada." % (COLOR.get("selected", "auto"), item.show.strip())
+        heading = "Sei sicuro di voler eliminare il filtro?"
+        line1 = "Premi 'Si' per eliminare il filtro di [COLOR %s]%s[/COLOR], Premi 'No' o chiudi la finestra " \
+                "per annullare." % (COLOR.get("selected", "auto"), item.show.strip())
 
         if platformtools.dialog_yesno(heading, line1) == 1:
             lang_selected = dict_series.get(tvshow, {}).get(TAG_LANGUAGE, "")
@@ -494,9 +494,9 @@ def delete(item, dict_values):
 
             sound = False
             if result:
-                message = "FILTRO ELIMINADO"
+                message = "FILTRO ELIMINATO"
             else:
-                message = "Error al guardar en disco"
+                message = "Errore nel salvataggio su disco"
                 sound = True
 
             heading = "%s [%s]" % (item.show.strip(), lang_selected)
@@ -541,9 +541,9 @@ def save(item, dict_data_saved):
 
         sound = False
         if result:
-            message = "FILTRO GUARDADO"
+            message = "FILTRO SALVATO"
         else:
-            message = "Error al guardar en disco"
+            message = "Errore nel salvataggio su disco"
             sound = True
 
         heading = "%s [%s]" % (item.show.strip(), lang_selected)
@@ -572,9 +572,9 @@ def save_from_context(item):
 
     sound = False
     if result:
-        message = "FILTRO GUARDADO"
+        message = "FILTRO SALVATO"
     else:
-        message = "Error al guardar en disco"
+        message = "Errore nel salvataggio su disco"
         sound = True
 
     heading = "%s [%s]" % (item.show.strip(), item.language)
@@ -607,9 +607,9 @@ def delete_from_context(item):
 
     sound = False
     if result:
-        message = "FILTRO ELIMINADO"
+        message = "FILTRO ELIMINATO"
     else:
-        message = "Error al guardar en disco"
+        message = "Errore nel salvataggio su disco"
         sound = True
 
     heading = "%s [%s]" % (item.show.strip(), lang_selected)

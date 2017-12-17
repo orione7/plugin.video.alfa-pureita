@@ -49,7 +49,7 @@ def mainlist(item):
                                   "action": "delFavourite",
                                   "channel": "favorites",
                                   "from_title": item.title},
-                                 {"title": "Renombrar",
+                                 {"title": "Rinominare",
                                   "action": "renameFavourite",
                                   "channel": "favorites",
                                   "from_title": item.title}
@@ -137,7 +137,7 @@ def renameFavourite(item):
                 favourites_list[i] = (new_title, fav[1], fav[2])
                 if save_favourites(favourites_list):
                     platformtools.dialog_ok(config.get_localized_string(30102), item.from_title,
-                                            "se ha renombrado como:", new_title)  # 'Se ha quitado de favoritos'
+                                            "È stato rinominato come:", new_title)  # 'Se ha quitado de favoritos'
                     platformtools.itemlist_refresh()
 
 
