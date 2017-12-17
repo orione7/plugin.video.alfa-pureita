@@ -8,7 +8,7 @@
     <provides>video</provides>
   </extension>
   <extension point="xbmc.addon.metadata">
-    <summary lang="es">Navega con Kodi por páginas web.</summary>
+    <summary lang="it">Naviga nelle pagine web utilizzando Kodi.</summary>
     <assets>
       <icon>icon1.png</icon>
       <fanart>fanart.jpg</fanart>
@@ -18,17 +18,17 @@
       <screenshot>resources/media/themes/ss/4.jpg</screenshot>
     </assets>
     <news>[B]Novita in questa versione:[/B]   gnula, plusdede, streamplay, bitertv, canalpelis, playpornx, yaske, bdupload, userscloud, arreglos internos</news>
-    <description lang="it">Browse web pages using Kodi</description>
+    <description lang="it">Naviga nelle pagine web utilizzando Kodi</description>
     <description lang="es">Navega con Kodi por páginas web para ver sus videos de manera fácil.</description>
     <summary lang="en">Browse web pages using Kodi</summary>
     <description lang="en">Browse web pages using Kodi, you can easily watch their video content.</description>
     <disclaimer>[COLOR red]The owners and submitters to this addon do not host or distribute any of the content displayed by these addons nor do they have any affiliation with the content providers.[/COLOR]</disclaimer>
     <platform>all</platform>
     <license>GNU GPL v3</license>
-    <forum>foro</forum>
+    <forum>forum Alfa-ITA</forum>
     <website>web</website>
     <email>my@email.com</email>
-    <source>https://github.com/alfa-addon/addon</source>
+    <source>https://github.com/orione7/plugin.video.alfa-pureita</source>
   </extension>
   <extension point="xbmc.service" library="videolibrary_service.py" start="login|startup">
   </extension>
