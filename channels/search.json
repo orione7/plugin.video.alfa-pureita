@@ -1,6 +1,6 @@
 {
   "id": "search",
-  "name": "Buscador global",
+  "name": "Ricerca Globale",
   "active": false,
   "adult": false,
   "language": ["*"],
@@ -11,7 +11,7 @@
     {
       "id": "multithread",
       "type": "bool",
-      "label": "Buscador MultiThread",
+      "label": "Ricerca MultiThread",
       "default": true,
       "enabled": true,
       "visible": true
@@ -19,19 +19,19 @@
     {
       "id": "result_mode",
       "type": "list",
-      "label": "Mostrar resultados:",
+      "label": "Mostra resultati:",
       "default": 0,
       "enabled": true,
       "visible": true,
       "lvalues": [
-        "Por canales",
-        "Todo junto"
+        "Per canale",
+        "Tutto unito"
       ]
     },
     {
       "id": "saved_searches_limit",
       "type": "list",
-      "label": "Busquedas guardadas:",
+      "label": "Ricerche salvate:",
       "default": 0,
       "enabled": true,
       "visible": true,
@@ -45,7 +45,7 @@
     {
       "id": "last_search",
       "type": "bool",
-      "label": "Recordar última búsqueda",
+      "label": "Ricorda l'ultima ricerca",
       "default": true,
       "enabled": true,
       "visible": true

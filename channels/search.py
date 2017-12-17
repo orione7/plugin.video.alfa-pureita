@@ -18,36 +18,36 @@ def mainlist(item):
     item.channel = "search"
 
     itemlist = list()
-    context = [{"title": "Elegir canales incluidos",
+    context = [{"title": "Scegli i canali da includere",
                 "action": "setting_channel",
                 "channel": item.channel}]
     itemlist.append(Item(channel=item.channel, action="search",
-                         title="Buscar por titulo", context=context,
+                         title="Cerca per titolo", context=context,
                          thumbnail=get_thumb("search.png")))
 
     thumbnail = get_thumb("search_star.png")
 
-    itemlist.append(Item(channel='tvmoviedb', title="Buscar actor/actriz", action="search_",
+    itemlist.append(Item(channel='tvmoviedb', title="Cerca per attore/attice", action="search_",
                          search={'url': 'search/person', 'language': 'es', 'page': 1}, star=True,
                          thumbnail=thumbnail))
 
     itemlist.append(Item(channel=item.channel, action="search",
-                         title="Buscar por categorias (búsqueda avanzada)", extra="categorias",
+                         title="Cerca per categoria (ricerca avanzata)", extra="categorias",
                          context=context,
                          thumbnail=get_thumb("search.png")))
-    itemlist.append(Item(channel=item.channel, action="opciones", title="Opciones",
+    itemlist.append(Item(channel=item.channel, action="opciones", title="Opzioni",
                          thumbnail=get_thumb("search.png")))
 
     saved_searches_list = get_saved_searches()
     context2 = context[:]
-    context2.append({"title": "Borrar búsquedas guardadas",
+    context2.append({"title": "Cancella ricerche effettuate",
                      "action": "clear_saved_searches",
                      "channel": item.channel})
     logger.info("saved_searches_list=%s" % saved_searches_list)
 
     if saved_searches_list:
         itemlist.append(Item(channel=item.channel, action="",
-                             title="Búsquedas guardadas:", context=context2,
+                             title="Ricerche effettuate:", context=context2,
                              thumbnail=get_thumb("search.png")))
         for saved_search_text in saved_searches_list:
             itemlist.append(Item(channel=item.channel, action="do_search",
@@ -62,17 +62,17 @@ def mainlist(item):
 def opciones(item):
     itemlist = list()
     itemlist.append(Item(channel=item.channel, action="setting_channel",
-                         title="Elegir canales incluidos en la búsqueda", folder=False,
+                         title="Scegli i canali da includere nella ricerca", folder=False,
                          thumbnail=get_thumb("search.png")))
-    itemlist.append(Item(channel=item.channel, action="clear_saved_searches", title="Borrar búsquedas guardadas",
+    itemlist.append(Item(channel=item.channel, action="clear_saved_searches", title="Elimina ricerche effettuate",
                          folder=False, thumbnail=get_thumb("search.png")))
-    itemlist.append(Item(channel=item.channel, action="settings", title="Otros ajustes", folder=False,
+    itemlist.append(Item(channel=item.channel, action="settings", title="Opzioni Extra", folder=False,
                          thumbnail=get_thumb("search.png")))
     return itemlist
 
 
 def settings(item):
-    return platformtools.show_channel_settings(caption="configuración -- Buscador")
+    return platformtools.show_channel_settings(caption="Configurazione -- Ricerca")
 
 
 def setting_channel(item):
@@ -116,12 +116,12 @@ def setting_channel(item):
         list_controls.append(control)
 
     if config.get_setting("custom_button_value", item.channel):
-        custom_button_label = "Ninguno"
+        custom_button_label = "Nessuno"
     else:
-        custom_button_label = "Todos"
+        custom_button_label = "Tutti"
 
     return platformtools.show_channel_settings(list_controls=list_controls,
-                                               caption="Canales incluidos en la búsqueda",
+                                               caption="Canali inclusi nella Ricerca",
                                                callback="save_settings", item=item,
                                                custom_button={'visible': True,
                                                               'function': "cb_custom_button",
@@ -130,10 +130,10 @@ def setting_channel(item):
 
 
 def save_settings(item, dict_values):
-    progreso = platformtools.dialog_progress("Guardando configuración...", "Espere un momento por favor.")
+    progreso = platformtools.dialog_progress("Controllo configurazione...", "Attendere...")
     n = len(dict_values)
     for i, v in enumerate(dict_values):
-        progreso.update((i * 100) / n, "Guardando configuración...")
+        progreso.update((i * 100) / n, "Controllo configurazione...")
         config.set_setting("include_in_global_search", dict_values[v], v)
 
     progreso.close()
@@ -148,16 +148,16 @@ def cb_custom_button(item, dict_values):
         dict_values[v] = not value
 
     if config.set_setting("custom_button_value", not value, item.channel) == True:
-        return {"label": "Ninguno"}
+        return {"label": "Nessuno"}
     else:
-        return {"label": "Todos"}
+        return {"label": "Tutti"}
 
 
 def searchbycat(item):
     # Only in xbmc/kodi
     # Abre un cuadro de dialogo con las categorías en las que hacer la búsqueda
 
-    categories = ["Películas", "Series", "Anime", "Documentales", "VOS", "Latino"]
+    categories = ["Film", "SerieTV", "Anime", "Documentari", "VOS", "Latino"]
     categories_id = ["movie", "tvshow", "anime", "documentary", "vos", "latino"]
     list_controls = []
     for i, category in enumerate(categories):
@@ -178,13 +178,13 @@ def searchbycat(item):
     list_controls.append(control)
     control = {'id': "torrent",
                'type': "bool",
-               'label': 'Incluir en la búsqueda canales Torrent',
+               'label': 'Includi nella ricerca i canali Torrent',
                'default': True,
                'enabled': True,
                'visible': True}
     list_controls.append(control)
 
-    return platformtools.show_channel_settings(list_controls=list_controls, caption="Elegir categorías",
+    return platformtools.show_channel_settings(list_controls=list_controls, caption="Scegliere una categoria",
                                                callback="search_cb", item=item)
 
 
@@ -226,7 +226,7 @@ def show_result(item):
     tecleado = None
     if item.adult and config.get_setting("adult_request_password"):
         # Solicitar contraseña
-        tecleado = platformtools.dialog_input("", "Contraseña para canales de adultos", True)
+        tecleado = platformtools.dialog_input("", "Password per i canali adulti", True)
         if tecleado is None or tecleado != config.get_setting("adult_password"):
             return []
 
@@ -285,7 +285,7 @@ def do_search(item, categories=None):
 
     if item.contextual==True:
         categories = ["Películas"]
-        setting_item = Item(channel=item.channel, title="Elegir canales incluidos en la búsqueda", folder=False,
+        setting_item = Item(channel=item.channel, title="Scegli i canali da includere nella ricerca", folder=False,
                             thumbnail=get_thumb("search.png"))
         setting_channel(setting_item)
 
@@ -312,7 +312,7 @@ def do_search(item, categories=None):
     # Para Kodi es necesario esperar antes de cargar el progreso, de lo contrario
     # el cuadro de progreso queda "detras" del cuadro "cargando..." y no se le puede dar a cancelar
     time.sleep(0.5)
-    progreso = platformtools.dialog_progress("Buscando '%s'..." % tecleado, "")
+    progreso = platformtools.dialog_progress("Ricerca di '%s'..." % tecleado, "")
     channel_files = sorted(glob.glob(channels_path), key=lambda x: os.path.basename(x))
 
     import math
@@ -393,7 +393,7 @@ def do_search(item, categories=None):
 
             logger.info("%s incluido en la búsqueda" % basename_without_extension)
             progreso.update(percentage,
-                            "Buscando en %s..." % channel_parameters["title"])
+                            "Ricerca in %s..." % channel_parameters["title"])
 
         except:
             logger.error("No se puede buscar en: %s" % channel_parameters["title"])
@@ -413,8 +413,8 @@ def do_search(item, categories=None):
             percentage = int(math.ceil(index * t))
 
             list_pendent_names = [a.getName() for a in pendent]
-            mensaje = "Buscando en %s" % (", ".join(list_pendent_names))
-            progreso.update(percentage, "Finalizado en %d/%d canales..." % (len(threads) - len(pendent), len(threads)),
+            mensaje = "Ricerca in %s" % (", ".join(list_pendent_names))
+            progreso.update(percentage, "Ricerca in %d di %d canali..." % (len(threads) - len(pendent), len(threads)),
                             mensaje)
             logger.debug(mensaje)
 
@@ -448,7 +448,7 @@ def do_search(item, categories=None):
                                      from_action="search", from_channel=element["item"].channel, tecleado=tecleado))
             # todos los resultados juntos, en la misma lista
             else:
-                title = " [ Resultados del canal %s ] " % channel
+                title = " [ Risultati nel canale %s ] " % channel
                 itemlist.append(Item(title=title, channel="search", action="",
                                      folder=False, text_bold=True, from_channel=channel))
                 for i in element["itemlist"]:
@@ -457,7 +457,7 @@ def do_search(item, categories=None):
                         itemlist.append(i.clone(title=title, from_action=i.action, from_channel=i.channel,
                                                 channel="search", action="show_result", adult=element["adult"]))
 
-    title = "Buscando: '%s' | Encontrado: %d vídeos | Tiempo: %2.f segundos" % (
+    title = "Ricerca di: '%s' | Trovati: %d vídeo | Tempo: %2.f secondi" % (
     tecleado, total, time.time() - start_time)
     itemlist.insert(0, Item(title=title, text_color='yellow'))
 
@@ -503,7 +503,7 @@ def save_search(text):
 
 def clear_saved_searches(item):
     config.set_setting("saved_searches_list", list(), "search")
-    platformtools.dialog_ok("Buscador", "Búsquedas borradas correctamente")
+    platformtools.dialog_ok("Ricerca", "Ricerche cancellare correttamente")
 
 
 def get_saved_searches():
