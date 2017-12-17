@@ -53,7 +53,7 @@ def mainlist(item):
                     title = TITLE_TVSHOW % (
                         STATUS_COLORS[i.downloadStatus], i.downloadProgress, i.contentSerieName, i.contentChannel)
 
-                    itemlist.append(Item(title=title, channel="descargas", action="mainlist", contentType="tvshow",
+                    itemlist.append(Item(title=title, channel="Download", action="mainlist", contentType="tvshow",
                                          contentSerieName=i.contentSerieName, contentChannel=i.contentChannel,
                                          downloadStatus=i.downloadStatus, downloadProgress=[i.downloadProgress],
                                          fanart=i.fanart, thumbnail=i.thumbnail))
@@ -89,40 +89,40 @@ def mainlist(item):
 
     # Si hay alguno completado
     if 2 in estados:
-        itemlist.insert(0, Item(channel=item.channel, action="clean_ready", title="Eliminar descargas completadas",
+        itemlist.insert(0, Item(channel=item.channel, action="clean_ready", title="Eliminare i download completati",
                                 contentType=item.contentType, contentChannel=item.contentChannel,
                                 contentSerieName=item.contentSerieName, text_color="sandybrown"))
 
     # Si hay alguno con error
     if 3 in estados:
-        itemlist.insert(0, Item(channel=item.channel, action="restart_error", title="Reiniciar descargas con error",
+        itemlist.insert(0, Item(channel=item.channel, action="restart_error", title="Riavvia i download con errore",
                                 contentType=item.contentType, contentChannel=item.contentChannel,
                                 contentSerieName=item.contentSerieName, text_color="orange"))
 
     # Si hay alguno pendiente
     if 1 in estados or 0 in estados:
-        itemlist.insert(0, Item(channel=item.channel, action="download_all", title="Descargar todo",
+        itemlist.insert(0, Item(channel=item.channel, action="download_all", title="Scarica tutti",
                                 contentType=item.contentType, contentChannel=item.contentChannel,
                                 contentSerieName=item.contentSerieName, text_color="green"))
 
     if len(itemlist):
-        itemlist.insert(0, Item(channel=item.channel, action="clean_all", title="Eliminar todo",
+        itemlist.insert(0, Item(channel=item.channel, action="clean_all", title="Elimina tutti",
                                 contentType=item.contentType, contentChannel=item.contentChannel,
                                 contentSerieName=item.contentSerieName, text_color="red"))
 
     if not item.contentType == "tvshow" and config.get_setting("browser", "downloads") == True:
-        itemlist.insert(0, Item(channel=item.channel, action="browser", title="Ver archivos descargados",
+        itemlist.insert(0, Item(channel=item.channel, action="browser", title="Visualizza i file scaricati",
                                 url=DOWNLOAD_PATH, text_color="yellow"))
 
     if not item.contentType == "tvshow":
-        itemlist.insert(0, Item(channel=item.channel, action="settings", title="Configuración descargas...",
+        itemlist.insert(0, Item(channel=item.channel, action="settings", title="Impostazioni Download...",
                                 text_color="blue"))
 
     return itemlist
 
 
 def settings(item):
-    ret = platformtools.show_channel_settings(caption="configuración -- Descargas")
+    ret = platformtools.show_channel_settings(caption="configurazione -- Download")
     platformtools.itemlist_refresh()
     return ret
 
@@ -211,8 +211,8 @@ def menu(item):
     else:
         servidor = "Auto"
     # Opciones disponibles para el menu
-    op = ["Descargar", "Eliminar de la lista", "Reiniciar descarga y eliminar datos",
-          "Modificar servidor: %s" % (servidor.capitalize())]
+    op = ["Download", "Eliminare dalla lista", "Riavvia download ed elimina dati",
+          "Modifica server: %s" % (servidor.capitalize())]
 
     opciones = []
 
@@ -237,7 +237,7 @@ def menu(item):
         opciones.append(op[1])  # Eliminar de la lista
 
     # Mostramos el dialogo
-    seleccion = platformtools.dialog_select("Elige una opción", opciones)
+    seleccion = platformtools.dialog_select("Scegli un'opzione", opciones)
 
     # -1 es cancelar
     if seleccion == -1: return
@@ -289,12 +289,12 @@ def move_to_libray(item):
     if config.get_setting("library_add", "downloads") == True:
         if filetools.isfile(final_path):
             if item.contentType == "movie" and item.infoLabels["tmdb_id"]:
-                library_item = Item(title="Descargado: %s" % item.downloadFilename, channel="downloads",
+                library_item = Item(title="Downloading: %s" % item.downloadFilename, channel="downloads",
                                     action="findvideos", infoLabels=item.infoLabels, url=final_path)
                 videolibrarytools.save_movie(library_item)
 
             elif item.contentType == "episode" and item.infoLabels["tmdb_id"]:
-                library_item = Item(title="Descargado: %s" % item.downloadFilename, channel="downloads",
+                library_item = Item(title="Downloading: %s" % item.downloadFilename, channel="downloads",
                                     action="findvideos", infoLabels=item.infoLabels, url=final_path)
                 tvshow = Item(channel="downloads", contentType="tvshow",
                               infoLabels={"tmdb_id": item.infoLabels["tmdb_id"]})
@@ -416,10 +416,10 @@ def sort_method(item):
     @rtype: int
     """
     lang_orders = {}
-    lang_orders[0] = ["ES", "LAT", "SUB", "ENG", "VOSE"]
-    lang_orders[1] = ["ES", "SUB", "LAT", "ENG", "VOSE"]
-    lang_orders[2] = ["ENG", "SUB", "VOSE", "ESP", "LAT"]
-    lang_orders[3] = ["VOSE", "ENG", "SUB", "ESP", "LAT"]
+    lang_orders[0] = ["IT", "ES", "LAT", "SUB", "ENG", "VOSE"]
+    lang_orders[1] = ["IT", "ES", "SUB", "LAT", "ENG", "VOSE"]
+    lang_orders[2] = ["ENG", "SUB", "VOSE", "IT", "ESP", "LAT"]
+    lang_orders[3] = ["VOSE", "ENG", "SUB", "IT", "ESP", "LAT"]
 
     quality_orders = {}
     quality_orders[0] = ["BLURAY", "FULLHD", "HD", "480P", "360P", "240P"]
@@ -429,8 +429,9 @@ def sort_method(item):
 
     order_list_idiomas = lang_orders[int(config.get_setting("language", "downloads"))]
     match_list_idimas = {"ES": ["CAST", "ESP", "Castellano", "Español", "Audio Español"],
+                         "IT": ["IT", "ITA", "Italian", "Italiano", "it"],
                          "LAT": ["LAT", "Latino"],
-                         "SUB": ["Subtitulo Español", "Subtitulado", "SUB"],
+                         "SUB": ["Sottotitoli Italiano", "SubITA", "Sottotitolato", "Subtitulo Español", "Subtitulado", "SUB"],
                          "ENG": ["EN", "ENG", "Inglés", "Ingles", "English"],
                          "VOSE": ["VOSE"]}
 
@@ -472,7 +473,7 @@ def download_from_url(url, item):
                    block_size=2 ** (17 + int(config.get_setting("block_size", "downloads"))),
                    part_size=2 ** (20 + int(config.get_setting("part_size", "downloads"))),
                    max_buffer=2 * int(config.get_setting("max_buffer", "downloads")))
-    d.start_dialog("Descargas")
+    d.start_dialog("Download")
 
     # Descarga detenida. Obtenemos el estado:
     # Se ha producido un error en la descarga   
@@ -509,11 +510,11 @@ def download_from_server(item):
     logger.info(item.tostring())
     unsupported_servers = ["torrent"]
 
-    progreso = platformtools.dialog_progress("Descargas", "Probando con: %s" % item.server)
+    progreso = platformtools.dialog_progress("Download", "Provo con: %s" % item.server)
     channel = __import__('channels.%s' % item.contentChannel, None, None, ["channels.%s" % item.contentChannel])
     if hasattr(channel, "play") and not item.play_menu:
 
-        progreso.update(50, "Probando con: %s" % item.server, "Conectando con %s..." % item.contentChannel)
+        progreso.update(50, "Provo con: %s" % item.server, "Connessione con %s..." % item.contentChannel)
         try:
             itemlist = getattr(channel, "play")(item.clone(channel=item.contentChannel, action=item.contentAction))
         except:
@@ -576,10 +577,10 @@ def download_from_best_server(item):
 
     result = {"downloadStatus": STATUS_CODES.error}
 
-    progreso = platformtools.dialog_progress("Descargas", "Obteniendo lista de servidores disponibles...")
+    progreso = platformtools.dialog_progress("Download", "Ricerca elenco dei server disponibili...")
     channel = __import__('channels.%s' % item.contentChannel, None, None, ["channels.%s" % item.contentChannel])
 
-    progreso.update(50, "Obteniendo lista de servidores disponibles:", "Conectando con %s..." % item.contentChannel)
+    progreso.update(50, "Ricerca elenco dei server disponibili:", "Connessione con %s..." % item.contentChannel)
 
     if hasattr(channel, item.contentAction):
         play_items = getattr(channel, item.contentAction)(
@@ -589,8 +590,8 @@ def download_from_best_server(item):
 
     play_items = filter(lambda x: x.action == "play" and not "trailer" in x.title.lower(), play_items)
 
-    progreso.update(100, "Obteniendo lista de servidores disponibles", "Servidores disponibles: %s" % len(play_items),
-                    "Identificando servidores...")
+    progreso.update(100, "Ricerca elenco dei server disponibili", "Server disponibili: %s" % len(play_items),
+                    "Identificazione server...")
 
     if config.get_setting("server_reorder", "downloads") == 1:
         play_items.sort(key=sort_method)
@@ -623,9 +624,9 @@ def select_server(item):
     logger.info(
         "contentAction: %s | contentChannel: %s | url: %s" % (item.contentAction, item.contentChannel, item.url))
 
-    progreso = platformtools.dialog_progress("Descargas", "Obteniendo lista de servidores disponibles...")
+    progreso = platformtools.dialog_progress("Download", "Ricerca elenco dei server disponibili...")
     channel = __import__('channels.%s' % item.contentChannel, None, None, ["channels.%s" % item.contentChannel])
-    progreso.update(50, "Obteniendo lista de servidores disponibles:", "Conectando con %s..." % item.contentChannel)
+    progreso.update(50, "Ricerca elenco dei server disponibili:", "Connessione con %s..." % item.contentChannel)
 
     if hasattr(channel, item.contentAction):
         play_items = getattr(channel, item.contentAction)(
@@ -635,14 +636,14 @@ def select_server(item):
 
     play_items = filter(lambda x: x.action == "play" and not "trailer" in x.title.lower(), play_items)
 
-    progreso.update(100, "Obteniendo lista de servidores disponibles", "Servidores disponibles: %s" % len(play_items),
-                    "Identificando servidores...")
+    progreso.update(100, "Ricerca elenco dei server disponibili", "Server disponibili: %s" % len(play_items),
+                    "Identificazione server...")
 
     for x, i in enumerate(play_items):
         if not i.server and hasattr(channel, "play"):
             play_items[x] = getattr(channel, "play")(i)
 
-    seleccion = platformtools.dialog_select("Selecciona el servidor", ["Auto"] + [s.title for s in play_items])
+    seleccion = platformtools.dialog_select("Seleziona il server", ["Auto"] + [s.title for s in play_items])
     if seleccion > 1:
         update_json(item.path, {
             "downloadServer": {"url": play_items[seleccion - 1].url, "server": play_items[seleccion - 1].server}})
@@ -793,7 +794,7 @@ def save_download_video(item):
 
     write_json(item)
 
-    if not platformtools.dialog_yesno(config.get_localized_string(30101), "¿Iniciar la descarga ahora?"):
+    if not platformtools.dialog_yesno(config.get_localized_string(30101), "Desideri iniziare il download adesso?"):
         platformtools.dialog_ok(config.get_localized_string(30101), item.contentTitle,
                                 config.get_localized_string(30109))
     else:
@@ -804,7 +805,7 @@ def save_download_movie(item):
     logger.info("contentAction: %s | contentChannel: %s | contentTitle: %s" % (
         item.contentAction, item.contentChannel, item.contentTitle))
 
-    progreso = platformtools.dialog_progress("Descargas", "Obteniendo datos de la pelicula")
+    progreso = platformtools.dialog_progress("Download", "Ricerca dati del Film")
 
     set_movie_title(item)
 
@@ -813,7 +814,7 @@ def save_download_movie(item):
         progreso.close()
         return save_download_video(item)
 
-    progreso.update(0, "Añadiendo pelicula...")
+    progreso.update(0, "Aggiungo il film...")
 
     item.downloadFilename = filetools.validate_path("%s [%s]" % (item.contentTitle.strip(), item.contentChannel))
 
@@ -821,7 +822,7 @@ def save_download_movie(item):
 
     progreso.close()
 
-    if not platformtools.dialog_yesno(config.get_localized_string(30101), "¿Iniciar la descarga ahora?"):
+    if not platformtools.dialog_yesno(config.get_localized_string(30101), "Desideri iniziare il download adesso?"):
         platformtools.dialog_ok(config.get_localized_string(30101), item.contentTitle,
                                 config.get_localized_string(30109))
     else:
@@ -832,17 +833,17 @@ def save_download_tvshow(item):
     logger.info("contentAction: %s | contentChannel: %s | contentType: %s | contentSerieName: %s" % (
         item.contentAction, item.contentChannel, item.contentType, item.contentSerieName))
 
-    progreso = platformtools.dialog_progress("Descargas", "Obteniendo datos de la serie")
+    progreso = platformtools.dialog_progress("Download", "Ricerca dati della serie")
 
     scraper.find_and_set_infoLabels(item)
 
     item.downloadFilename = filetools.validate_path("%s [%s]" % (item.contentSerieName, item.contentChannel))
 
-    progreso.update(0, "Obteniendo episodios...", "conectando con %s..." % item.contentChannel)
+    progreso.update(0, "Ricerca episodi...", "connessione con %s..." % item.contentChannel)
 
     episodes = get_episodes(item)
 
-    progreso.update(0, "Añadiendo capitulos...", " ")
+    progreso.update(0, "Aggiungo capitolo...", " ")
 
     for x, i in enumerate(episodes):
         progreso.update(x * 100 / len(episodes),
@@ -850,7 +851,7 @@ def save_download_tvshow(item):
         write_json(i)
     progreso.close()
 
-    if not platformtools.dialog_yesno(config.get_localized_string(30101), "¿Iniciar la descarga ahora?"):
+    if not platformtools.dialog_yesno(config.get_localized_string(30101), "Desideri iniziare il download adesso?"):
         platformtools.dialog_ok(config.get_localized_string(30101),
                                 str(len(episodes)) + " capitulos de: " + item.contentSerieName,
                                 config.get_localized_string(30109))

@@ -10,14 +10,14 @@
   "settings": [
     {
       "type": "label",
-      "label": "Ubicacion de archivos",
+      "label": "Ubicazione File",
       "enabled": true,
       "visible": true
     },
     {
       "id": "library_add",
       "type": "bool",
-      "label": "  - Añadir descargas completadas a la videoteca",
+      "label": "  - Aggiungi download completi alla libreria video",
       "default": true,
       "enabled": true,
       "visible": true
@@ -25,7 +25,7 @@
     {
       "id": "library_move",
       "type": "bool",
-      "label": "  - Mover el archivo descargado a la videoteca",
+      "label": "  - Sposta il file scaricato nella libreria video",
       "default": true,
       "enabled": "eq(-1,true)",
       "visible": true
@@ -33,21 +33,21 @@
     {
       "id": "browser",
       "type": "bool",
-      "label": "  - Visualizar archivos descargados desde descargas",
+      "label": "  - Visualizza i file scaricati in Download",
       "default": false,
       "enabled": true,
       "visible": true
     },
     {
       "type": "label",
-      "label": "Descarga",
+      "label": "Download",
       "enabled": true,
       "visible": true
     },
     {
       "id": "block_size",
       "type": "list",
-      "label": "  - Tamaño por bloque",
+      "label": "  - Dimensione per blocco",
       "lvalues": [
         "128 KB",
         "256 KB",
@@ -62,7 +62,7 @@
     {
       "id": "part_size",
       "type": "list",
-      "label": "  - Tamaño por parte",
+      "label": "  - Dimensione per parte",
       "lvalues": [
         "1 MB",
         "2 MB",
@@ -78,7 +78,7 @@
     {
       "id": "max_connections",
       "type": "list",
-      "label": "  - Numero máximo de conexiones simultaneas",
+      "label": "  - Numero massimo di connessioni simultanee",
       "lvalues": [
         "1",
         "2",
@@ -98,7 +98,7 @@
     {
       "id": "max_buffer",
       "type": "list",
-      "label": "  - Numero máximo de partes en memoria",
+      "label": "  - Numero massimo di parti in memoria",
       "lvalues": [
         "0",
         "2",
@@ -118,17 +118,17 @@
     },
     {
       "type": "label",
-      "label": "Elección del servidor",
+      "label": "Scelta del server",
       "enabled": true,
       "visible": true
     },
     {
       "id": "server_reorder",
       "type": "list",
-      "label": "  - Orden de servidores",
+      "label": "  - Ordine dei server",
       "lvalues": [
-        "Mantener",
-        "Reordenar"
+        "Mantenere",
+        "Riordinare"
       ],
       "default": 1,
       "enabled": true,
@@ -137,37 +137,37 @@
     {
       "id": "language",
       "type": "list",
-      "label": "  - Idioma preferido",
+      "label": "  - Lingua preferita",
       "lvalues": [
-        "Esp, Lat, Sub, Eng, Vose",
-        "Esp, Sub, Lat, Eng, Vose",
-        "Eng, Sub, Vose, Esp, Lat",
-        "Vose, Eng, Sub, Esp, Lat"
+        "IT, Esp, Lat, Sub, Eng, Vose",
+        "IT, Esp, Sub, Lat, Eng, Vose",
+        "Eng, Sub, Vose, IT, Esp, Lat",
+        "Vose, Eng, Sub, IT, Esp, Lat"
       ],
       "default": 0,
-      "enabled": "eq(-1,'Reordenar')",
+      "enabled": "eq(-1,'Riordinare')",
       "visible": true
     },
     {
       "id": "quality",
       "type": "list",
-      "label": "  - Calidad preferida",
+      "label": "  - Qualita preferita",
       "lvalues": [
-        "La mas alta",
+        "La piu alta",
         "HD 1080",
         "HD 720",
         "SD"
       ],
       "default": 0,
-      "enabled": "eq(-2,'Reordenar')",
+      "enabled": "eq(-2,'Riordinare')",
       "visible": true
     },
     {
       "id": "server_speed",
       "type": "bool",
-      "label": "  - Elegir los servidores mas rapidos",
+      "label": "  - Scegli i server più veloci",
       "default": true,
-      "enabled": "eq(-3,'Reordenar')",
+      "enabled": "eq(-3,'Riordinare')",
       "visible": true
     }
   ]
