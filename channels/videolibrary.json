@@ -1,6 +1,6 @@
 {
   "id": "videolibrary",
-  "name": "Videoteca",
+  "name": "Libreria video",
   "active": false,
   "adult": false,
   "language": ["*"],
@@ -8,23 +8,23 @@
     {
       "id": "update",
       "type": "list",
-      "label": "Actualizar la videoteca",
+      "label": "Aggiorna la libreria video",
       "default": 1,
       "visible": true,
       "lvalues": [
-        "Nunca",
-        "Al iniciar Kodi",
-        "Una sola vez al día",
-        "Al iniciar Kodi y al menos una vez al día"
+        "Mai",
+        "Quando si avvia Kodi",
+        "Una volta al giorno",
+        "Quando si avvia Kodi e almeno una volta al giorno"
       ]
     },
     {
       "id": "update_wait",
       "type": "list",
-      "label": "    Esperar antes de actualizar al iniciar kodi",
+      "label": "    Attendere prima di aggiornare",
       "default": 0,
       "visible": true,
-      "enabled": "eq(-1,Al iniciar Kodi)|eq(-1,Al iniciar Kodi y al menos una vez al día)",
+      "enabled": "eq(-1,Quando si avvia Kodi)|eq(-1,Quando si avvia Kodi e almeno una volta al giorno)",
       "lvalues": [
         "No",
         "10 seg",
@@ -36,10 +36,10 @@
     {
       "id": "everyday_delay",
       "type": "list",
-      "label": "    Iniciar actualización programada a partir de las",
+      "label": "    Avvia aggiornamento programmato dalle",
       "default": 1,
       "visible": true,
-      "enabled": "eq(-2,Una sola vez al día)|eq(-2,Al iniciar Kodi y al menos una vez al día)",
+      "enabled": "eq(-2,Una sola volta al giorno)|eq(-2,Quando si avvia Kodi e almeno una volta al giorno)",
       "lvalues": [
         "00:00",
         "04:00",
@@ -50,47 +50,47 @@
     {
       "id": "updatetvshows_interval",
       "type": "list",
-      "label": "    Buscar nuevos episodios en las series activas",
+      "label": "    Cerca nuovi episodi in serie attive",
       "default": 0,
       "visible": true,
-      "enabled": "!eq(-3,Nunca)",
+      "enabled": "!eq(-3,Mai)",
       "lvalues": [
-        "Siempre",
-        "Según su emisión"
+        "Sempre",
+        "Seconda emissione"
       ]
     },
     {
       "id": "search_new_content",
       "type": "list",
-      "label": "    Realizar búsqueda de contenido en",
+      "label": "    Esegui la ricerca di contenuti",
       "default": 0,
-      "enabled": "!eq(-4,Nunca)",
+      "enabled": "!eq(-4,Mai)",
       "lvalues": [
-        "La carpeta de cada serie",
-        "Toda la videoteca"
+        "nella cartella di ogni serie",
+        "Tutta la libreria video"
       ]
     },
     {
       "id": "window_type",
       "type": "list",
-      "label": "Mostrar los enlaces en",
+      "label": "Mostra collegamenti in",
       "default": 0,
       "enabled": true,
       "visible": true,
       "lvalues": [
-        "Ventana convencional",
-        "Ventana emergente"
+        "Finestra convenzionale",
+        "Finestra emergente"
       ]
     },
     {
       "id": "max_links",
       "type": "list",
-      "label": "    Numero máximo de enlaces a mostrar (recomendable para equipos lentos)",
+      "label": "    Numero massimo di collegamenti da mostrare (Raccomandato per i dispositivi lenti)",
       "default": 0,
       "enabled": true,
       "visible": true,
       "lvalues": [
-        "Todos",
+        "Tutti",
         "30",
         "60",
         "90",
@@ -103,7 +103,7 @@
     {
       "id": "white_list_order",
       "type": "bool",
-      "label": "    Ordenar segun el orden de la lista blanca",
+      "label": "    Ordina in base alla whitelist",
       "enabled": true,
       "visible": true,
       "default": false
@@ -111,7 +111,7 @@
     {
       "id": "quit_channel_name",
       "type": "bool",
-      "label": "    Quitar el nombre del canal del principio",
+      "label": "    Rimuovi il nome del canale iniziale",
       "enabled": true,
       "visible": true,
       "default": false
@@ -119,7 +119,7 @@
     {
       "id": "replace_VD",
       "type": "bool",
-      "label": "    Ventana emergente: Reemplazar \"Ver en\" por \"[V]\" y \"Descargar en\" por \"[D]\"",
+      "label": "    Finestra emergente: sostituire \"View\" con \"[V]\" e \"Scarica in\" con \"[D]\"",
       "enabled": true,
       "visible": true,
       "default": false
@@ -127,33 +127,33 @@
     {
       "id": "db_mode",
       "type": "list",
-      "label": "Ubicación de Base de datos",
+      "label": "Ubicazione del database",
       "default": 0,
       "enabled": true,
       "visible": true,
       "lvalues": [
-        "Local",
+        "Locale",
         "Remota"
       ]
     },
     {
       "id": "xbmc_host",
       "type": "text",
-      "label": "    Nombre Servidor",
+      "label": "    Nome del server",
       "visible": true,
       "enabled": "eq(-1,Remota)"
     },
     {
       "id": "xbmc_puerto",
       "type": "text",
-      "label": "    Puerto Servidor",
+      "label": "    Porta del server",
       "enabled": "!eq(-1,'')",
       "visible": true
     },
     {
       "id": "mark_as_watched",
       "type": "bool",
-      "label": "Marcar automáticamente como visto",
+      "label": "Segna automaticamente come visto",
       "default": true,
       "enabled": true,
       "visible": true
@@ -161,7 +161,7 @@
     {
       "id": "watched_setting",
       "type": "list",
-      "label": "    Tiempo necesario del video",
+      "label": "    Tempo necessario pe la visione del video",
       "default": 3,
       "visible": true,
       "enabled": "eq(-1,true)",
@@ -176,14 +176,14 @@
     {
       "id": "sync_trakt",
       "type": "label",
-      "label": "Sincronización con Trakt",
+      "label": "Sincronizzazione con Trakt",
       "enabled": true,
       "visible": true
     },
     {
       "id": "sync_trakt_watched",
       "type": "bool",
-      "label": "    Tras marcar como visto el episodio",
+      "label": "    Dopo aver segnato l'episodio come visto",
       "default": false,
       "visible": true,
       "enabled": "eq(-3,true)"
@@ -191,7 +191,7 @@
     {
       "id": "sync_trakt_notification",
       "type": "bool",
-      "label": "        Mostrar notificación",
+      "label": "        Mostra notifica",
       "default": true,
       "visible": true,
       "enabled": "eq(-1,true)"
@@ -199,7 +199,7 @@
     {
       "id": "sync_trakt_new_tvshow",
       "type": "bool",
-      "label": "    Al añadir una serie a la videoteca",
+      "label": "    Quando si aggiunge una serie alla libreria video",
       "default": false,
       "enabled": true,
       "visible": true
@@ -207,7 +207,7 @@
     {
       "id": "sync_trakt_new_tvshow_wait",
       "type": "bool",
-      "label": "        Esperar a que se añada la serie a la videoteca",
+      "label": "        Attendi che la serie venga aggiunta alla libreria video",
       "default": true,
       "visible": true,
       "enabled": "eq(-1,true)"
@@ -215,47 +215,47 @@
     {
       "id": "show_all_seasons",
       "type": "bool",
-      "label": "Mostrar la opción \"Todas las temporadas\"",
+      "label": "Visualizza l'opzione \"Tutte le stagioni\"",
       "default": true
     },
     {
       "id": "no_pile_on_seasons",
       "type": "list",
-      "label": "No apilar temporadas de series",
+      "label": "Non unire le stagioni delle serie",
       "default": 1,
       "lvalues": [
-        "Nunca",
-        "Sólo si hay una temporada",
-        "Siempre"
+        "Mai",
+        "Solo se presente una stagione",
+        "Sempre"
       ]
     },
     {
       "id": "ask_channel",
       "type": "bool",
-      "label": "Mostrar cuadro de selección de canales",
+      "label": "Visualizza dialogo di selezione deel canale",
       "default": false
     },
     {
       "id": "original_title_folder",
       "type": "list",
-      "label": "Crear directorios en el sistema usando",
+      "label": "Creare directory sul sistema utilizzando",
       "default": 0,
       "lvalues": [
-        "Título localizado",
-        "Título original"
+        "Títolo in Lingua Italiana",
+        "Títolo in Lingua Originale"
       ]
     },
     {
       "id": "lab_1",
       "type": "label",
-      "label": "Al añadir contenido, obtener información de:",
+      "label": "Quando aggiungi contenuti, estrai informazioni da:",
       "enabled": true,
       "visible": true
     },
     {
       "id": "scraper_movies",
       "type": "list",
-      "label": "    Peliculas:",
+      "label": "    Film:",
       "enabled": false,
       "default": 0,
       "lvalues": [
@@ -266,7 +266,7 @@
     {
       "id": "scraper_tvshows",
       "type": "list",
-      "label": "    Series:",
+      "label": "    SerieTV:",
       "default": 0,
       "lvalues": [
         "TheMovieDB.org",
@@ -276,7 +276,7 @@
     {
       "id": "tvdb_retry_eng",
       "type": "bool",
-      "label": "        Si no hay resultados buscar también en Inglés",
+      "label": "        Se non ci sono risultati, cerca anche in inglese",
       "default": true,
       "enabled": "eq(-1,TheTvDB.com)",
       "visible": true
