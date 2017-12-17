@@ -1,4 +1,5 @@
-# plugin.video.alfa-pureita-classic
+# Alfa PureITA
+![alt tag](https://raw.githubusercontent.com/orione7/plugin.video.alfa-pureita/master/icon1.png)
 
 Son of Alfa-Addon:
 
