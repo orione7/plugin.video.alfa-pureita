@@ -205,7 +205,7 @@ msgstr "Documentari"
 
 msgctxt "#30136"
 msgid "Original version"
-msgstr "Versioni in Lingua originale"
+msgstr "Versioni originale"
 
 msgctxt "#30126"
 msgid "Adult"
