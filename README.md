@@ -3,7 +3,7 @@
 
 Son of Alfa-Addon:
 
-italian Alfa PureITA Classic
+italian Alfa PureITA Classic --in progress--
 
 Fork of Alfa-Addon, fully translated and customized with only italian channels.
 
