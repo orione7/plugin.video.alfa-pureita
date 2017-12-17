@@ -48,35 +48,35 @@ def mainlist(item):
 
     #if list_canales['peliculas']:
     thumbnail = get_thumb("channels_movie.png")
-    new_item = Item(channel=item.channel, action="novedades", extra="peliculas", title="Películas",
+    new_item = Item(channel=item.channel, action="novedades", extra="peliculas", title="Film",
                     thumbnail=thumbnail)
 
     set_category_context(new_item)
     itemlist.append(new_item)
     #if list_canales['terror']:
     thumbnail = get_thumb("channels_horror.png")
-    new_item = Item(channel=item.channel, action="novedades", extra="terror", title="Peliculas de miedo!",
+    new_item = Item(channel=item.channel, action="novedades", extra="terror", title="Film Horor!",
                     thumbnail=thumbnail)
     set_category_context(new_item)
     itemlist.append(new_item)
 
     #if list_canales['infantiles']:
     thumbnail = get_thumb("channels_children.png")
-    new_item = Item(channel=item.channel, action="novedades", extra="infantiles", title="Para niños",
+    new_item = Item(channel=item.channel, action="novedades", extra="infantiles", title="Per Bambini",
                     thumbnail=thumbnail)
     set_category_context(new_item)
     itemlist.append(new_item)
 
     #if list_canales['series']:
     thumbnail = get_thumb("channels_tvshow.png")
-    new_item = Item(channel=item.channel, action="novedades", extra="series", title="Episodios de series",
+    new_item = Item(channel=item.channel, action="novedades", extra="series", title="Serie TV",
                     thumbnail=thumbnail)
     set_category_context(new_item)
     itemlist.append(new_item)
 
     #if list_canales['anime']:
     thumbnail = get_thumb("channels_anime.png")
-    new_item = Item(channel=item.channel, action="novedades", extra="anime", title="Episodios de anime",
+    new_item = Item(channel=item.channel, action="novedades", extra="anime", title="Anime ",
                     thumbnail=thumbnail)
     set_category_context(new_item)
     itemlist.append(new_item)
@@ -103,7 +103,7 @@ def mainlist(item):
 
     #if list_canales['documentales']:
     thumbnail = get_thumb("channels_documentary.png")
-    new_item = Item(channel=item.channel, action="novedades", extra="documentales", title="Documentales",
+    new_item = Item(channel=item.channel, action="novedades", extra="documentales", title="Documentari",
                     thumbnail=thumbnail)
     set_category_context(new_item)
     itemlist.append(new_item)
@@ -112,11 +112,11 @@ def mainlist(item):
 
 
 def set_category_context(item):
-    item.context = [{"title": "Canales incluidos en: %s" % item.title,
+    item.context = [{"title": "Canali inclusi in: %s" % item.title,
                      "extra": item.extra,
                      "action": "setting_channel",
                      "channel": item.channel}]
-    item.category = "Novedades en %s" % item.extra
+    item.category = "Novita; in %s" % item.extra
 
 
 def get_channels_list():
@@ -226,15 +226,15 @@ def novedades(item):
     logger.info("multithread= " + str(multithread))
 
     if not multithread:
-        if platformtools.dialog_yesno("Búsqueda concurrente desactivada",
-                                      "La búsqueda concurrente de novedades proporciona",
-                                      "una mayor velocidad y su desactivación solo es aconsejable en caso de fallo.",
-                                      "¿Desea activar la búsqueda concurrente ahora?"):
+        if platformtools.dialog_yesno("Ricerca Multi Thread  disattivata",
+                                      "La ricerca Multi Thread  garantisce",
+                                      "una maggiore velocità e la sua disattivazione è consigliabile solo in caso di instabilita'.",
+                                      "Desideri Attivare la Ricerca Multi Thread adesso?"):
             if config.set_setting("multithread", True, "news"):
                 multithread = True
 
     if mode == 'normal':
-        progreso = platformtools.dialog_progress(item.category, "Buscando canales...")
+        progreso = platformtools.dialog_progress(item.category, "Ricerca nei canali...")
 
     list_canales, any_active = get_channels_list()
 
@@ -269,13 +269,13 @@ def novedades(item):
                 t.start()
                 threads.append(t)
                 if mode == 'normal':
-                    progreso.update(percentage, "", "Buscando en '%s'..." % channel_title)
+                    progreso.update(percentage, "", "Ricerca in '%s'..." % channel_title)
 
             # Modo single Thread
             else:
                 if mode == 'normal':
                     logger.info("Obteniendo novedades de channel_id=" + channel_id)
-                    progreso.update(percentage, "", "Buscando en '%s'..." % channel_title)
+                    progreso.update(percentage, "", "Ricverca in '%s'..." % channel_title)
                 get_newest(channel_id, item.extra)
 
         # Modo Multi Thread: esperar q todos los hilos terminen
@@ -288,8 +288,8 @@ def novedades(item):
 
                 list_pendent_names = [a.getName() for a in pendent]
                 if mode == 'normal':
-                    mensaje = "Buscando en %s" % (", ".join(list_pendent_names))
-                    progreso.update(percentage, "Finalizado en %d/%d canales..." % (len(threads) - len(pendent), len(threads)),
+                    mensaje = "Ricerca in %s" % (", ".join(list_pendent_names))
+                    progreso.update(percentage, "Ricerca in %d/%d canali..." % (len(threads) - len(pendent), len(threads)),
                                 mensaje)
                     logger.debug(mensaje)
 
@@ -300,7 +300,7 @@ def novedades(item):
                 time.sleep(0.5)
                 pendent = [a for a in threads if a.isAlive()]
         if mode == 'normal':
-            mensaje = "Resultados obtenidos: %s | Tiempo: %2.f segundos" % (len(list_newest), time.time() - start_time)
+            mensaje = "Risultati ottenuti: %s | Tempo: %2.f secondi" % (len(list_newest), time.time() - start_time)
             progreso.update(100, mensaje, " ", " ")
             logger.info(mensaje)
             start_time = time.time()
@@ -330,9 +330,9 @@ def novedades(item):
             return ret
     else:
         if mode != 'set_cache':
-            no_channels = platformtools.dialog_ok('Novedades - %s'%item.extra, 'No se ha definido ningun canal para la '
-                                                                               'busqueda.','Utilice el menu contextual '
-                                                                                           'para agregar al menos uno')
+            no_channels = platformtools.dialog_ok('Novita - %s'%item.extra, 'Nessun canale è stato definito per la '
+                                                                               'ricerca.','Usa il menu contestuale '
+                                                                                           'per aggiungere almeno un canale')
         return
 
 
@@ -524,21 +524,21 @@ def show_channels(item):
 
 def menu_opciones(item):
     itemlist = list()
-    itemlist.append(Item(channel=item.channel, title="Canales incluidos en:",
+    itemlist.append(Item(channel=item.channel, title="Canali Inclusi in:",
                          thumbnail=get_thumb("setting_0.png"),
                          folder=False))
-    itemlist.append(Item(channel=item.channel, action="setting_channel", extra="peliculas", title="    - Películas ",
+    itemlist.append(Item(channel=item.channel, action="setting_channel", extra="peliculas", title="    - Film ",
                          thumbnail=get_thumb("channels_movie.png"),
                          folder=False))
-    itemlist.append(Item(channel=item.channel, action="setting_channel", extra="infantiles", title="    - Para niños",
+    itemlist.append(Item(channel=item.channel, action="setting_channel", extra="infantiles", title="    - Per bambini",
                          thumbnail=get_thumb("channels_children.png"),
                          folder=False))
     itemlist.append(Item(channel=item.channel, action="setting_channel", extra="series",
-                         title="    - Episodios de series",
+                         title="    - Serie TV",
                          thumbnail=get_thumb("channels_tvshow.png"),
                          folder=False))
     itemlist.append(Item(channel=item.channel, action="setting_channel", extra="anime",
-                         title="    - Episodios de anime",
+                         title="    - Anime",
                          thumbnail=get_thumb("channels_anime.png"),
                          folder=False))
     itemlist.append(
@@ -552,17 +552,17 @@ def menu_opciones(item):
                          thumbnail=get_thumb("channels_documentary.png"), folder=False))
 
     itemlist.append(Item(channel=item.channel, action="setting_channel", extra="documentales",
-                         title="    - Documentales",
+                         title="    - Documentari",
                          thumbnail=get_thumb("channels_documentary.png"),
                          folder=False))
-    itemlist.append(Item(channel=item.channel, action="settings", title="Otros ajustes",
+    itemlist.append(Item(channel=item.channel, action="settings", title="Opzioni Extra",
                          thumbnail=get_thumb("setting_0.png"),
                          folder=False))
     return itemlist
 
 
 def settings(item):
-    return platformtools.show_channel_settings(caption="configuración -- Novedades")
+    return platformtools.show_channel_settings(caption="configurazione -- Novita'")
 
 
 def setting_channel(item):
@@ -601,14 +601,14 @@ def setting_channel(item):
 
         list_controls.append(control)
 
-    caption = "Canales incluidos en Novedades " + item.title.replace("Canales incluidos en: ", "- ").strip()
+    caption = "Canali inclusi in Novita " + item.title.replace("Caanali inclusi: ", "- ").strip()
     if config.get_setting("custom_button_value_news", item.channel):
-        custom_button_label = "Ninguno"
+        custom_button_label = "Nessuno"
     else:
-        custom_button_label = "Todos"
+        custom_button_label = "Tutti"
 
     return platformtools.show_channel_settings(list_controls=list_controls,
-                                               caption="Canales incluidos en Novedades",
+                                               caption="Canali inclusi in Novita",
                                                callback="save_settings", item=item,
                                                custom_button={'visible': True,
                                                               'function': "cb_custom_button",
@@ -630,7 +630,7 @@ def cb_custom_button(item, dict_values):
         dict_values[v] = not value
 
     if config.set_setting("custom_button_value_news", not value, item.channel) == True:
-        return {"label": "Ninguno"}
+        return {"label": "Nessuno"}
     else:
-        return {"label": "Todos"}
+        return {"label": "Tutti"}
 
