@@ -1,0 +1,12 @@
+{
+  "id": "teledocumentales",
+  "name": "Teledocumentales",
+  "active": true,
+  "adult": false,
+  "language": ["cast", "lat"],
+  "banner": "teledocumentales.png",
+  "thumbnail": "teledocumentales.png",
+  "categories": [
+    "documentary"
+  ]
+}

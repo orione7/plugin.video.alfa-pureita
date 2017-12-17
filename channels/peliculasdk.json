@@ -1,0 +1,31 @@
+{
+  "id": "peliculasdk",
+  "name": "PeliculasDK",
+  "active": true,
+  "adult": false,
+  "language": ["cast"],
+  "thumbnail": "http://s29.postimg.org/wzw749oon/pldklog.jpg",
+  "banner": "peliculasdk.png",
+  "categories": [
+    "torrent",
+    "movie"
+  ],
+  "settings": [
+    {
+      "id": "include_in_global_search",
+      "type": "bool",
+      "label": "Incluir en busqueda global",
+      "default": true,
+      "enabled": true,
+      "visible": true
+    },
+    {
+      "id": "include_in_newest_castellano",
+      "type": "bool",
+      "label": "Incluir en Novedades - Castellano",
+      "default": true,
+      "enabled": true,
+      "visible": true
+    }
+  ]
+}

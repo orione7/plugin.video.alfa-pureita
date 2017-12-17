@@ -1,0 +1,12 @@
+{
+  "id": "gnula",
+  "name": "Gnula",
+  "active": true,
+  "adult": false,
+  "language": ["cast", "lat"],
+  "thumbnail": "gnula.png",
+  "banner": "gnula.png",
+  "categories": [
+    "movie"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "id": "newpct",
+  "name": "Newpct",
+  "active": true,
+  "adult": false,
+  "language": ["cast"],
+  "thumbnail": "newpct.png",
+  "banner": "newpct.png",
+  "categories": [
+    "movie",
+    "tvshow",
+    "documentary",
+    "anime"
+  ],
+  "settings": [
+    {
+      "id": "include_in_global_search",
+      "type": "bool",
+      "label": "Incluir en busqueda global",
+      "default": false,
+      "enabled": true,
+      "visible": true
+    }
+  ]
+}
