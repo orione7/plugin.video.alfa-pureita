@@ -275,7 +275,7 @@ def novedades(item):
             else:
                 if mode == 'normal':
                     logger.info("Obteniendo novedades de channel_id=" + channel_id)
-                    progreso.update(percentage, "", "Ricverca in '%s'..." % channel_title)
+                    progreso.update(percentage, "", "Ricerca in '%s'..." % channel_title)
                 get_newest(channel_id, item.extra)
 
         # Modo Multi Thread: esperar q todos los hilos terminen
