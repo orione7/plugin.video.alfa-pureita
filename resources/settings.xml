@@ -44,7 +44,7 @@
         <setting id="news_start" type="bool" label="Mostra Novita'" default="false" visible="eq(-2,True)"
                  enable="eq(-1,False)+eq(-2,True"/>
          <setting id="category" type="labelenum" label="Categoria"
-                 values="Film|Serie|Anime|Cartoni Animati|Documentari|Terrore|Castellano|Latino|Torrent"
+                 values="Peliculas|Series|Anime|Infantiles|Documentales|Terror|Castellano|Latino|Torrent"
                  default="Peliculas" visible="eq(-3,True)+eq(-1,True)+eq(-2,False)" enable="eq(-3,True)+eq(-1,True)+(-2,false)"/>
    </category>
     <category label="Opciones Visuales">
