@@ -55,7 +55,7 @@ def mainlist(item):
     itemlist.append(new_item)
     #if list_canales['terror']:
     thumbnail = get_thumb("channels_horror.png")
-    new_item = Item(channel=item.channel, action="novedades", extra="terror", title="Film Horor!",
+    new_item = Item(channel=item.channel, action="novedades", extra="terror", title="Film Horror!",
                     thumbnail=thumbnail)
     set_category_context(new_item)
     itemlist.append(new_item)
