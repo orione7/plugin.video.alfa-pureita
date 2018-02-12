@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.alfa-pureita" name="alfa-pureITA" version="2.4.7" provider-name="Alfa-ITA Addon">
+<addon id="plugin.video.alfa-pureita" name="alfa-pureita" version="2.4.7" provider-name="Alfa-ITA Addon">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
     <import addon="script.module.libtorrent" optional="true"/>
