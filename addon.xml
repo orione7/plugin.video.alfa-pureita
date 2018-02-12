@@ -28,7 +28,7 @@
     <forum>forum Alfa-ITA</forum>
     <website>web</website>
     <email>my@email.com</email>
-    <source>https://github.com/orione7/plugin.video.alfa-pureita</source>
+    <source>https://github.com/orione7/plugin.video.alfa-pureita/tree/master/</source>
   </extension>
   <extension point="xbmc.service" library="videolibrary_service.py" start="login|startup">
   </extension>
