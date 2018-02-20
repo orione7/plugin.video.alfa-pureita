@@ -46,8 +46,8 @@ def check_user_home(item):
     else:
         item = Item(channel="channelselector", action="getmainlist", viewmode="movie")
         from platformcode import platformtools
-        undefined_start = platformtools.dialog_ok('Inicio Personalizado', 'No has definido ninguna seccion para mostrar '
-                                                         'en tu inicio', 'Utiliza el menu contextual para definir una')
+        undefined_start = platformtools.dialog_ok('Start Personalizzado', 'Non hai selezionato nessuna sezione da mostrare '
+                                                         'nella Pagina Iniziale', 'Utilizzare il menu di scelta rapida per definire una scelta')
     return item
 
 def set_custom_start(item):
@@ -109,7 +109,7 @@ class Main(xbmcgui.WindowXMLDialog):
         font = 'font25_title'
 
         if config.get_setting('start_page'):
-            label = 'Inicio'
+            label = 'Pagina Iniziale'
             self.button_start = xbmcgui.ControlButton(posx, posy, width, height, label, font=font, alignment=0x00000000,
                                                        noFocusTexture='', focusTexture=media_path + selected,
                                                        textColor=textcolor, shadowColor=shadow, textOffsetX=offsetx,
@@ -118,7 +118,7 @@ class Main(xbmcgui.WindowXMLDialog):
             self.buttons.append(self.button_start)
 
         posy += space * 2
-        label = 'Menú Clasico'
+        label = 'Menú Classico'
         self.button_alfa = xbmcgui.ControlButton(posx, posy, width, height, label, font=font, alignment=0x00000000,
                                                  noFocusTexture='', focusTexture=media_path+selected, 
                                                  textColor=textcolor, shadowColor=shadow, textOffsetX=offsetx,
@@ -128,7 +128,7 @@ class Main(xbmcgui.WindowXMLDialog):
 
 
         posy += space
-        label = 'Configuracion'
+        label = 'Configurazione'
         self.button_config = xbmcgui.ControlButton(posx, posy, width, height, label, font=font, alignment=0x00000000,
                                                    noFocusTexture='', focusTexture=media_path + selected,
                                                    textColor=textcolor, shadowColor=shadow, textOffsetX=offsetx,
@@ -136,7 +136,7 @@ class Main(xbmcgui.WindowXMLDialog):
         self.addControl(self.button_config)
         self.buttons.append(self.button_config)
         posy += space*2
-        label = 'Peliculas'
+        label = 'Film'
         self.button_peliculas = xbmcgui.ControlButton(posx, posy, width, height, label, font=font,
                                                       alignment=0x00000000, noFocusTexture='',
                                                       focusTexture=media_path+selected, textColor=textcolor,
@@ -144,7 +144,7 @@ class Main(xbmcgui.WindowXMLDialog):
         self.addControl(self.button_peliculas)
         self.buttons.append(self.button_peliculas)
         posy += space
-        label = 'Series'
+        label = 'SerieTV'
         self.button_series = xbmcgui.ControlButton(posx, posy, width, height, label, font=font,
                                                    alignment=0x00000000, noFocusTexture='',
                                                    focusTexture=media_path+selected, textColor=textcolor,
@@ -160,7 +160,7 @@ class Main(xbmcgui.WindowXMLDialog):
         self.addControl(self.button_anime)
         self.buttons.append(self.button_anime)
         posy += space
-        label = 'Infantiles'
+        label = 'Per Bambini'
         self.button_infantil = xbmcgui.ControlButton(posx, posy, width, height, label, font=font,
                                                      alignment=0x00000000, noFocusTexture='',
                                                      focusTexture=media_path+selected, textColor=textcolor,
@@ -168,7 +168,7 @@ class Main(xbmcgui.WindowXMLDialog):
         self.addControl(self.button_infantil)
         self.buttons.append(self.button_infantil)
         posy += space
-        label = 'Documentales'
+        label = 'Documentari'
         self.button_docu = xbmcgui.ControlButton(posx, posy, width, height, label, font=font,
                                                      alignment=0x00000000, noFocusTexture='',
                                                      focusTexture=media_path + selected, textColor=textcolor,
@@ -177,7 +177,7 @@ class Main(xbmcgui.WindowXMLDialog):
         self.buttons.append(self.button_docu)
         posy += space
 
-        label = 'Terror'
+        label = 'Horror'
         self.button_terror = xbmcgui.ControlButton(posx, posy, width, height, label, font=font,
                                                    alignment=0x00000000, noFocusTexture='',
                                                    focusTexture=media_path+selected, textColor=textcolor,
@@ -213,7 +213,7 @@ class Main(xbmcgui.WindowXMLDialog):
         start_page_item = get_start_page()
         if config.get_setting('start_page') and start_page_item.channel =='news':
             posy += space
-            label = 'Canales Activos'
+            label = 'Canali Attivi'
             self.button_config = xbmcgui.ControlButton(posx, posy, width, height, label, font=font,
                                                        alignment=0x00000000, noFocusTexture='',
                                                        focusTexture=media_path+selected, textColor=conditional_textcolor,
@@ -222,7 +222,7 @@ class Main(xbmcgui.WindowXMLDialog):
             self.buttons.append(self.button_config)
 
         posy += space*2
-        label = 'Buscar'
+        label = 'Cerca'
         self.button_buscar = xbmcgui.ControlButton(posx, posy, width, height, label, font=font, alignment=0x00000000,
                                                    noFocusTexture='', focusTexture=media_path + selected,
                                                    textColor=textcolor, shadowColor=shadow, textOffsetX=offsetx,
@@ -230,7 +230,7 @@ class Main(xbmcgui.WindowXMLDialog):
         self.addControl(self.button_buscar)
         self.buttons.append(self.button_buscar)
         posy += space
-        label = 'Buscar Actor'
+        label = 'Cerca attore'
         self.button_actor = xbmcgui.ControlButton(posx, posy, width, height, label, font=font, alignment=0x00000000,
                                                    noFocusTexture='', focusTexture=media_path + selected,
                                                    textColor=textcolor, shadowColor=shadow, textOffsetX=offsetx,
@@ -239,7 +239,7 @@ class Main(xbmcgui.WindowXMLDialog):
         self.buttons.append(self.button_actor)
 
         posy += space
-        label = 'Donde Buscar'
+        label = 'Dove Cercare'
         self.button_config_search = xbmcgui.ControlButton(posx, posy, width, height, label, font=font,
                                                        alignment=0x00000000,
                                                    noFocusTexture='', focusTexture=media_path + selected,
@@ -260,23 +260,23 @@ class Main(xbmcgui.WindowXMLDialog):
 
         control = self.getControl(control).getLabel()
 
-        if control == 'Inicio':
+        if control == 'Pagina Iniziale':
             new_item = get_start_page()
-        elif control == u'Menú Clasico':
-            new_item = Item(channel='', action='getmainlist', title='Menú Alfa')
-        elif control == 'Configuracion':
+        elif control == u'Menú Classico':
+            new_item = Item(channel='', action='getmainlist', title='Menú Alfa-PureITA')
+        elif control == 'Configurazione':
             new_item = Item(channel='setting', action="settings")
-        elif control == 'Peliculas':
+        elif control == 'Film':
             new_item = Item(channel='news', action="novedades", extra="peliculas", mode='silent')
-        elif control == 'Series':
+        elif control == 'SerieTV':
             new_item = Item(channel='news', action="novedades", extra="series", mode='silent')
         elif control == 'Anime':
             new_item = Item(channel='news', action="novedades", extra="anime", mode='silent')
-        elif control == 'Infantiles':
+        elif control == 'Per Bambini':
             new_item = Item(channel='news', action="novedades", extra="infantiles", mode='silent')
-        elif control == 'Documentales':
+        elif control == 'Documentari':
             new_item = Item(channel='news', action="novedades", extra="documentales", mode='silent')
-        elif control == 'Terror':
+        elif control == 'Horror':
             new_item = Item(channel='news', action="novedades", extra="terror", mode='silent')
         elif control == 'Castellano':
             new_item = Item(channel='news', action="novedades", extra="castellano", mode='silent')
@@ -284,7 +284,7 @@ class Main(xbmcgui.WindowXMLDialog):
             new_item = Item(channel='news', action="novedades", extra="latino", mode='silent')
         elif control == 'Torrents':
             new_item = Item(channel='news', action="novedades", extra="torrent", mode='silent')
-        elif control == 'Canales Activos':
+        elif control == 'Canali Attivi':
             menu_node = jsontools.get_node_from_file('menu_settings_data.json', 'menu')
             if 'categoria actual' in menu_node:
                 category = menu_node['categoria actual']
@@ -292,7 +292,7 @@ class Main(xbmcgui.WindowXMLDialog):
         elif control == 'Buscar':
             new_item = Item(channel='search', action="search")
         elif control == 'Buscar Actor':
-            new_item = Item(channel='tvmoviedb', title="Buscar actor/actriz", action="search_",
+            new_item = Item(channel='tvmoviedb', title="Cerca attori/attrici", action="search_",
                             search={'url': 'search/person', 'language': 'es', 'page': 1}, star=True)
         elif control == 'Donde Buscar':
             new_item = Item(channel='search', action="setting_channel")

@@ -6,63 +6,63 @@
   "language": ["*"],
   "thumbnail": "http://i.imgur.com/HA7fvgD.png",
   "categories": [
-    "movie",
-    "tvshow",
-    "anime"
+    "Film",
+    "Serie TV",
+    "Anime"
   ],
   "settings": [
     {
       "id": "tmdb",
       "type": "list",
-      "label": "Idioma de búsqueda en TMDB",
-      "default": 7,
+      "label": "Lingua per la ricerca in TMDB",
+      "default": 4,
       "enabled": true,
       "visible": true,
       "lvalues": [
-        "Alemán",
-        "Francés",
-        "Portugués",
+        "Tedesco",
+        "Francese",
+        "Portoghese",
         "Italiano",
-        "Español Latino",
-        "Catalán",
-        "Inglés",
+        "Spagnolo Latino",
+        "Catalano",
+        "Inglese",
         "Castellano"
       ]
     },
     {
       "id": "tmdb_alternativo",
       "type": "list",
-      "label": "Idioma alternativo para TMDB (No sinopsis idioma principal)",
-      "default": 6,
+      "label": "Lingua alternativa per TMDB",
+      "default": 4,
       "enabled": true,
       "visible": true,
       "lvalues": [
-        "Alemán",
-        "Francés",
+        "Tedesco",
+        "Francese",
         "Portugués",
         "Italiano",
-        "Español Latino",
-        "Catalán",
-        "Inglés",
+        "Spagnolo Latino",
+        "Catalano",
+        "Inglese",
         "Castellano"
       ]
     },
     {
       "id": "imdb",
       "type": "list",
-      "label": "Idioma de los títulos en IMDB",
+      "label": "Lingua dei titoli in IMDB",
       "color": "0xFFE0F04B",
-      "default": 7,
+      "default": 4,
       "enabled": true,
       "visible": true,
       "lvalues": [
-        "Alemán",
-        "Francés",
+        "Tedesco",
+        "Francese",
         "Portugués",
         "Italiano",
-        "Español Latino",
-        "Catalán",
-        "Inglés",
+        "Spagnolo Latino",
+        "Catalano",
+        "Inglese",
         "Castellano"
       ]
     },
@@ -76,7 +76,7 @@
     {
       "id": "filmaff",
       "type": "list",
-      "label": "Sitio Web Filmaffinity",
+      "label": "Sito Web Filmaffinity",
       "color": "0xFF25AA48",
       "default": 5,
       "enabled": true,
@@ -85,15 +85,15 @@
         "Colombia",
         "Chile",
         "Argentina",
-        "México",
+        "Messico",
         "US/UK",
-        "España"
+        "Spagna"
       ]
     },
     {
       "id": "usuariofa",
       "type": "text",
-      "label": "Usuario Filmaffinity (Opcional)",
+      "label": "User Filmaffinity (Opzional)",
       "color": "0xFFd50b0b",
       "default": "",
       "enabled": true,
@@ -102,7 +102,7 @@
     {
       "id": "passfa",
       "type": "text",
-      "label": "Contraseña Filmaffinity",
+      "label": "Password Filmaffinity",
       "color": "0xFFd50b0b",
       "default": "",
       "enabled": "!eq(-1,'')",
@@ -112,15 +112,15 @@
     {
       "id": "orderfa",
       "type": "list",
-      "label": "Ordenar listas personales de Filmaffinity por:",
+      "label": "Ordina lista personale di Filmaffinity per:",
       "color": "0xFF25AA48",
       "default": 0,
       "enabled": "!eq(-1,'')",
       "visible": true,
       "lvalues": [
-        "Posición",
-        "Título",
-        "Año",
+        "Posizione",
+        "Títolo",
+        "Anno",
         "Voto",
         "Nota media"
       ]
@@ -135,7 +135,7 @@
     {
       "id": "usuariomal",
       "type": "text",
-      "label": "Usuario MyAnimeList (Opcional)",
+      "label": "User MyAnimeList (Opzional)",
       "color": "0xFF25AA48",
       "default": "",
       "enabled": true,
@@ -144,7 +144,7 @@
     {
       "id": "passmal",
       "type": "text",
-      "label": "Contraseña MyAnimeList",
+      "label": "Password MyAnimeList",
       "color": "0xFF25AA48",
       "default": "",
       "enabled": "!eq(-1,'')",
@@ -154,7 +154,7 @@
     {
       "id": "adult_mal",
       "type": "bool",
-      "label": "Mostrar Hentais en MyAnimeList",
+      "label": "Visualizza Hentai in MyAnimeList",
       "color": "0xFFd50b0b",
       "default": false,
       "enabled": true,
@@ -163,15 +163,15 @@
     {
       "id": "perfil",
       "type": "list",
-      "label": "Perfil de color",
+      "label": "Profilo colore",
       "default": 2,
       "enabled": true,
       "visible": true,
       "lvalues": [
-        "Perfil 3",
-        "Perfil 2",
-        "Perfil 1",
-        "Ninguno"
+        "Profilo 3",
+        "Profilo 2",
+        "Profilo 1",
+        "Nessuno"
       ]
     }
   ]

@@ -258,7 +258,7 @@ def servers_favorites(item):
 
 def cb_servers_favorites(server_names, dict_values):
     dict_name = {}
-    progreso = platformtools.dialog_progress("Controllo configurazione...", "Espere un momento por favor.")
+    progreso = platformtools.dialog_progress("Controllo configurazione...", "Attendere...")
 
     for i, v in dict_values.items():
         if i == "favorites_servers":
@@ -293,7 +293,7 @@ def submenu_tools(item):
 
     itemlist.append(Item(channel=CHANNELNAME, title="Strumenti del canale", action="", folder=False,
                          thumbnail=get_thumb("channels.png")))
-    itemlist.append(Item(channel=CHANNELNAME, title="   Controllo archivio  *_data.json", action="conf_tools",
+    itemlist.append(Item(channel=CHANNELNAME, title="   Controllo File  .json", action="conf_tools",
                          folder=True, extra="lib_check_datajson", thumbnail=get_thumb("channels.png")))
 
     if config.get_videolibrary_support():
@@ -580,9 +580,9 @@ def overwrite_tools(item):
     import videolibrary_service
     from core import videolibrarytools
 
-    seleccion = platformtools.dialog_yesno("Sobrescribir toda la videoteca",
-                                           "Esto puede llevar algún tiempo.",
-                                           "¿Desea continuar?")
+    seleccion = platformtools.dialog_yesno("Sovrascrivere tutta la Libreria Video",
+                                           "Questo puyo' richiedere del tempo.",
+                                           "Desideri continuare?")
     if seleccion == 1:
         # tvshows
         heading = 'Sovrascrivo libreria....SERIES'

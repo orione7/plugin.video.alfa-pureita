@@ -25,11 +25,11 @@ class KeyListener(xbmcgui.WindowXMLDialog):
 
     def onInit(self):
         try:
-            self.getControl(401).addLabel("Presiona la tecla a usar para abrir la ventana")
-            self.getControl(402).addLabel("Tienes %s segundos" % self.TIMEOUT)
+            self.getControl(401).addLabel("Premere il tasto da utilizzare per aprire la finestra")
+            self.getControl(402).addLabel("Hai %s secondi" % self.TIMEOUT)
         except AttributeError:
-            self.getControl(401).setLabel("Presiona la tecla a usar para abrir la ventana")
-            self.getControl(402).setLabel("Tienes %s segundos" % self.TIMEOUT)
+            self.getControl(401).setLabel("Premere il tasto da utilizzare per aprire la finestra")
+            self.getControl(402).setLabel("Hai %s secondi" % self.TIMEOUT)
 
     def onAction(self, action):
         code = action.getButtonCode()
@@ -59,11 +59,11 @@ def set_key():
         from core import filetools
         from platformcode import platformtools
         import xbmc
-        file_xml = "special://profile/keymaps/alfa.xml"
+        file_xml = "special://profile/keymaps/alfa-pureita.xml"
         data = '<keymap><global><keyboard><key id="%s">' % new_key + 'runplugin(plugin://' \
-                                                                     'plugin.video.alfa/?ew0KICAgICJhY3Rpb24iOiAia2V5bWFwIiwNCiAgICAib3BlbiI6IHRydWUNCn0=)</key></keyboard></global></keymap>'
+                                                                     'plugin.video.alfa-pureita/?ew0KICAgICJhY3Rpb24iOiAia2V5bWFwIiwNCiAgICAib3BlbiI6IHRydWUNCn0=)</key></keyboard></global></keymap>'
         filetools.write(xbmc.translatePath(file_xml), data)
-        platformtools.dialog_notification("Tecla guardada", "Reinicia Kodi para que se apliquen los cambios")
+        platformtools.dialog_notification("Chiave salvata", "Riavvia Kodi per applicare le modifiche")
 
         config.set_setting("shortcut_key", new_key)
         # file_idioma = filetools.join(config.get_runtime_path(), 'resources', 'language', 'Spanish', 'strings.xml')
@@ -82,13 +82,13 @@ def set_key():
 
 
 MAIN_MENU = {
-    "news": {"label": "Novedades", "icon": get_thumb("news.png"), "order": 0},
-    "channels": {"label": "Canales", "icon": get_thumb("channels.png"), "order": 1},
-    "search": {"label": "Buscador", "icon": get_thumb("search.png"), "order": 2},
-    "favorites": {"label": "Favoritos", "icon": get_thumb("favorites.png"), "order": 3},
+    "news": {"label": "Novita'", "icon": get_thumb("news.png"), "order": 0},
+    "channels": {"label": "Canali", "icon": get_thumb("channels.png"), "order": 1},
+    "search": {"label": "Ricerca", "icon": get_thumb("search.png"), "order": 2},
+    "favorites": {"label": "Preferiti", "icon": get_thumb("favorites.png"), "order": 3},
     "videolibrary": {"label": "Videoteca", "icon": get_thumb("videolibrary.png"), "order": 4},
-    "downloads": {"label": "Descargas", "icon": get_thumb("downloads.png"), "order": 5},
-    "settings": {"label": "Configuración", "icon": get_thumb("setting_0.png"), "order": 6}
+    "downloads": {"label": "Download", "icon": get_thumb("downloads.png"), "order": 5},
+    "settings": {"label": "Configurazione", "icon": get_thumb("setting_0.png"), "order": 6}
 }
 
 
@@ -116,31 +116,31 @@ class Main(xbmcgui.WindowXMLDialog):
             if identifier == "news":
                 xbmc.executebuiltin('Dialog.Close(all,true)')
                 xbmc.executebuiltin(
-                    'ActivateWindow(10025, "plugin://plugin.video.alfa/?ew0KICAgICJhY3Rpb24iOiAibWFpbmxpc3QiLCANCiAgICAiY2hhbm5lbCI6ICJuZXdzIg0KfQ==")')
+                    'ActivateWindow(10025, "plugin://plugin.video.alfa-pureita/?ew0KICAgICJhY3Rpb24iOiAibWFpbmxpc3QiLCANCiAgICAiY2hhbm5lbCI6ICJuZXdzIg0KfQ==")')
             elif identifier == "channels":
                 xbmc.executebuiltin('Dialog.Close(all,true)')
                 xbmc.executebuiltin(
-                    'ActivateWindow(10025, "plugin://plugin.video.alfa/?ew0KICAgICJhY3Rpb24iOiAiZ2V0Y2hhbm5lbHR5cGVzIiwgDQogICAgImNoYW5uZWwiOiAiY2hhbm5lbHNlbGVjdG9yIg0KfQ==")')
+                    'ActivateWindow(10025, "plugin://plugin.video.alfa-pureita/?ew0KICAgICJhY3Rpb24iOiAiZ2V0Y2hhbm5lbHR5cGVzIiwgDQogICAgImNoYW5uZWwiOiAiY2hhbm5lbHNlbGVjdG9yIg0KfQ==")')
             elif identifier == "search":
                 xbmc.executebuiltin('Dialog.Close(all,true)')
                 xbmc.executebuiltin(
-                    'ActivateWindow(10025, "plugin://plugin.video.alfa/?ew0KICAgICJhY3Rpb24iOiAibWFpbmxpc3QiLCANCiAgICAiY2hhbm5lbCI6ICJzZWFyY2giDQp9")')
+                    'ActivateWindow(10025, "plugin://plugin.video.alfa-pureita/?ew0KICAgICJhY3Rpb24iOiAibWFpbmxpc3QiLCANCiAgICAiY2hhbm5lbCI6ICJzZWFyY2giDQp9")')
             elif identifier == "favorites":
                 xbmc.executebuiltin('Dialog.Close(all,true)')
                 xbmc.executebuiltin(
-                    'ActivateWindow(10025, "plugin://plugin.video.alfa/?ew0KICAgICJhY3Rpb24iOiAibWFpbmxpc3QiLCANCiAgICAiY2hhbm5lbCI6ICJmYXZvcml0ZXMiDQp9")')
+                    'ActivateWindow(10025, "plugin://plugin.video.alfa-pureita/?ew0KICAgICJhY3Rpb24iOiAibWFpbmxpc3QiLCANCiAgICAiY2hhbm5lbCI6ICJmYXZvcml0ZXMiDQp9")')
             elif identifier == "videolibrary":
                 xbmc.executebuiltin('Dialog.Close(all,true)')
                 xbmc.executebuiltin(
-                    'ActivateWindow(10025, "plugin://plugin.video.alfa/?ew0KICAgICJhY3Rpb24iOiAibWFpbmxpc3QiLCANCiAgICAiY2hhbm5lbCI6ICJ2aWRlb2xpYnJhcnkiDQp9")')
+                    'ActivateWindow(10025, "plugin://plugin.video.alfa-pureita/?ew0KICAgICJhY3Rpb24iOiAibWFpbmxpc3QiLCANCiAgICAiY2hhbm5lbCI6ICJ2aWRlb2xpYnJhcnkiDQp9")')
             elif identifier == "downloads":
                 xbmc.executebuiltin('Dialog.Close(all,true)')
                 xbmc.executebuiltin(
-                    'ActivateWindow(10025, "plugin://plugin.video.alfa/?ew0KICAgICJhY3Rpb24iOiAibWFpbmxpc3QiLCANCiAgICAiY2hhbm5lbCI6ICJkb3dubG9hZHMiDQp9")')
+                    'ActivateWindow(10025, "plugin://plugin.video.alfa-pureita/?ew0KICAgICJhY3Rpb24iOiAibWFpbmxpc3QiLCANCiAgICAiY2hhbm5lbCI6ICJkb3dubG9hZHMiDQp9")')
             elif identifier == "settings":
                 xbmc.executebuiltin('Dialog.Close(all,true)')
                 xbmc.executebuiltin(
-                    'ActivateWindow(10025, "plugin://plugin.video.alfa/?ew0KICAgICJhY3Rpb24iOiAibWFpbmxpc3QiLCANCiAgICAiY2hhbm5lbCI6ICJzZXR0aW5nIg0KfQ==")')
+                    'ActivateWindow(10025, "plugin://plugin.video.alfa-pureita/?ew0KICAgICJhY3Rpb24iOiAibWFpbmxpc3QiLCANCiAgICAiY2hhbm5lbCI6ICJzZXR0aW5nIg0KfQ==")')
 
 
     def onAction(self, action):

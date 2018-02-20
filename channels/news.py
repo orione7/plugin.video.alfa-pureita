@@ -116,7 +116,7 @@ def set_category_context(item):
                      "extra": item.extra,
                      "action": "setting_channel",
                      "channel": item.channel}]
-    item.category = "Novita; in %s" % item.extra
+    item.category = "Le Novita in %s" % item.title
 
 
 def get_channels_list():

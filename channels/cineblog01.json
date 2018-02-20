@@ -1,11 +1,11 @@
 {
-  "id": "allpeliculas",
-  "name": "Allpeliculas",
+  "id": "cineblog01",
+  "name": "cineblog01",
   "language": ["it"],
   "active": true,
   "adult": false,
-  "thumbnail": "http://i.imgur.com/aWCDWtn.png",
-  "banner": "allpeliculas.png",
+  "thumbnail": "https://raw.githubusercontent.com/orione7/Pelis_images/master/posters/cineblog01.png",
+  "banner": "https://raw.githubusercontent.com/orione7/Pelis_images/master/posters/cineblog01.png",
   "categories": [
     "movie",
     "vos",
@@ -15,7 +15,7 @@
     {
       "id": "include_in_global_search",
       "type": "bool",
-      "label": "Incluir en busqueda global",
+      "label": "Includi nella RicercaGlobale",
       "default": true,
       "enabled": true,
       "visible": true
@@ -23,7 +23,7 @@
     {
       "id": "include_in_newest_latino",
       "type": "bool",
-      "label": "Incluir en Novedades - Latino",
+      "label": "Includi in Novita' latino",
       "default": true,
       "enabled": true,
       "visible": true
@@ -31,7 +31,7 @@
     {
       "id": "include_in_newest_peliculas",
       "type": "bool",
-      "label": "Incluir en Novedades - Películas",
+      "label": "Includi in Novita' Film",
       "default": true,
       "enabled": true,
       "visible": true
@@ -39,7 +39,7 @@
     {
       "id": "modo_grafico",
       "type": "bool",
-      "label": "Buscar información extra",
+      "label": "Cerca info extra",
       "default": true,
       "enabled": true,
       "visible": true
@@ -47,14 +47,14 @@
     {
       "id": "perfil",
       "type": "list",
-      "label": "Perfil de color",
+      "label": "Profilo color3",
       "default": 0,
       "enabled": true,
       "visible": true,
       "lvalues": [
-        "Perfil 3",
-        "Perfil 2",
-        "Perfil 1"
+        "Profilo 3",
+        "Profilo 2",
+        "Profilo 1"
       ]
     }
   ]

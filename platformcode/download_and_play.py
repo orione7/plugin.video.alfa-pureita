@@ -37,15 +37,15 @@ def download_and_play(url, file_name, download_path):
     while True:
         cancelled = False
         dialog = xbmcgui.DialogProgress()
-        dialog.create('Descargando...', 'Cierra esta ventana para empezar la reproducción')
+        dialog.create('Downloading...', 'Chiudi questa finestra per avviare la riproduzione')
         dialog.update(0)
 
         while not cancelled and download_thread.isAlive():
-            dialog.update(download_thread.get_progress(), "Cancela esta ventana para empezar la reproducción",
-                          "Velocidad: " + str(int(download_thread.get_speed() / 1024)) + " KB/s " + str(
+            dialog.update(download_thread.get_progress(), "Annulla questa finestra per avviare la riproduzione",
+                          "Velocita: " + str(int(download_thread.get_speed() / 1024)) + " KB/s " + str(
                               download_thread.get_actual_size()) + "MB de " + str(
                               download_thread.get_total_size()) + "MB",
-                          "Tiempo restante: " + str(downloadtools.sec_to_hms(download_thread.get_remaining_time())))
+                          "Tempo restante: " + str(downloadtools.sec_to_hms(download_thread.get_remaining_time())))
             xbmc.sleep(1000)
 
             if dialog.iscanceled():

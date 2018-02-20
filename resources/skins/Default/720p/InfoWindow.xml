@@ -27,7 +27,7 @@
           <shadowcolor>black</shadowcolor>
           <align>center</align>
           <aligny>center</aligny>
-          <label>Opciones</label>
+          <label>Opzioni</label>
         </control>
         <control type="button" id="10003">
           <posx>735</posx>
@@ -303,7 +303,7 @@
             <texturenofocus>Controls/KeyboardKeyNF.png</texturenofocus>
             <align>center</align>
             <aligny>center</aligny>
-            <label>Anterior</label>
+            <label>Precedente</label>
           </control>
           <control type="button" id="10026">
             <posy>0</posy>
@@ -315,7 +315,7 @@
             <texturenofocus>Controls/KeyboardKeyNF.png</texturenofocus>
             <align>center</align>
             <aligny>center</aligny>
-            <label>Siguiente</label>
+            <label>Successivo</label>
           </control>
           <control type="button" id="10027">
             <posy>0</posy>
@@ -327,7 +327,7 @@
             <texturenofocus>Controls/KeyboardKeyNF.png</texturenofocus>
             <align>center</align>
             <aligny>center</aligny>
-            <label>Cancelar</label>
+            <label>Annulla</label>
           </control>
           <control type="button" id="10028">
             <posy>0</posy>
@@ -339,7 +339,7 @@
             <texturenofocus>Controls/KeyboardKeyNF.png</texturenofocus>
             <align>center</align>
             <aligny>center</aligny>
-            <label>Aceptar</label>
+            <label>Accetta</label>
           </control>
           <control type="label" id="100029">
             <posy>0</posy>

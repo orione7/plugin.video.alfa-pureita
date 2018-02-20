@@ -11,7 +11,7 @@
     {
       "id": "multithread",
       "type": "bool",
-      "label": "Buscar de manera concurrente (multiprocesos)",
+      "label": "Ricerca Multithread",
       "default": true,
       "enabled": true,
       "visible": true
@@ -19,20 +19,20 @@
     {
       "id": "result_mode",
       "type": "list",
-      "label": "Mostrar resultados:",
+      "label": "Visualizza risultati:",
       "default": 2,
       "enabled": true,
       "visible": true,
       "lvalues": [
-        "Agrupados por contenido",
-        "Agrupados por canales",
-        "Sin Agrupar"
+        "Raggruppa per contenuto",
+        "Raggruppa per canale",
+        "Non raggruppare"
       ]
     },
     {
       "id": "perfil",
       "type": "list",
-      "label": "Perfil de color",
+      "label": "Profilo colore",
       "default": 0,
       "enabled": true,
       "visible": true,

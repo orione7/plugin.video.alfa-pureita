@@ -184,11 +184,10 @@ def cache_response(fn):
     return wrapper
 
 
-def set_infoLabels(source, seekTmdb=True, idioma_busqueda='es'):
+def set_infoLabels(source, seekTmdb=True, idioma_busqueda='it'):
     """
     Dependiendo del tipo de dato de source obtiene y fija (item.infoLabels) los datos extras de una o varias series,
     capitulos o peliculas.
-
     @param source: variable que contiene la información para establecer infoLabels
     @type source: list, item
     @param seekTmdb: si es True hace una busqueda en www.themoviedb.org para obtener los datos, en caso contrario
@@ -210,13 +209,11 @@ def set_infoLabels(source, seekTmdb=True, idioma_busqueda='es'):
     return ret
 
 
-def set_infoLabels_itemlist(item_list, seekTmdb=False, idioma_busqueda='es'):
+def set_infoLabels_itemlist(item_list, seekTmdb=False, idioma_busqueda='it'):
     """
     De manera concurrente, obtiene los datos de los items incluidos en la lista item_list.
-
     La API tiene un limite de 40 peticiones por IP cada 10'' y por eso la lista no deberia tener mas de 30 items
     para asegurar un buen funcionamiento de esta funcion.
-
     @param item_list: listado de objetos Item que representan peliculas, series o capitulos. El atributo
         infoLabels de cada objeto Item sera modificado incluyendo los datos extras localizados.
     @type item_list: list
@@ -225,7 +222,6 @@ def set_infoLabels_itemlist(item_list, seekTmdb=False, idioma_busqueda='es'):
     @type seekTmdb: bool
     @param idioma_busqueda: Codigo del idioma segun ISO 639-1, en caso de busqueda en www.themoviedb.org.
     @type idioma_busqueda: str
-
     @return: Una lista de numeros cuyo valor absoluto representa la cantidad de elementos incluidos en el atributo
         infoLabels de cada Item. Este numero sera positivo si los datos se han obtenido de www.themoviedb.org y
         negativo en caso contrario.
@@ -264,10 +260,9 @@ def set_infoLabels_itemlist(item_list, seekTmdb=False, idioma_busqueda='es'):
     return [ii[2] for ii in r_list]
 
 
-def set_infoLabels_item(item, seekTmdb=True, idioma_busqueda='es', lock=None):
+def set_infoLabels_item(item, seekTmdb=True, idioma_busqueda='it', lock=None):
     """
     Obtiene y fija (item.infoLabels) los datos extras de una serie, capitulo o pelicula.
-
     @param item: Objeto Item que representa un pelicula, serie o capitulo. El atributo infoLabels sera modificado
         incluyendo los datos extras localizados.
     @type item: Item
@@ -423,11 +418,11 @@ def set_infoLabels_item(item, seekTmdb=True, idioma_busqueda='es', lock=None):
 
                         otmdb = Tmdb(texto_buscado=titulo_buscado, tipo=tipo_busqueda, idioma_busqueda=idioma_busqueda,
                                      filtro=item.infoLabels.get('filtro', {}), year=item.infoLabels['year'])
-
-                if otmdb.get_id() and config.get_setting("tmdb_plus_info", default=False):
-                    # Si la busqueda ha dado resultado y no se esta buscando una lista de items,
-                    # realizar otra busqueda para ampliar la informacion
-                    otmdb = Tmdb(id_Tmdb=otmdb.result.get("id"), tipo=tipo_busqueda, idioma_busqueda=idioma_busqueda)
+                if otmdb is not None:
+                    if otmdb.get_id() and config.get_setting("tmdb_plus_info", default=False):
+                        # Si la busqueda ha dado resultado y no se esta buscando una lista de items,
+                        # realizar otra busqueda para ampliar la informacion
+                        otmdb = Tmdb(id_Tmdb=otmdb.result.get("id"), tipo=tipo_busqueda, idioma_busqueda=idioma_busqueda)
 
             if lock and lock.locked():
                 lock.release()
@@ -470,7 +465,7 @@ def find_and_set_infoLabels(item):
             otmdb_global = Tmdb(external_id=item.infoLabels.get("imdb_id"), external_source="imdb_id",
                                 tipo=tipo_busqueda)
     elif not otmdb_global or str(otmdb_global.result.get("id")) != item.infoLabels['tmdb_id']:
-        otmdb_global = Tmdb(id_Tmdb=item.infoLabels['tmdb_id'], tipo=tipo_busqueda, idioma_busqueda="es")
+        otmdb_global = Tmdb(id_Tmdb=item.infoLabels['tmdb_id'], tipo=tipo_busqueda, idioma_busqueda="it")
 
     results = otmdb_global.get_list_resultados()
 
@@ -756,7 +751,7 @@ class Tmdb(object):
         self.busqueda_id = kwargs.get('id_Tmdb', '')
         self.busqueda_texto = re.sub('\[\\\?(B|I|COLOR)\s?[^\]]*\]', '', self.texto_buscado).strip()
         self.busqueda_tipo = kwargs.get('tipo', '')
-        self.busqueda_idioma = kwargs.get('idioma_busqueda', 'es')
+        self.busqueda_idioma = kwargs.get('idioma_busqueda', 'it')
         self.busqueda_include_adult = kwargs.get('include_adult', False)
         self.busqueda_year = kwargs.get('year', '')
         self.busqueda_filtro = kwargs.get('filtro', {})
@@ -832,7 +827,7 @@ class Tmdb(object):
         return dict_data
 
     @classmethod
-    def rellenar_dic_generos(cls, tipo='movie', idioma='es'):
+    def rellenar_dic_generos(cls, tipo='movie', idioma='it'):
         # Rellenar diccionario de generos del tipo e idioma pasados como parametros
         if idioma not in cls.dic_generos:
             cls.dic_generos[idioma] = {}
@@ -1086,7 +1081,6 @@ class Tmdb(object):
 
     def get_id(self):
         """
-
         :return: Devuelve el identificador Tmdb de la pelicula o serie cargada o una cadena vacia en caso de que no
             hubiese nada cargado. Se puede utilizar este metodo para saber si una busqueda ha dado resultado o no.
         :rtype: str
@@ -1095,7 +1089,6 @@ class Tmdb(object):
 
     def get_sinopsis(self, idioma_alternativo=""):
         """
-
         :param idioma_alternativo: codigo del idioma, segun ISO 639-1, en el caso de que en el idioma fijado para la
             busqueda no exista sinopsis.
             Por defecto, se utiliza el idioma original. Si se utiliza None como idioma_alternativo, solo se buscara en
@@ -1129,7 +1122,6 @@ class Tmdb(object):
 
     def get_poster(self, tipo_respuesta="str", size="original"):
         """
-
         @param tipo_respuesta: Tipo de dato devuelto por este metodo. Por defecto "str"
         @type tipo_respuesta: list, str
         @param size: ("w45", "w92", "w154", "w185", "w300", "w342", "w500", "w600", "h632", "w780", "w1280", "original")
@@ -1258,13 +1250,13 @@ class Tmdb(object):
                 self.temporada[numtemporada] = {"status_code": 15, "status_message": "Failed"}
                 self.temporada[numtemporada] = {"episodes": {}}
 
-            # if "status_code" in self.temporada[numtemporada]:
-            #     # Se ha producido un error
-            #     msg = "La busqueda de " + buscando + " no dio resultados."
-            #     msg += "\nError de tmdb: %s %s" % (
-            #     self.temporada[numtemporada]["status_code"], self.temporada[numtemporada]["status_message"])
-            #     logger.debug(msg)
-            #     self.temporada[numtemporada] = {"episodes": {}}
+            if "status_code" in self.temporada[numtemporada]:
+                #Se ha producido un error
+                msg = "La busqueda de " + buscando + " no dio resultados."
+                msg += "\nError de tmdb: %s %s" % (
+                self.temporada[numtemporada]["status_code"], self.temporada[numtemporada]["status_message"])
+                logger.debug(msg)
+                self.temporada[numtemporada] = {"episodes": {}}
 
         return self.temporada[numtemporada]
 
@@ -1555,3 +1547,30 @@ class Tmdb(object):
             ret_infoLabels['writer'] = ', '.join(sorted(l_writer))
 
         return ret_infoLabels
+		
+		
+def infoSod(item, tipo="movie"):
+    '''
+    :param item:  item
+    :return:      ritorna un'item completo esente da errori di codice
+    '''
+    logger.info("alfa-pureita-master.core.tmdb infoSod")
+    logger.info("channel=[" + item.channel + "], action=[" + item.action + "], title[" + item.title + "], url=[" + item.url + "], thumbnail=[" + item.thumbnail + "], tipo=[" + tipo + "]")
+    try:
+        tmdbtitle = item.fulltitle.split("|")[0].split("{")[0].split("[")[0].split("(")[0].split("Sub-ITA")[0].split("Sub ITA")[0].split("20")[0].split("19")[0].split("S0")[0].split("Serie")[0].split("HD ")[0]
+        year = scrapertools.find_single_match(item.fulltitle, '\((\d{4})\)')
+
+        otmdb = Tmdb(texto_buscado=tmdbtitle,
+                     tipo=tipo,
+                     idioma_busqueda='it',
+                     year=year)
+
+        item.infoLabels = otmdb.get_infoLabels(item.infoLabels)
+        if 'thumbnail' in item.infoLabels:
+            item.thumbnail = item.infoLabels['thumbnail']
+        if 'fanart' in item.infoLabels:
+            item.fanart = item.infoLabels['fanart']
+
+    except:
+        pass
+    return item

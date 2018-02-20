@@ -24,7 +24,7 @@ def context():
     _context = ""
 
     if config.is_xbmc():
-        _context = [{"title": "Configurar AutoPlay",
+        _context = [{"title": "Configurare AutoPlay",
                      "action": "autoplay_config",
                      "channel": "autoplay"}]
     return _context
@@ -57,7 +57,7 @@ def show_option(channel, itemlist, text_color='yellow', thumbnail=None, fanart=N
                     'servidores y calidades preferidas. '
     itemlist.append(
         Item(channel=__channel__,
-             title="Configurar AutoPlay",
+             title="Configurare AutoPlay",
              action="autoplay_config",
              text_color=text_color,
              thumbnail=thumbnail,
@@ -172,7 +172,7 @@ def start(itemlist, item):
             if 'context' not in item:
                 item.context = list()
             if not filter(lambda x: x['action'] == 'autoplay_config', context):
-                item.context.append({"title": "Configurar AutoPlay",
+                item.context.append({"title": "Configurare AutoPlay",
                                      "action": "autoplay_config",
                                      "channel": "autoplay",
                                      "from_channel": item.channel})
