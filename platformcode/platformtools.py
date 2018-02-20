@@ -16,9 +16,19 @@ import config
 import xbmc
 import xbmcgui
 import xbmcplugin
+from channelselector import get_thumb
+from core import trakt_tools
 from core.item import Item
 from platformcode import logger
-from channelselector import get_thumb
+
+
+class XBMCPlayer(xbmc.Player):
+
+    def __init__(self, *args):
+        pass
+
+
+xbmc_player = XBMCPlayer()
 
 
 def dialog_ok(heading, line1, line2="", line3=""):
@@ -96,7 +106,6 @@ def render_items(itemlist, parent_item):
     """
     # Si el itemlist no es un list salimos
     if not type(itemlist) == list:
-
         return
 
     if parent_item.start:
@@ -142,7 +151,7 @@ def render_items(itemlist, parent_item):
         if item.fanart:
             fanart = item.fanart
         else:
-            fanart = os.path.join(config.get_runtime_path(), "fanart-xmas.jpg")
+            fanart = os.path.join(config.get_runtime_path(), "fanart.jpg")
 
         # Creamos el listitem
         listitem = xbmcgui.ListItem(item.title)
@@ -205,12 +214,11 @@ def render_items(itemlist, parent_item):
     if config.get_setting("forceview"):
         viewmode_id = get_viewmode_id(parent_item)
         xbmc.executebuiltin("Container.SetViewMode(%s)" % viewmode_id)
-    if parent_item.mode in ['silent', 'get_cached', 'set_cache','finish']:
+    if parent_item.mode in ['silent', 'get_cached', 'set_cache', 'finish']:
         xbmc.executebuiltin("Container.SetViewMode(500)")
 
 
 def get_viewmode_id(parent_item):
-
     # viewmode_json habria q guardarlo en un archivo y crear un metodo para q el user fije sus preferencias en:
     # user_files, user_movies, user_tvshows, user_season y user_episodes.
     viewmode_json = {'skin.confluence': {'default_files': 50,
@@ -367,7 +375,7 @@ def set_context_commands(item, parent_item):
                                          "XBMC.RunScript(script.extendedinfo,info=seasoninfo,%s)" % param))
 
             elif item.contentType == "tvshow" and (item.infoLabels['tmdb_id'] or item.infoLabels['tvdb_id'] or
-                                                       item.infoLabels['imdb_id'] or item.contentSerieName):
+                                                   item.infoLabels['imdb_id'] or item.contentSerieName):
                 param = "id =%s,tvdb_id=%s,imdb_id=%s,name=%s" \
                         % (item.infoLabels['tmdb_id'], item.infoLabels['tvdb_id'], item.infoLabels['imdb_id'],
                            item.contentSerieName)
@@ -375,14 +383,14 @@ def set_context_commands(item, parent_item):
                                          "XBMC.RunScript(script.extendedinfo,info=extendedtvinfo,%s)" % param))
 
             elif item.contentType == "movie" and (item.infoLabels['tmdb_id'] or item.infoLabels['imdb_id'] or
-                                                      item.contentTitle):
+                                                  item.contentTitle):
                 param = "id =%s,imdb_id=%s,name=%s" \
                         % (item.infoLabels['tmdb_id'], item.infoLabels['imdb_id'], item.contentTitle)
                 context_commands.append(("ExtendedInfo",
                                          "XBMC.RunScript(script.extendedinfo,info=extendedinfo,%s)" % param))
 
         # InfoPlus
-        if config.get_setting("infoplus") == True:
+        if config.get_setting("infoplus"):
             if item.infoLabels['tmdb_id'] or item.infoLabels['imdb_id'] or item.infoLabels['tvdb_id'] or \
                     (item.contentTitle and item.infoLabels["year"]) or item.contentSerieName:
                 context_commands.append(("InfoPlus", "XBMC.RunPlugin(%s?%s)" % (sys.argv[0], item.clone(
@@ -402,11 +410,11 @@ def set_context_commands(item, parent_item):
                                      (sys.argv[0], item.clone(channel="favorites", action="addFavourite",
                                                               from_channel=item.channel,
                                                               from_action=item.action).tourl())))
-        #Buscar en otros canales
-        if item.contentType in ['movie','tvshow']and item.channel != 'search':
+        # Buscar en otros canales
+        if item.contentType in ['movie', 'tvshow'] and item.channel != 'search':
             # Buscar en otros canales
-            if item.contentSerieName!='':
-                item.wanted=item.contentSerieName
+            if item.contentSerieName != '':
+                item.wanted = item.contentSerieName
             else:
                 item.wanted = item.contentTitle
             context_commands.append(("[COLOR yellow]Cerca in altri canali[/COLOR]",
@@ -416,19 +424,19 @@ def set_context_commands(item, parent_item):
                                                                                    from_channel=item.channel,
 
                                                                                    contextual=True).tourl())))
-        #Definir como Pagina de inicio
+        # Definir como Pagina de inicio
         if config.get_setting('start_page'):
             if item.action not in ['findvideos', 'play']:
-                context_commands.insert(0, ("[COLOR 0xffccff00]Definire la pagina iniziale[/COLOR]",
+                context_commands.insert(0, ("[COLOR 0xffccff00]Definire la Pagina Iniziale[/COLOR]",
                                             "XBMC.RunPlugin(%s?%s)" % (
-                                                                        sys.argv[0], Item(channel='side_menu',
-                                                                                          action="set_custom_start",
-                                                                                          parent=item.tourl()).tourl())))
+                                                sys.argv[0], Item(channel='side_menu',
+                                                                  action="set_custom_start",
+                                                                  parent=item.tourl()).tourl())))
 
         if item.channel != "videolibrary":
             # Añadir Serie a la videoteca
             if item.action in ["episodios", "get_episodios"] and item.contentSerieName:
-                context_commands.append(("Aggiungi SerieTV alla Libreria Video", "XBMC.RunPlugin(%s?%s)" %
+                context_commands.append(("Aggiungi Serie TV alla Libreria Video", "XBMC.RunPlugin(%s?%s)" %
                                          (sys.argv[0], item.clone(action="add_serie_to_library",
                                                                   from_action=item.action).tourl())))
             # Añadir Pelicula a videoteca
@@ -448,7 +456,7 @@ def set_context_commands(item, parent_item):
             elif item.contentSerieName:
                 # Descargar serie
                 if item.contentType == "tvshow":
-                    context_commands.append(("Scarica SerieTV", "XBMC.RunPlugin(%s?%s)" %
+                    context_commands.append(("Scarica Serie TV", "XBMC.RunPlugin(%s?%s)" %
                                              (sys.argv[0], item.clone(channel="downloads", action="save_download",
                                                                       from_channel=item.channel,
                                                                       from_action=item.action).tourl())))
@@ -469,7 +477,7 @@ def set_context_commands(item, parent_item):
 
         # Abrir configuración
         if parent_item.channel not in ["setting", "news", "search"]:
-            context_commands.append(("Apri la configurazione", "XBMC.Container.Update(%s?%s)" %
+            context_commands.append(("Apri la Configurazione", "XBMC.Container.Update(%s?%s)" %
                                      (sys.argv[0], Item(channel="setting", action="mainlist").tourl())))
 
         # Buscar Trailer
@@ -484,26 +492,22 @@ def set_context_commands(item, parent_item):
         context_commands.append(("Super Favourites Menu",
                                  "XBMC.RunScript(special://home/addons/plugin.program.super.favourites/LaunchSFMenu.py)"))
 
-
-
     context_commands = sorted(context_commands, key=lambda comand: comand[0])
     # Menu Rapido
-    context_commands.insert(0,("[COLOR 0xffccff00]<Menú Veloce>[/COLOR]",
-                               "XBMC.Container.Update (%s?%s)" % (sys.argv[0], Item(channel='side_menu',
-                                                                                    action="open_menu",
-                                                                                    parent=parent_item.tourl()).tourl(
+    context_commands.insert(0, ("[COLOR 0xffccff00]<Menú Veloce>[/COLOR]",
+                                "XBMC.Container.Update (%s?%s)" % (sys.argv[0], Item(channel='side_menu',
+                                                                                     action="open_menu",
+                                                                                     parent=parent_item.tourl()).tourl(
 
-                                                                                    ))))
+                                ))))
     return context_commands
 
 
-
-
 def is_playing():
-    return xbmc.Player().isPlaying()
+    return xbmc_player.isPlaying()
 
 
-def play_video(item, strm=False, force_direct=False):
+def play_video(item, strm=False, force_direct=False, autoplay=False):
     logger.info()
     # logger.debug(item.tostring('\n'))
 
@@ -516,14 +520,14 @@ def play_video(item, strm=False, force_direct=False):
             xlistitem.setThumbnailImage(item.thumbnail)
 
         set_infolabels(xlistitem, item, True)
-        xbmc.Player().play(item.url, xlistitem)
+        xbmc_player.play(item.url, xlistitem)
         return
 
     default_action = config.get_setting("default_action")
     logger.info("default_action=%s" % default_action)
 
     # Abre el diálogo de selección para ver las opciones disponibles
-    opciones, video_urls, seleccion, salir = get_dialogo_opciones(item, default_action, strm)
+    opciones, video_urls, seleccion, salir = get_dialogo_opciones(item, default_action, strm, autoplay)
     if salir:
         return
 
@@ -573,14 +577,14 @@ def play_video(item, strm=False, force_direct=False):
         playlist.add(mediaurl, xlistitem)
 
         # Reproduce
-        xbmc_player = xbmc.Player()
+        xbmc_player = XBMCPlayer()
         xbmc_player.play(playlist, xlistitem)
     else:
         set_player(item, xlistitem, mediaurl, view, strm)
 
 
 def stop_video():
-    xbmc.Player().stop()
+    xbmc_player.stop()
 
 
 def get_seleccion(default_action, opciones, seleccion, video_urls):
@@ -662,14 +666,14 @@ def handle_wait(time_to_wait, title, text):
             break
 
     if cancelled:
-        logger.info('Attesa cancellada')
+        logger.info('Attesa Cancellata')
         return False
     else:
-        logger.info('Attesa completata')
+        logger.info('Attesa Completata')
         return True
 
 
-def get_dialogo_opciones(item, default_action, strm):
+def get_dialogo_opciones(item, default_action, strm, autoplay):
     logger.info()
     # logger.debug(item.tostring('\n'))
     from core import servertools
@@ -690,6 +694,7 @@ def get_dialogo_opciones(item, default_action, strm):
 
     # Extrae las URL de los vídeos, y si no puedes verlo te dice el motivo
     # Permitir varias calidades para server "directo"
+
     if item.video_urls:
         video_urls, puedes, motivo = item.video_urls, True, ""
     else:
@@ -730,22 +735,23 @@ def get_dialogo_opciones(item, default_action, strm):
 
     # Si no puedes ver el vídeo te informa
     else:
-        if item.server != "":
-            if "<br/>" in motivo:
-                dialog_ok("Non puoi visualizzare il video perché...", motivo.split("<br/>")[0], motivo.split("<br/>")[1],
-                          item.url)
+        if not autoplay:
+            if item.server != "":
+                if "<br/>" in motivo:
+                    dialog_ok("Non puoi visualizzare il video perche'...", motivo.split("<br/>")[0], motivo.split("<br/>")[1],
+                              item.url)
+                else:
+                    dialog_ok("Non puoi visualizzare il video perche'..", motivo, item.url)
             else:
-                dialog_ok("Non puoi visualizzare il video perché...", motivo, item.url)
-        else:
-            dialog_ok("Non puoi visualizzare il video perché...", "Il server in cui è ospitato non  è",
-                      "sopportado da alfa tuttavía", item.url)
+                dialog_ok("Non puoi visualizzare il video perche'..", "Il server in cui e ospitato non e'",
+                          "sopportato da Alfa-PureITA", item.url)
 
-        if item.channel == "favorites":
-            # "Quitar de favoritos"
-            opciones.append(config.get_localized_string(30154))
+            if item.channel == "favorites":
+                # "Quitar de favoritos"
+                opciones.append(config.get_localized_string(30154))
 
-        if len(opciones) == 0:
-            error = True
+            if len(opciones) == 0:
+                error = True
 
     return opciones, video_urls, seleccion, error
 
@@ -761,7 +767,7 @@ def set_opcion(item, seleccion, opciones, video_urls):
         listitem = xbmcgui.ListItem(item.title)
 
         if config.get_platform(True)['num_version'] >= 16.0:
-            listitem.setArt({'icon':"DefaultVideo.png", 'thumb': item.thumbnail})
+            listitem.setArt({'icon': "DefaultVideo.png", 'thumb': item.thumbnail})
         else:
             listitem.setIconImage("DefaultVideo.png")
             listitem.setThumbnailImage(item.thumbnail)
@@ -788,20 +794,6 @@ def set_opcion(item, seleccion, opciones, video_urls):
         from channels import favorites
         item.from_channel = "favorites"
         favorites.addFavourite(item)
-        salir = True
-
-    # "Añadir a videoteca":
-    elif opciones[seleccion] == config.get_localized_string(30161):
-        titulo = item.fulltitle
-        if titulo == "":
-            titulo = item.title
-
-        new_item = item.clone(title=titulo, action="play_from_library", category="Cine",
-                              fulltitle=item.fulltitle, channel=item.channel)
-
-        from core import videolibrarytools
-        videolibrarytools.add_movie(new_item)
-
         salir = True
 
     # "Buscar Trailer":
@@ -867,7 +859,7 @@ def set_player(item, xlistitem, mediaurl, view, strm):
         xbmcplugin.setResolvedUrl(int(sys.argv[1]), True, xlistitem)
         if item.subtitle != "":
             xbmc.sleep(2000)
-            xbmc.Player().setSubtitles(item.subtitle)
+            xbmc_player.setSubtitles(item.subtitle)
 
     else:
         logger.info("player_mode=%s" % config.get_setting("player_mode"))
@@ -885,8 +877,11 @@ def set_player(item, xlistitem, mediaurl, view, strm):
             playlist.add(mediaurl, xlistitem)
 
             # Reproduce
-            xbmc_player = xbmc.Player()
+            # xbmc_player = xbmc_player
             xbmc_player.play(playlist, xlistitem)
+            if config.get_setting('trakt_sync'):
+                trakt_tools.wait_for_update_trakt()
+
         # elif config.get_setting("player_mode") == 1 or item.isPlayable:
         elif config.get_setting("player_mode") == 1:
             logger.info("mediaurl :" + mediaurl)
@@ -905,7 +900,7 @@ def set_player(item, xlistitem, mediaurl, view, strm):
     if item.subtitle != "" and view:
         logger.info("Subtítulos externos: " + item.subtitle)
         xbmc.sleep(2000)
-        xbmc.Player().setSubtitles(item.subtitle)
+        xbmc_player.setSubtitles(item.subtitle)
 
     # si es un archivo de la videoteca enviar a marcar como visto
     if strm or item.strm_path:
@@ -942,12 +937,12 @@ def play_torrent(item, xlistitem, mediaurl):
 
     if torrent_client and torrent_client - 1 <= len(torrent_options):
         if torrent_client == 0:
-            seleccion = dialog_select("Aprire torrent con...", [opcion[0] for opcion in torrent_options])
+            seleccion = dialog_select("Aprire i torrent con...", [opcion[0] for opcion in torrent_options])
         else:
             seleccion = torrent_client - 1
     else:
         if len(torrent_options) > 1:
-            seleccion = dialog_select("Aprire torrent con...", [opcion[0] for opcion in torrent_options])
+            seleccion = dialog_select("Aprire i torrent con...", [opcion[0] for opcion in torrent_options])
         else:
             seleccion = 0
 
@@ -974,7 +969,7 @@ def play_torrent(item, xlistitem, mediaurl):
             client_tmp_path = config.get_data_path()
 
         # Iniciamos el cliente:
-        c = Client(url=mediaurl, is_playing_fnc=xbmc.Player().isPlaying, wait_time=None, timeout=10,
+        c = Client(url=mediaurl, is_playing_fnc=xbmc_player.isPlaying, wait_time=None, timeout=10,
                    temp_path=os.path.join(client_tmp_path, "alfa-torrent"), print_status=debug)
 
         # Mostramos el progreso
@@ -999,7 +994,7 @@ def play_torrent(item, xlistitem, mediaurl):
                           (s.progress_file, s.file_size, s.str_state, s._download_rate)
                     txt2 = 'S: %d(%d) P: %d(%d)' % (s.num_seeds, s.num_complete, s.num_peers, s.num_incomplete)
                     try:
-                        txt3 = 'Arresto automatico: %ss' % (int(s.timeout))
+                        txt3 = 'Arresto Automatico: %ss' % (int(s.timeout))
                     except:
                         txt3 = ''
 
@@ -1014,11 +1009,11 @@ def play_torrent(item, xlistitem, mediaurl):
                             progreso = dialog_progress("Alfa-PureITA - Torrent", "")
                             progreso.update(s.buffer, txt, txt2, txt3)
                         else:
-                            progreso = dialog_progress("Alfa - Torrent", "")
+                            progreso = dialog_progress("Alfa-PureITA - Torrent", "")
                             break
 
                     else:
-                        if dialog_yesno("Alfa-PureITA - Torrent", "Vuoi annullare il processo?"):
+                        if dialog_yesno("Alfa-PureITA - Torrent", "Desideri annullare il processo?"):
                             progreso = dialog_progress("Alfa-PureITA - Torrent", "")
                             break
 
@@ -1038,7 +1033,7 @@ def play_torrent(item, xlistitem, mediaurl):
                     playlist = xbmc.PlayList(xbmc.PLAYLIST_VIDEO)
                     playlist.clear()
                     playlist.add(videourl, xlistitem)
-                    xbmc_player = xbmc.Player()
+                    # xbmc_player = xbmc_player
                     xbmc_player.play(playlist)
 
                     # Marcamos como reproducido para que no se vuelva a iniciar
@@ -1050,7 +1045,7 @@ def play_torrent(item, xlistitem, mediaurl):
                         xbmc_videolibrary.mark_auto_as_watched(item)
 
                     # Y esperamos a que el reproductor se cierre
-                    while xbmc.Player().isPlaying():
+                    while xbmc_player.isPlaying():
                         time.sleep(1)
 
                     # Cuando este cerrado,  Volvemos a mostrar el dialogo
