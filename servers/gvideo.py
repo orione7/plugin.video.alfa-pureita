@@ -11,17 +11,17 @@ def test_video_exists(page_url):
 
     response = httptools.downloadpage(page_url, cookies=False, headers={"Referer": page_url})
     if "no+existe" in response.data:
-        return False, "[gvideo] El video no existe o ha sido borrado"
+        return False, "[gvideo] Il video non esiste o e stato cancellato"
     if "Se+ha+excedido+el" in response.data:
-        return False, "[gvideo] Se ha excedido el número de reproducciones permitidas"
+        return False, "[gvideo] Il numero di riproduzioni consentite è stato superato"
     if "No+tienes+permiso" in response.data:
-        return False, "[gvideo] No tienes permiso para acceder a este video"
+        return False, "[gvideo] Non hai i permessi necessari per accedere a questo video"
     if "Se ha producido un error" in response.data:
-        return False, "[gvideo] Se ha producido un error en el reproductor de google"
+        return False, "[gvideo] Si e verificato un errore nel player di google"
     if "No+se+puede+procesar+este" in response.data:
-        return False, "[gvideo] No se puede procesar este video"
+        return False, "[gvideo] Impossibile elaborare questo video"
     if response.code == 429:
-        return False, "[gvideo] Demasiadas conexiones al servidor, inténtelo después"
+        return False, "[gvideo] Troppe connessioni al server, prova più tardi"
     return True, ""
 
 
