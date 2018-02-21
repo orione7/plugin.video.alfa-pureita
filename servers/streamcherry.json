@@ -17,7 +17,7 @@
       "default": false,
       "enabled": true,
       "id": "black_list",
-      "label": "Includiu nella Black List",
+      "label": "Incluir en lista negra",
       "type": "bool",
       "visible": true
     },
@@ -25,7 +25,7 @@
       "default": 0,
       "enabled": true,
       "id": "favorites_servers_list",
-      "label": "Includi nei Preferiti",
+      "label": "Incluir en lista de favoritos",
       "lvalues": [
         "No",
         "1",

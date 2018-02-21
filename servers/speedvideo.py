@@ -3,7 +3,6 @@
 import base64
 
 from core import scrapertools
-from core import httptools
 from platformcode import logger
 
 
@@ -17,7 +16,7 @@ def get_video_url(page_url, premium=False, user="", password="", video_password=
     logger.info("url=" + page_url)
     video_urls = []
 
-    data = httptools.downloadpage(page_url).data
+    data = scrapertools.cachePage(page_url)
 
     codif = scrapertools.find_single_match(data, 'var [a-z]+ = ([0-9]+);')
     link = scrapertools.find_single_match(data, 'linkfile ="([^"]+)"')

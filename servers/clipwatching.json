@@ -4,17 +4,14 @@
     "ignore_urls": [],
     "patterns": [
       {
-        "pattern": "(?:openload|oload).*?/(?:embed|f)/([0-9a-zA-Z-_]+)",
-        "url": "https://openload.co/embed/\\1/"
+        "pattern": "clipwatching.com/(.*?).html",
+        "url": "http://clipwatching.com/\\1.html"
       }
     ]
   },
   "free": true,
-  "id": "openload",
-  "name": "openload",
-  "premium": [
-    "realdebrid"
-  ],
+  "id": "clipwatching",
+  "name": "clipwatching",
   "settings": [
     {
       "default": false,
@@ -41,5 +38,5 @@
       "visible": false
     }
   ],
-  "thumbnail": "server_openload.png"
+  "thumbnail": "https://s17.postimg.org/e6kcan0vj/clipwatching1.png"
 }

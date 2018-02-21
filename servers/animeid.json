@@ -4,17 +4,14 @@
     "ignore_urls": [],
     "patterns": [
       {
-        "pattern": "(?:openload|oload).*?/(?:embed|f)/([0-9a-zA-Z-_]+)",
-        "url": "https://openload.co/embed/\\1/"
+        "pattern": "(s[0-9]+\\.animeid.tv/\\?vid=[A-z0-9-_]+)",
+        "url": "https://\\1"
       }
     ]
   },
   "free": true,
-  "id": "openload",
-  "name": "openload",
-  "premium": [
-    "realdebrid"
-  ],
+  "id": "animeid",
+  "name": "animeid",
   "settings": [
     {
       "default": false,
@@ -41,5 +38,5 @@
       "visible": false
     }
   ],
-  "thumbnail": "server_openload.png"
+  "thumbnail": ""
 }

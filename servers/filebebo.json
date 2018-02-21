@@ -4,17 +4,14 @@
     "ignore_urls": [],
     "patterns": [
       {
-        "pattern": "(?:openload|oload).*?/(?:embed|f)/([0-9a-zA-Z-_]+)",
-        "url": "https://openload.co/embed/\\1/"
+        "pattern": "(https://filebebo.com/e/[a-zA-Z0-9]+)",
+        "url": "\\1"
       }
     ]
   },
   "free": true,
-  "id": "openload",
-  "name": "openload",
-  "premium": [
-    "realdebrid"
-  ],
+  "id": "filebebo",
+  "name": "filebebo",
   "settings": [
     {
       "default": false,
@@ -41,5 +38,5 @@
       "visible": false
     }
   ],
-  "thumbnail": "server_openload.png"
+  "thumbnail": "https://filebebo.com/images/logo.png"
 }
