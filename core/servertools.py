@@ -242,8 +242,8 @@ def resolve_video_urls_for_playing(server, url, video_password="", muestra_dialo
         if server_parameters:
             # Muestra un diágo de progreso
             if muestra_dialogo:
-                progreso = platformtools.dialog_progress("alfa",
-                                                         "Conectando con %s" % server_parameters["name"])
+                progreso = platformtools.dialog_progress("Alfa-PureITA",
+                                                         "Connessione con %s" % server_parameters["name"])
 
             # Cuenta las opciones disponibles, para calcular el porcentaje
 
