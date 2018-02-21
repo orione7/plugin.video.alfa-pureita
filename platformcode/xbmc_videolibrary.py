@@ -208,8 +208,8 @@ def sync_trakt_kodi(silent=True):
         logger.info("Sincronizacion con Trakt iniciada")
 
         if notificacion:
-            platformtools.dialog_notification("Alfa",
-                                              "Sincronizacion con Trakt iniciada",
+            platformtools.dialog_notification("Alfa-PureITA",
+                                              "Sincronizzazione con Trakt iniziata",
                                               icon=0,
                                               time=2000)
 
@@ -421,7 +421,7 @@ def clean(mostrar_dialogo=False):
 
 
 def search_library_path():
-    sql = 'SELECT strPath FROM path WHERE strPath LIKE "special://%/plugin.video.alfa/library/" AND idParentPath ISNULL'
+    sql = 'SELECT strPath FROM path WHERE strPath LIKE "special://%/plugin.video.alfa-pureita/library/" AND idParentPath ISNULL'
     nun_records, records = execute_sql_kodi(sql)
     if nun_records >= 1:
         logger.debug(records[0][0])
@@ -444,8 +444,8 @@ def set_content(content_type, silent=False):
             if not silent:
                 # Preguntar si queremos instalar metadata.themoviedb.org
                 install = platformtools.dialog_yesno("The Movie Database",
-                                                     "No se ha encontrado el Scraper de películas de TheMovieDB.",
-                                                     "¿Desea instalarlo ahora?")
+                                                     "Nessun Scraper TheMovieDBNo per i Film installato.",
+                                                     "Desideri installarlo adesso?")
             else:
                 install = True
 
@@ -459,7 +459,7 @@ def set_content(content_type, silent=False):
 
             continuar = (install and xbmc.getCondVisibility('System.HasAddon(metadata.themoviedb.org)'))
             if not continuar:
-                msg_text = "The Movie Database no instalado."
+                msg_text = "The Movie Database non e stato installato."
 
     else:  # SERIES
         # Instalar The TVDB
@@ -467,8 +467,8 @@ def set_content(content_type, silent=False):
             if not silent:
                 # Preguntar si queremos instalar metadata.tvdb.com
                 install = platformtools.dialog_yesno("The TVDB",
-                                                     "No se ha encontrado el Scraper de series de The TVDB.",
-                                                     "¿Desea instalarlo ahora?")
+                                                     "Nessun Scraper TVDB per le Serie TV installato.",
+                                                     "Desideri Installarlo adesso?")
             else:
                 install = True
 
@@ -482,7 +482,7 @@ def set_content(content_type, silent=False):
 
             continuar = (install and xbmc.getCondVisibility('System.HasAddon(metadata.tvdb.com)'))
             if not continuar:
-                msg_text = "The TVDB no instalado."
+                msg_text = "The TVDB non e stato installato."
 
         # Instalar TheMovieDB
         if continuar and not xbmc.getCondVisibility('System.HasAddon(metadata.tvshows.themoviedb.org)'):
@@ -490,8 +490,8 @@ def set_content(content_type, silent=False):
             if not silent:
                 # Preguntar si queremos instalar metadata.tvshows.themoviedb.org
                 install = platformtools.dialog_yesno("The Movie Database",
-                                                     "No se ha encontrado el Scraper de series de TheMovieDB.",
-                                                     "¿Desea instalarlo ahora?")
+                                                     "Nessun Scraper TheMovieDB per le Serie TV installato.",
+                                                     "Desideri Installarlo adesso?")
             else:
                 install = True
 
@@ -535,7 +535,7 @@ def set_content(content_type, silent=False):
 
             continuar = (install and continuar)
             if not continuar:
-                msg_text = "The Movie Database no instalado."
+                msg_text = "The Movie Database non e stato installato."
 
     idPath = 0
     idParentPath = 0
@@ -609,7 +609,7 @@ def set_content(content_type, silent=False):
                           "<setting id='fallback' value='true' />" \
                           "<setting id='fanart' value='true' />" \
                           "<setting id='language' value='es' /></settings>"
-            strActualizar = "¿Desea configurar este Scraper en español como opción por defecto para series?"
+            strActualizar = "Vuoi configurare questo Scraper in italiano come opzione predefinita per le Serie TV?"
             if not videolibrarypath.endswith(sep):
                 videolibrarypath += sep
             strPath = videolibrarypath + config.get_setting("folder_tvshows") + sep
@@ -644,17 +644,17 @@ def set_content(content_type, silent=False):
                 continuar = True
 
         if not continuar:
-            msg_text = "Error al configurar el scraper en la BD."
+            msg_text = "Errore nel configurare lo Scraper."
 
     if not continuar:
-        heading = "Videoteca %s no configurada" % content_type
+        heading = "Videoteca %s non configurata" % content_type
     elif content_type == 'SERIES' and not xbmc.getCondVisibility(
             'System.HasAddon(metadata.tvshows.themoviedb.org)'):
         heading = "Videoteca %s configurada" % content_type
-        msg_text = "Es necesario reiniciar Kodi para que los cambios surtan efecto."
+        msg_text = "È necessario riavviare Kodi in modo che le modifiche abbiano effetto."
     else:
-        heading = "Videoteca %s configurada" % content_type
-        msg_text = "Felicidades la videoteca de Kodi ha sido configurada correctamente."
+        heading = "Videoteca %s configurata" % content_type
+        msg_text = "Congratulazioni la Libreria di Kodi e stata configurata correttamente."
     platformtools.dialog_notification(heading, msg_text, icon=1, time=10000)
     logger.info("%s: %s" % (heading, msg_text))
 
@@ -804,9 +804,9 @@ def ask_set_content(flag, silent=False):
         add_sources(config.get_setting("downloadpath"))
 
     if not silent:
-        heading = "Alfa Auto-configuración"
-        linea1 = "¿Desea que Alfa auto-configure la videoteca de Kodi?"
-        linea2 = "Si pulsa 'No' podra hacerlo desde 'Configuración > Preferencia > Rutas'."
+        heading = "Alfa-PureITA Auto-configurazione"
+        linea1 = "Desideri che Alfa-PureITA Auto-Configura la libreria di Kodi?"
+        linea2 = "Se premi 'NO' puoi farlo successivamente in 'Configurazioni > Preferenze > Percorso'."
         if platformtools.dialog_yesno(heading, linea1, linea2):
             do_config()
         else:
