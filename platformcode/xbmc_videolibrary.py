@@ -805,7 +805,7 @@ def ask_set_content(flag, silent=False):
 
     if not silent:
         heading = "Alfa-PureITA Auto-configurazione"
-        linea1 = "Desideri che Alfa-PureITA Auto-Configura la libreria di Kodi?"
+        linea1 = "Desideri che Alfa-PureITA Auto-Configuri la libreria di Kodi?"
         linea2 = "Se premi 'NO' puoi farlo successivamente in 'Configurazioni > Preferenze > Percorso'."
         if platformtools.dialog_yesno(heading, linea1, linea2):
             do_config()
