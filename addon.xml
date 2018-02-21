@@ -10,14 +10,14 @@
   <extension point="xbmc.addon.metadata">
     <summary lang="it">Naviga nelle pagine web utilizzando Kodi.</summary>
     <assets>
-      <icon>icon1.png</icon>
+      <icon>icon.png</icon>
       <fanart>fanart.jpg</fanart>
       <screenshot>resources/media/themes/ss/1.jpg</screenshot>
       <screenshot>resources/media/themes/ss/2.jpg</screenshot>
       <screenshot>resources/media/themes/ss/3.jpg</screenshot>
       <screenshot>resources/media/themes/ss/4.jpg</screenshot>
     </assets>
-    <news>[B]Novita in questa versione:[/B]   gnula, plusdede, streamplay, bitertv, canalpelis, playpornx, yaske, bdupload, userscloud, arreglos internos</news>
+    <news>[B]Novita in questa versione BETA:[/B]   Nuova interfacia Grafica, Libreria, Menu Veloce, Shortcut Menu, Configurazioni Personalizzabili and much moore</news>
     <description lang="it">Naviga nelle pagine web utilizzando Kodi</description>
     <description lang="es">Navega con Kodi por páginas web para ver sus videos de manera fácil.</description>
     <summary lang="en">Browse web pages using Kodi</summary>
