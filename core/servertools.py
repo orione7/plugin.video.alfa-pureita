@@ -51,7 +51,7 @@ def find_video_items(item=None, data=None):
 
     # Busca los enlaces a los videos
     for label, url, server, thumbnail in findvideos(data):
-        title = "Enlace encontrado en %s" % label
+        title = "%s" % label
         itemlist.append(
             item.clone(title=title, action="play", url=url, thumbnail=thumbnail, server=server, folder=False))
 
@@ -153,9 +153,9 @@ def findvideos(data, skip=False):
             break
 
     if not devuelve and is_filter_servers:
-        platformtools.dialog_ok("Filtrar servidores (Lista Negra)",
-                                "No hay enlaces disponibles que cumplan los requisitos de su Lista Negra.",
-                                "Pruebe de nuevo modificando el fíltro en 'Configuracíon Servidores")
+        platformtools.dialog_ok("Filtro Server (Black List)",
+                                "Nessun collegamento disponibile che soddisfi i requisiti della Black List.",
+                                "Prova di nuovo a modificare il filtro in 'Configurazione dei server'")
 
     return devuelve
 
@@ -699,9 +699,9 @@ def filter_servers(servers_list):
             servers_list_filter = filter(lambda x: not config.get_setting("black_list", server=x), servers_list)
 
         # Si no hay enlaces despues de filtrarlos
-        if servers_list_filter or not platformtools.dialog_yesno("Filtrar servidores (Lista Negra)",
-                                                                 "Todos los enlaces disponibles pertenecen a servidores incluidos en su Lista Negra.",
-                                                                 "¿Desea mostrar estos enlaces?"):
+        if servers_list_filter or not platformtools.dialog_yesno("Filtro Server (Black List)",
+                                                                 "Tutti i collegamenti disponibili appartengono ai server inclusi nella tua Black List.",
+                                                                 "Vuoi mostrare questi link?"):
             servers_list = servers_list_filter
 
     return servers_list
