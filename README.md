@@ -1,5 +1,5 @@
 # Alfa PureITA
-![alt tag](https://raw.githubusercontent.com/orione7/plugin.video.alfa-pureita/master/icon1.png)
+![alt tag](https://raw.githubusercontent.com/orione7/plugin.video.alfa-pureita/master/icon.png)
 
 Son of Alfa-Addon:
 
