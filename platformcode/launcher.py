@@ -270,10 +270,10 @@ def run(item=None):
         canal = scrapertools.find_single_match(traceback.format_exc(), patron)
 
         platformtools.dialog_ok(
-            "Error en el canal " + canal,
-            "La web de la que depende parece no estar disponible, puede volver a intentarlo, "
-            "si el problema persiste verifique mediante un navegador la web: %s. "
-            "Si la web funciona correctamente informe el error en: www.alfa-addon.com" %(e))
+            "Errore ne canale " + canal,
+            "Il sito web da cui dipende sembra non essere disponibile, "
+            "Se il problema persiste, controlla il sito web utilizzando un browser: %s. "
+            "Se il sito web funziona correttamente segnala l'errore in: www.ita.alfa-addon.com" %(e))
     except:
         import traceback
         logger.error(traceback.format_exc())
@@ -294,14 +294,14 @@ def run(item=None):
 
         if canal:
             platformtools.dialog_ok(
-                "Error inesperado en el canal " + canal,
-                "Puede deberse a un fallo de conexión, la web del canal "
-                "ha cambiado su estructura, o un error interno de alfa.",
-                "Para saber más detalles, consulta el log.", log_message)
+                "Errore imprevisto nel canale " + canal,
+                "Potrebbe essere causato da un errore di connessione, il sito Web del canale "
+                "ha cambiato struttura, o un errore interno di Alfa-PureITA.",
+                "Per maggiori informazioni consultare il Log.", log_message)
         else:
             platformtools.dialog_ok(
-                "Se ha producido un error en alfa",
-                "Comprueba el log para ver mas detalles del error.",
+                "Si e verificato un errore in Alfa-PureITA",
+                "Controllare il Log per vedere maggiori informazioni.",
                 log_message)
 
 
@@ -404,7 +404,7 @@ def play_from_library(item):
     else:
         # Ventana emergente
         from channels import videolibrary
-        p_dialog = platformtools.dialog_progress_bg('alfa', 'Cargando...')
+        p_dialog = platformtools.dialog_progress_bg('alfa-pureita', 'Ricerca...')
         p_dialog.update(0, '')
 
         itemlist = videolibrary.findvideos(item)
