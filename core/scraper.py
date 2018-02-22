@@ -21,10 +21,10 @@ def find_and_set_infoLabels(item):
     scraper = None
     # logger.debug("item:\n" + item.tostring('\n'))
 
-    list_opciones_cuadro = ["Introducir otro nombre", "Completar información"]
+    list_opciones_cuadro = ["Inserisci un altro nome", "Informazioni complete"]
     # Si se añaden más scrapers hay q declararlos aqui-> "modulo_scraper": "Texto_en_cuadro"
-    scrapers_disponibles = {'tmdb': "Buscar en TheMovieDB.org",
-                            'tvdb': "Buscar en TheTvDB.com"}
+    scrapers_disponibles = {'tmdb': "Ricerca in TheMovieDB.org",
+                            'tvdb': "Ricerca in TheTvDB.com"}
 
     # Obtener el Scraper por defecto de la configuracion segun el tipo de contenido
     if item.contentType == "movie":
@@ -63,10 +63,10 @@ def find_and_set_infoLabels(item):
             return True
         elif scraper_result:
             # Contenido encontrado pero no hay 'code'
-            msg = "Identificador no encontrado para: %s" % title
+            msg = "Identificatore non trovato per: %s" % title
         else:
             # Contenido no encontrado
-            msg = "No se ha encontrado informacion para: %s" % title
+            msg = "Nessuna informazione trovata per: %s" % title
 
         logger.info(msg)
         # Mostrar cuadro con otras opciones:
@@ -80,7 +80,7 @@ def find_and_set_infoLabels(item):
 
         elif index == 0:
             # Pregunta el titulo
-            title = platformtools.dialog_input(title, "Introduzca el nombre de la %s a buscar" % tipo_contenido)
+            title = platformtools.dialog_input(title, "Inserire il nome  %s per la Ricerca" % tipo_contenido)
             if title:
                 if item.contentType == "movie":
                     item.contentTitle = title
@@ -125,18 +125,18 @@ def cuadro_completar(item):
 
     COLOR = ["0xFF8A4B08", "0xFFF7BE81"]
     # Creamos la lista de campos del infoLabel
-    controls = [("title", "text", "Titulo:"),
-                ("originaltitle", "text", "Titulo original"),
-                ("year", "text", "Año"),
-                ("identificadores", "label", "Identificadores:"),
+    controls = [("title", "text", "Titolo:"),
+                ("originaltitle", "text", "Titolo originale"),
+                ("year", "text", "Anno"),
+                ("identificadores", "label", "Identificatori:"),
                 ("tmdb_id", "text", "    The Movie Database ID"),
                 ("url_tmdb", "text", "        URL Tmdb", "+!eq(-1,'')"),
                 ("tvdb_id", "text", "    The TVDB ID", "+eq(-7,'Serie')"),
                 ("url_tvdb", "text", "        URL TVDB", "+!eq(-1,'')+eq(-8,'Serie')"),
                 ("imdb_id", "text", "    IMDb ID"),
-                ("otro_id", "text", "    Otro ID", "+eq(-1,'')"),
-                ("urls", "label", "Imágenes (urls):"),
-                ("fanart", "text", "    Fondo"),
+                ("otro_id", "text", "    Altri ID", "+eq(-1,'')"),
+                ("urls", "label", "Immagine (urls):"),
+                ("fanart", "text", "    Sfondo"),
                 ("thumbnail", "text", "    Miniatura")]
 
     if item.infoLabels["mediatype"] == "movie":
@@ -146,12 +146,12 @@ def cuadro_completar(item):
 
     listado_controles = [{'id': "mediatype",
                           'type': "list",
-                          'label': "Tipo de contenido",
+                          'label': "Tipo di contenuto",
                           'color': COLOR[1],
                           'default': mediatype_default,
                           'enabled': True,
                           'visible': True,
-                          'lvalues': ["Película", "Serie"]
+                          'lvalues': ["Film", "Serie TV"]
                           }]
 
     for i, c in enumerate(controls):
@@ -188,7 +188,7 @@ def cuadro_completar(item):
                                   'visible': True})
 
     # logger.debug(dict_default)
-    if platformtools.show_channel_settings(list_controls=listado_controles, caption="Completar información", item=item,
+    if platformtools.show_channel_settings(list_controls=listado_controles, caption="Informazioni Complete", item=item,
                                            callback="core.scraper.callback_cuadro_completar",
                                            custom_button={"visible": False}):
         return True
