@@ -81,7 +81,7 @@ class InfoWindow(xbmcgui.WindowXMLDialog):
 
             self.result = infoLabels
 
-    def start(self, data, caption="Información del vídeo", item=None, scraper=Tmdb):
+    def start(self, data, caption="Informazioni del vídeo", item=None, scraper=Tmdb):
         """
         Muestra una ventana con la info del vídeo. Opcionalmente se puede indicar el titulo de la ventana mendiante
         el argumento 'caption'.
@@ -196,48 +196,48 @@ class InfoWindow(xbmcgui.WindowXMLDialog):
 
         # Cargamos los datos para el formato pelicula
         if self.result.get("mediatype", "movie") == "movie":
-            self.getControl(10006).setLabel("Título:")
+            self.getControl(10006).setLabel("Títolo:")
             self.getControl(10007).setLabel(self.result.get("title", "N/A"))
-            self.getControl(10008).setLabel("Título original:")
+            self.getControl(10008).setLabel("Títolo originale:")
             self.getControl(10009).setLabel(self.result.get("originaltitle", "N/A"))
-            self.getControl(100010).setLabel("Idioma original:")
+            self.getControl(100010).setLabel("Lingua originale:")
             self.getControl(100011).setLabel(self.result.get("language", "N/A"))
-            self.getControl(100012).setLabel("Puntuación:")
+            self.getControl(100012).setLabel("Punteggio:")
             self.getControl(100013).setLabel(self.result.get("puntuacion", "N/A"))
-            self.getControl(100014).setLabel("Lanzamiento:")
+            self.getControl(100014).setLabel("Rilasciato:")
             self.getControl(100015).setLabel(self.result.get("release_date", "N/A"))
-            self.getControl(100016).setLabel("Géneros:")
+            self.getControl(100016).setLabel("Genere:")
             self.getControl(100017).setLabel(self.result.get("genre", "N/A"))
 
         # Cargamos los datos para el formato serie
         else:
             self.getControl(10006).setLabel("Serie:")
             self.getControl(10007).setLabel(self.result.get("title", "N/A"))
-            self.getControl(10008).setLabel("Idioma original:")
+            self.getControl(10008).setLabel("Lingua originale:")
             self.getControl(10009).setLabel(self.result.get("language", "N/A"))
-            self.getControl(100010).setLabel("Puntuación:")
+            self.getControl(100010).setLabel("Punteggio:")
             self.getControl(100011).setLabel(self.result.get("puntuacion", "N/A"))
-            self.getControl(100012).setLabel("Géneros:")
+            self.getControl(100012).setLabel("Genere:")
             self.getControl(100013).setLabel(self.result.get("genre", "N/A"))
 
             if self.result.get("season"):
-                self.getControl(100014).setLabel("Título temporada:")
+                self.getControl(100014).setLabel("Títolo stagione:")
                 self.getControl(100015).setLabel(self.result.get("temporada_nombre", "N/A"))
-                self.getControl(100016).setLabel("Temporada:")
+                self.getControl(100016).setLabel("Stagione:")
                 self.getControl(100017).setLabel(self.result.get("season", "N/A") + " de " +
                                                  self.result.get("seasons", "N/A"))
             if self.result.get("episode"):
-                self.getControl(100014).setLabel("Título:")
+                self.getControl(100014).setLabel("Títolo:")
                 self.getControl(100015).setLabel(self.result.get("episode_title", "N/A"))
                 self.getControl(100018).setLabel("Episodio:")
                 self.getControl(100019).setLabel(self.result.get("episode", "N/A") + " de " +
                                                  self.result.get("episodes", "N/A"))
-                self.getControl(100020).setLabel("Emisión:")
+                self.getControl(100020).setLabel("Uscito:")
                 self.getControl(100021).setLabel(self.result.get("date", "N/A"))
 
         # Sinopsis
         if self.result['plot']:
-            self.getControl(100022).setLabel("Sinopsis:")
+            self.getControl(100022).setLabel("Sinopsi:")
             self.getControl(100023).setText(self.result.get("plot", "N/A"))
         else:
             self.getControl(100022).setLabel("")
