@@ -116,7 +116,7 @@ def save_movie(item):
     _id = item.infoLabels['code'][0]
 
     # progress dialog
-    p_dialog = platformtools.dialog_progress('alfa', 'Añadiendo película...')
+    p_dialog = platformtools.dialog_progress('alfa-pureita', 'Inserimento Film...')
 
     if config.get_setting("original_title_folder", "videolibrary") == 1 and item.infoLabels['originaltitle']:
         base_name = item.infoLabels['originaltitle']
@@ -180,7 +180,7 @@ def save_movie(item):
             insertados += 1
 
         if filetools.write(json_path, item.tojson()):
-            p_dialog.update(100, 'Añadiendo película...', item.contentTitle)
+            p_dialog.update(100, 'Inserimento Film...', item.contentTitle)
             item_nfo.library_urls[item.channel] = item.url
 
             if filetools.write(nfo_path, head_nfo + item_nfo.tojson()):
@@ -194,7 +194,7 @@ def save_movie(item):
 
     # Si llegamos a este punto es por q algo ha fallado
     logger.error("No se ha podido guardar %s en la videoteca" % item.contentTitle)
-    p_dialog.update(100, 'Fallo al añadir...', item.contentTitle)
+    p_dialog.update(100, 'Errore ...', item.contentTitle)
     p_dialog.close()
     return 0, 0, -1
 
@@ -351,8 +351,8 @@ def save_episodes(path, episodelist, serie, silent=False, overwrite=True):
     # Silent es para no mostrar progreso (para videolibrary_service)
     if not silent:
         # progress dialog
-        p_dialog = platformtools.dialog_progress('alfa', 'Añadiendo episodios...')
-        p_dialog.update(0, 'Añadiendo episodio...')
+        p_dialog = platformtools.dialog_progress('alfa-pureita', 'Inserimento episodi...')
+        p_dialog.update(0, 'Iserimento episodio...')
 
     new_episodelist = []
     # Obtenemos el numero de temporada y episodio y descartamos los q no lo sean
@@ -376,7 +376,7 @@ def save_episodes(path, episodelist, serie, silent=False, overwrite=True):
 
     for i, e in enumerate(scraper.sort_episode_list(new_episodelist)):
         if not silent:
-            p_dialog.update(int(math.ceil((i + 1) * t)), 'Añadiendo episodio...', e.title)
+            p_dialog.update(int(math.ceil((i + 1) * t)), 'Iserimento episodio...', e.title)
 
         season_episode = "%sx%s" % (e.contentSeason, str(e.contentEpisodeNumber).zfill(2))
         strm_path = filetools.join(path, "%s.strm" % season_episode)
@@ -517,7 +517,7 @@ def add_movie(item):
                                 config.get_localized_string(30135))  # 'se ha añadido a la videoteca'
     else:
         platformtools.dialog_ok(config.get_localized_string(30131),
-                                "ERROR, la pelicula NO se ha añadido a la videoteca")
+                                "ERROR, il Film NON e stao iserito nella Libreria")
 
 
 def add_tvshow(item, channel=None):
@@ -570,21 +570,21 @@ def add_tvshow(item, channel=None):
     insertados, sobreescritos, fallidos, path = save_tvshow(item, itemlist)
 
     if not insertados and not sobreescritos and not fallidos:
-        platformtools.dialog_ok("Videoteca", "ERROR, la serie NO se ha añadido a la videoteca",
-                                "No se ha podido obtener ningun episodio")
+        platformtools.dialog_ok("Videoteca", "ERROR, la Serie TV NON e stata iserita nella Libreria",
+                                "Nessun Episodio trovato")
         logger.error("La serie %s no se ha podido añadir a la videoteca. No se ha podido obtener ningun episodio"
                      % item.show)
 
     elif fallidos == -1:
-        platformtools.dialog_ok("Videoteca", "ERROR, la serie NO se ha añadido a la videoteca")
+        platformtools.dialog_ok("Videoteca", "ERROR, la Serie TV NON e stata iserita nella Libreria")
         logger.error("La serie %s no se ha podido añadir a la videoteca" % item.show)
 
     elif fallidos > 0:
-        platformtools.dialog_ok("Videoteca", "ERROR, la serie NO se ha añadido completa a la videoteca")
+        platformtools.dialog_ok("Videoteca", "ERROR, la Serie TV NON e stata iserita completamente nella Libreria")
         logger.error("No se han podido añadir %s episodios de la serie %s a la videoteca" % (fallidos, item.show))
 
     else:
-        platformtools.dialog_ok("Videoteca", "La serie se ha añadido a la videoteca")
+        platformtools.dialog_ok("Videoteca", "La Serie TV e stata inserita nella Libreria")
         logger.info("Se han añadido %s episodios de la serie %s a la videoteca" %
                     (insertados, item.show))
         if config.is_xbmc():
