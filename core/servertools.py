@@ -309,7 +309,7 @@ def resolve_video_urls_for_playing(server, url, video_password="", muestra_dialo
 
                 # Muestra el progreso
                 if muestra_dialogo:
-                    progreso.update((100 / len(opciones)) * opciones.index(opcion), "Conectando con %s" % server_name)
+                    progreso.update((100 / len(opciones)) * opciones.index(opcion), "Connesione con %s" % server_name)
 
                 # Modo free
                 if opcion == "free":
@@ -336,10 +336,10 @@ def resolve_video_urls_for_playing(server, url, video_password="", muestra_dialo
                         elif response and response[0][0]:
                             error_messages.append(response[0][0])
                         else:
-                            error_messages.append("Se ha producido un error en %s" % server_name)
+                            error_messages.append("Si e verificato un errore in  %s" % server_name)
                     except:
                         logger.error("Error en el servidor: %s" % opcion)
-                        error_messages.append("Se ha producido un error en %s" % server_name)
+                        error_messages.append("Si e verificato un errore in %s" % server_name)
                         import traceback
                         logger.error(traceback.format_exc())
 
@@ -356,11 +356,11 @@ def resolve_video_urls_for_playing(server, url, video_password="", muestra_dialo
             if video_exists and not opciones and server_parameters.get("premium"):
                 listapremium = [get_server_parameters(premium)["name"] for premium in server_parameters["premium"]]
                 error_messages.append(
-                    "Para ver un vídeo en %s necesitas<br/>una cuenta en: %s" % (server, " o ".join(listapremium)))
+                    "Per guardare il video %s necessita<br/>un accouunt in: %s" % (server, " o ".join(listapremium)))
 
             # Si no tenemos urls ni mensaje de error, ponemos uno generico
             elif not video_urls and not error_messages:
-                error_messages.append("Se ha producido un error en %s" % get_server_parameters(server)["name"])
+                error_messages.append("Si e verificato un errore in %s" % get_server_parameters(server)["name"])
 
     return video_urls, len(video_urls) > 0, "<br/>".join(error_messages)
 
