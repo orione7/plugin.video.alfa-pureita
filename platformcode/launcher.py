@@ -288,7 +288,7 @@ def run(item=None):
                 log_name = "xbmc.log"
             else:
                 log_name = "kodi.log"
-            log_message = "Ruta: " + xbmc.translatePath("special://logpath") + log_name
+            log_message = "Percorso: " + xbmc.translatePath("special://logpath") + log_name
         except:
             log_message = ""
 
