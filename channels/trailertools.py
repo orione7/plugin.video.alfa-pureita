@@ -76,7 +76,7 @@ def buscartrailer(item, trailers=[]):
             else:
                 for trailer in trailers:
                     title = trailer['name'] + " [" + trailer['size'] + "p] (" + trailer['language'].replace("en", "ING") \
-                        .replace("es", "ESP") + ")  [tmdb/youtube]"
+                        .replace("it", "ITA") + ")  [tmdb/youtube]"
                     itemlist.append(item.clone(action="play", title=title, url=trailer['url'], server="youtube"))
         except:
             import traceback
@@ -86,21 +86,21 @@ def buscartrailer(item, trailers=[]):
             title = "[COLOR green]%s[/COLOR]"
         else:
             title = "%s"
-        itemlist.append(item.clone(title=title % "Búsqueda en Youtube", action="youtube_search",
+        itemlist.append(item.clone(title=title % "Ricerca in Youtube", action="youtube_search",
                                    text_color="green"))
-        itemlist.append(item.clone(title=title % "Búsqueda en Filmaffinity",
+        itemlist.append(item.clone(title=title % "Ricerca in Filmaffinity",
                                    action="filmaffinity_search", text_color="green"))
         # Si se trata de una serie, no se incluye la opción de buscar en Abandomoviez
         if not item.show and not item.infoLabels['tvshowtitle']:
-            itemlist.append(item.clone(title=title % "Búsqueda en Abandomoviez",
+            itemlist.append(item.clone(title=title % "Ricerca in Abandomoviez",
                                        action="abandomoviez_search", text_color="green"))
-        itemlist.append(item.clone(title=title % "Búsqueda en Jayhap (Youtube, Vimeo & Dailymotion)",
+        itemlist.append(item.clone(title=title % "Ricerca in Jayhap (Youtube, Vimeo & Dailymotion)",
                                    action="jayhap_search", text_color="green"))
 
     if item.contextual:
         global window_select, result
         select = Select("DialogSelect.xml", config.get_runtime_path(), item=item, itemlist=itemlist,
-                        caption="Buscando: " + item.contentTitle)
+                        caption="Ricerca: " + item.contentTitle)
         window_select.append(select)
         select.doModal()
 
@@ -131,14 +131,14 @@ def tmdb_trailers(item, tipo="movie"):
     itemlist = []
     tmdb_search = None
     if item.infoLabels['tmdb_id']:
-        tmdb_search = Tmdb(id_Tmdb=item.infoLabels['tmdb_id'], tipo=tipo, idioma_busqueda='es')
+        tmdb_search = Tmdb(id_Tmdb=item.infoLabels['tmdb_id'], tipo=tipo, idioma_busqueda='it')
     elif item.infoLabels['year']:
         tmdb_search = Tmdb(texto_buscado=item.contentTitle, tipo=tipo, year=item.infoLabels['year'])
 
     if tmdb_search:
         for result in tmdb_search.get_videos():
             title = result['name'] + " [" + result['size'] + "p] (" + result['language'].replace("en", "ING") \
-                .replace("es", "ESP") + ")  [tmdb/youtube]"
+                .replace("it", "ITA") + ")  [tmdb/youtube]"
             itemlist.append(item.clone(action="play", title=title, url=result['url'], server="youtube"))
 
     return itemlist
@@ -177,11 +177,11 @@ def youtube_search(item):
                                                      'Siguiente')
     if next_page != "":
         next_page = urlparse.urljoin("https://www.youtube.com", next_page)
-        itemlist.append(item.clone(title=">> Siguiente", action="youtube_search", extra="youtube", page=next_page,
+        itemlist.append(item.clone(title=">> Successivi", action="youtube_search", extra="youtube", page=next_page,
                                    thumbnail="", text_color=""))
 
     if not itemlist:
-        itemlist.append(item.clone(title="La búsqueda no ha dado resultados (%s)" % titulo,
+        itemlist.append(item.clone(title="La ricerca non ha dato risultati (%s)" % titulo,
                                    action="", thumbnail="", text_color=""))
 
     if keyboard:
@@ -189,7 +189,7 @@ def youtube_search(item):
             title = "[COLOR green]%s[/COLOR]"
         else:
             title = "%s"
-        itemlist.append(item.clone(title=title % "Búsqueda Manual en Youtube", action="manual_search",
+        itemlist.append(item.clone(title=title % "Ricerca Manuale in Youtube", action="manual_search",
                                    text_color="green", thumbnail="", extra="youtube"))
 
     return itemlist
@@ -232,11 +232,11 @@ def abandomoviez_search(item):
         next_page = scrapertools.find_single_match(data, '<a href="([^"]+)">Siguiente')
         if next_page != "":
             next_page = urlparse.urljoin("http://www.abandomoviez.net/%s" % item.prefix, next_page)
-            itemlist.append(item.clone(title=">> Siguiente", action="abandomoviez_search", page=next_page, thumbnail="",
+            itemlist.append(item.clone(title=">> Successivi", action="abandomoviez_search", page=next_page, thumbnail="",
                                        text_color=""))
 
     if not itemlist:
-        itemlist.append(item.clone(title="La búsqueda no ha dado resultados", action="", thumbnail="",
+        itemlist.append(item.clone(title="La ricerca non ha dato risultati", action="", thumbnail="",
                                    text_color=""))
 
         if keyboard:
@@ -244,7 +244,7 @@ def abandomoviez_search(item):
                 title = "[COLOR green]%s[/COLOR]"
             else:
                 title = "%s"
-            itemlist.append(item.clone(title=title % "Búsqueda Manual en Abandomoviez",
+            itemlist.append(item.clone(title=title % "Ricerca Manuale in Abandomoviez",
                                        action="manual_search", thumbnail="", text_color="green", extra="abandomoviez"))
 
     return itemlist
@@ -256,13 +256,13 @@ def search_links_abando(item):
     data = scrapertools.downloadpage(item.url)
     itemlist = []
     if "Lo sentimos, no tenemos trailer" in data:
-        itemlist.append(item.clone(title="No hay ningún vídeo disponible", action="", text_color=""))
+        itemlist.append(item.clone(title="Nessun video disponibile", action="", text_color=""))
     else:
         if item.contextual:
-            progreso = platformtools.dialog_progress("Buscando en abandomoviez", "Cargando trailers...")
+            progreso = platformtools.dialog_progress("Ricerca in abandomoviez", "Ricerca trailers...")
             progreso.update(10)
             i = 0
-            message = "Cargando trailers..."
+            message = "Ricerca trailers..."
         patron = '<div class="col-md-3 col-xs-6"><a href="([^"]+)".*?' \
                  'Images/(\d+).gif.*?</div><small>(.*?)</small>'
         matches = scrapertools.find_multiple_matches(data, patron)
@@ -322,16 +322,16 @@ def filmaffinity_search(item):
     else:
         params = urllib.urlencode([('stext', item.contentTitle), ('stype%5B%5D', 'title'), ('country', ''),
                                    ('genre', ''), ('fromyear', item.year), ('toyear', item.year)])
-        url = "http://www.filmaffinity.com/es/advsearch.php?%s" % params
+        url = "http://www.filmaffinity.com/en/advsearch.php?%s" % params
         data = scrapertools.downloadpage(url)
 
     itemlist = []
     patron = '<div class="mc-poster">.*?<img.*?src="([^"]+)".*?' \
-             '<div class="mc-title"><a  href="/es/film(\d+).html"[^>]+>(.*?)<img'
+             '<div class="mc-title"><a  href="/en/film(\d+).html"[^>]+>(.*?)<img'
     matches = scrapertools.find_multiple_matches(data, patron)
     # Si solo hay un resultado, busca directamente los trailers, sino lista todos los resultados
     if len(matches) == 1:
-        item.url = "http://www.filmaffinity.com/es/evideos.php?movie_id=%s" % matches[0][1]
+        item.url = "http://www.filmaffinity.com/en/evideos.php?movie_id=%s" % matches[0][1]
         item.thumbnail = matches[0][0]
         if not item.thumbnail.startswith("http"):
             item.thumbnail = "http://www.filmaffinity.com" + item.thumbnail
@@ -340,7 +340,7 @@ def filmaffinity_search(item):
         for scrapedthumbnail, id, scrapedtitle in matches:
             if not scrapedthumbnail.startswith("http"):
                 scrapedthumbnail = "http://www.filmaffinity.com" + scrapedthumbnail
-            scrapedurl = "http://www.filmaffinity.com/es/evideos.php?movie_id=%s" % id
+            scrapedurl = "http://www.filmaffinity.com/en/evideos.php?movie_id=%s" % id
             scrapedtitle = unicode(scrapedtitle, encoding="utf-8", errors="ignore")
             scrapedtitle = scrapertools.htmlclean(scrapedtitle)
             itemlist.append(item.clone(title=scrapedtitle, url=scrapedurl, text_color="white",
@@ -348,12 +348,12 @@ def filmaffinity_search(item):
 
         next_page = scrapertools.find_single_match(data, '<a href="([^"]+)">&gt;&gt;</a>')
         if next_page != "":
-            next_page = urlparse.urljoin("http://www.filmaffinity.com/es/", next_page)
-            itemlist.append(item.clone(title=">> Siguiente", page=next_page, action="filmaffinity_search", thumbnail="",
+            next_page = urlparse.urljoin("http://www.filmaffinity.com/en/", next_page)
+            itemlist.append(item.clone(title=">> Successivi", page=next_page, action="filmaffinity_search", thumbnail="",
                                        text_color=""))
 
     if not itemlist:
-        itemlist.append(item.clone(title="La búsqueda no ha dado resultados (%s)" % item.contentTitle,
+        itemlist.append(item.clone(title="La ricerca non ha dato risultati (%s)" % item.contentTitle,
                                    action="", thumbnail="", text_color=""))
 
         if keyboard:
@@ -361,7 +361,7 @@ def filmaffinity_search(item):
                 title = "[COLOR green]%s[/COLOR]"
             else:
                 title = "%s"
-            itemlist.append(item.clone(title=title % "Búsqueda Manual en Filmaffinity",
+            itemlist.append(item.clone(title=title % "Ricerca Manuale in Filmaffinity",
                                        action="manual_search", text_color="green", thumbnail="", extra="filmaffinity"))
 
     return itemlist
@@ -373,7 +373,7 @@ def search_links_filmaff(item):
     itemlist = []
     data = scrapertools.downloadpage(item.url)
     if not '<a class="lnkvvid"' in data:
-        itemlist.append(item.clone(title="No hay ningún vídeo disponible", action="", text_color=""))
+        itemlist.append(item.clone(title="Nessun video disponibile", action="", text_color=""))
     else:
         patron = '<a class="lnkvvid".*?<b>(.*?)</b>.*?iframe.*?src="([^"]+)"'
         matches = scrapertools.find_multiple_matches(data, patron)
@@ -402,7 +402,7 @@ def search_links_filmaff(item):
             title = "[COLOR green]%s[/COLOR]"
         else:
             title = "%s"
-        itemlist.append(item.clone(title=title % "Búsqueda Manual en Filmaffinity",
+        itemlist.append(item.clone(title=title % "Ricerca Manuale in Filmaffinity",
                                    action="manual_search", thumbnail="", text_color="green", extra="filmaffinity"))
 
     return itemlist
@@ -437,7 +437,7 @@ def jayhap_search(item):
                                    text_color="white"))
 
     if not itemlist:
-        itemlist.append(item.clone(title="La búsqueda no ha dado resultados (%s)" % item.contentTitle,
+        itemlist.append(item.clone(title="La ricerca non ha dato risultati (%s)" % item.contentTitle,
                                    action="", thumbnail="", text_color=""))
     else:
         tokens = data['tokens']
@@ -485,7 +485,7 @@ try:
             except:
                 pass
             self.getControl(1).setLabel("[COLOR orange]" + self.caption + "[/COLOR]")
-            self.getControl(5).setLabel("[COLOR tomato][B]Cerrar[/B][/COLOR]")
+            self.getControl(5).setLabel("[COLOR tomato][B]Chiudi[/B][/COLOR]")
             self.items = []
             for item in self.itemlist:
                 item_l = xbmcgui.ListItem(item.title)
