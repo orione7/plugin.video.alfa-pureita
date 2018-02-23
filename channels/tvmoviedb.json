@@ -15,7 +15,7 @@
       "id": "tmdb",
       "type": "list",
       "label": "Lingua per la ricerca in TMDB",
-      "default": 4,
+      "default": 3,
       "enabled": true,
       "visible": true,
       "lvalues": [
@@ -33,7 +33,7 @@
       "id": "tmdb_alternativo",
       "type": "list",
       "label": "Lingua alternativa per TMDB",
-      "default": 4,
+      "default": 3,
       "enabled": true,
       "visible": true,
       "lvalues": [
@@ -52,7 +52,7 @@
       "type": "list",
       "label": "Lingua dei titoli in IMDB",
       "color": "0xFFE0F04B",
-      "default": 4,
+      "default": 3,
       "enabled": true,
       "visible": true,
       "lvalues": [
@@ -78,7 +78,7 @@
       "type": "list",
       "label": "Sito Web Filmaffinity",
       "color": "0xFF25AA48",
-      "default": 5,
+      "default": 4,
       "enabled": true,
       "visible": true,
       "lvalues": [
