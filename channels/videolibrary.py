@@ -146,7 +146,7 @@ def list_tvshows(item):
                                         "action": "delete",
                                         "channel": "videolibrary",
                                         "multicanal": multicanal},
-                                       {"title": "Buscar nuevos episodios ahora",
+                                       {"title": "Cerca nuovi spisodi adesso",
                                         "action": "update_tvshow",
                                         "channel": "videolibrary"}]
                 # ,{"title": "Cambiar contenido (PENDIENTE)",
