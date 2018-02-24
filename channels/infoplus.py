@@ -37,9 +37,9 @@ ACTION_MOVE_UP = 3
 
 set_animation = False
 xinfoplus_set = config.get_setting("infoplus_set")
-if xinfoplus_set == "Sin animación":
+if xinfoplus_set == "Senza Animazione":
     set_animation = False
-if xinfoplus_set == "Con animación":
+if xinfoplus_set == "Con Animazione":
     set_animation = True
 
 def start(item, recomendaciones=[], from_window=False):
@@ -54,8 +54,8 @@ def start(item, recomendaciones=[], from_window=False):
         global SearchWindows
         SearchWindows = list()
 
-    dialog = platformtools.dialog_progress("Cargando nuevos datos",
-                                           "Buscandoen Tmdb.......")
+    dialog = platformtools.dialog_progress("Ricerca nuovi dati",
+                                           "Ricerca in Tmdb.......")
 
     principal_window = main(item=item, recomendaciones=recomendaciones, dialog=dialog, from_window=from_window)
     try:
@@ -101,7 +101,7 @@ class main(xbmcgui.WindowDialog):
             self.item.infoLabels.pop("episode", None)
             if not self.item.infoLabels["year"]:
                 self.dialog.close()
-                platformtools.dialog_notification("Sin resultados. Falta información del año del video", "No hay info de la %s solicitada" % tipo)
+                platformtools.dialog_notification("Senza risultati.  Mancano le informazioni dell'anno del video "," Non ci sono informazioni sul %s richiesto" % tipo)
                 global mainWindow
                 self.close()
                 del mainWindow
@@ -113,7 +113,7 @@ class main(xbmcgui.WindowDialog):
 
             if not self.infoLabels["tmdb_id"]:
                 self.dialog.close()
-                platformtools.dialog_notification("Sin resultados", "No hay info de la %s solicitada" % tipo)
+                platformtools.dialog_notification("Senza risultati", "Non ci sono informazioni sul %s richiesto" % tipo)
                 global mainWindow
                 self.close()
                 del mainWindow
@@ -133,30 +133,30 @@ class main(xbmcgui.WindowDialog):
                 rating = "[COLOR crimson][B]%s[/B][/COLOR]" % self.infoLabels["rating"]
 
             self.dialog.update(40,
-                               'Registrando filmaffinity.......')
+                               'Registrazione filmaffinity.......')
             rating_fa, plot_fa = get_filmaf(self.item, self.infoLabels)
             if not self.infoLabels.get("plot") and plot_fa:
                 self.infoLabels["plot"] = "[COLOR moccasin][B]%s[/B][/COLOR]" % plot_fa
             elif not self.infoLabels["plot"]:
-                self.infoLabels["plot"] = "[COLOR yellow][B]Esta pelicula no tiene informacion...[/B][/COLOR]"
+                self.infoLabels["plot"] = "[COLOR yellow][B]Nessuna info disponibile ...[/B][/COLOR]"
             else:
                 self.infoLabels["plot"] = "[COLOR moccasin][B]%s[/B][/COLOR]" % self.infoLabels.get("plot")
 
-            self.dialog.update(60, 'Indagando recomendaciones.......')
+            self.dialog.update(60, 'Ricerca raccomandazioni.......')
             thread1 = Thread(target=get_recomendations, args=[self.item, self.infoLabels, self.recomendaciones])
             thread1.setDaemon(True)
             thread1.start()
 
             if self.infoLabels.get("status") == "Ended" and tipo == "serie":
-                status = "[COLOR aquamarine][B]Finalizada %s[/B][/COLOR]"
+                status = "[COLOR aquamarine][B]Completata %s[/B][/COLOR]"
             elif self.infoLabels.get("status") and tipo == "serie":
-                status = "[COLOR aquamarine][B]En emisión %s[/B][/COLOR]"
+                status = "[COLOR aquamarine][B]In Uscita %s[/B][/COLOR]"
             else:
                 status = "[COLOR aquamarine][B]%s[/B][/COLOR]"
             if self.infoLabels.get("tagline") and tipo == "serie":
                 self.infoLabels["tagline"] = status % "(" + self.infoLabels["tagline"] + ")"
             elif not self.infoLabels.get("tagline") and tipo == "serie":
-                self.infoLabels["tagline"] = status % "(Temporadas: %s)" % self.infoLabels.get("number_of_seasons",
+                self.infoLabels["tagline"] = status % "(Stagione: %s)" % self.infoLabels.get("number_of_seasons",
                                                                                                "---")
             else:
                 self.infoLabels["tagline"] = status % self.infoLabels.get("tagline", "")
@@ -184,7 +184,7 @@ class main(xbmcgui.WindowDialog):
 
         if self.item.contentType != "movie":
             self.dialog.update(60,
-                               'Recopilando imágenes en FANART.TV')
+                               'Raccolta di immagini su FANART.TV')
             try:
                 ###Busca música serie
                 titulo = re.sub('\[.*?\]', '', titulo)
@@ -210,9 +210,9 @@ class main(xbmcgui.WindowDialog):
                 logger.error(traceback.format_exc())
 
         if xbmc.Player().isPlaying():
-            self.dialog.update(80, 'Afinado instrumentos en Vtunes')
+            self.dialog.update(80, 'Strumenti sintonizzati in Vtunes')
         else:
-            self.dialog.update(80, 'Recopilando imágenes en FANART.TV')
+            self.dialog.update(80, 'Raccolta di immagini su FANART.TV')
 
         while thread2.isAlive():
             xbmc.sleep(100)
@@ -337,7 +337,7 @@ class main(xbmcgui.WindowDialog):
                 [('conditional', 'effect=fade start=0% end=100% delay=2000 time=1500 condition=true',),
                  ('WindowClose', 'effect=fade start=100% end=0% time=800 condition=true',)])
             self.duration.setText(
-                "[COLOR mediumturquoise][B]Duración: %s minutos[/B][/COLOR]" % self.infoLabels["duration"])
+                "[COLOR mediumturquoise][B]Durata: %s minuti[/B][/COLOR]" % self.infoLabels["duration"])
         self.addControl(self.rating)
         if set_animation:
             self.rating.setAnimations(
@@ -400,7 +400,7 @@ class main(xbmcgui.WindowDialog):
             self.plot.autoScroll(11000, 6000, 30000)
         except:
             xbmc.executebuiltin(
-                'Notification([COLOR red][B]Actualiza Kodi a su última versión[/B][/COLOR], [COLOR skyblue]para mejor info[/COLOR],8000, "http://i.imgur.com/mHgwcn3.png")')
+                'Notification([COLOR red][B]Aggiorna Kodi alla sua ultima versione[/B][/COLOR], [COLOR skyblue]per maggiori info[/COLOR],8000, "http://i.imgur.com/mHgwcn3.png")')
         self.plot.setText(dhe(self.infoLabels.get("plot", "")))
 
         xbmc.sleep(200)
@@ -741,8 +741,8 @@ class main(xbmcgui.WindowDialog):
         else:
             for boton, peli, id, poster2 in self.idps:
                 if control == boton:
-                    dialog = platformtools.dialog_progress("Cargando nueva info",
-                                                           "Buscando en Tmdb.......")
+                    dialog = platformtools.dialog_progress("Ricerca  info",
+                                                           "Ricerca in Tmdb.......")
                     tipo = self.item.contentType
                     if tipo != "movie":
                         tipo = "tv"
@@ -834,7 +834,7 @@ class related(xbmcgui.WindowDialog):
             [('conditional', 'effect=slide delay=6000 start=2000 time=800 condition=true',),
              ('WindowClose', 'effect=slide end=0,-700% time=1000 condition=true',)])
 
-        self.info = "[COLOR lemonchiffon]%s[/COLOR]" % self.infoLabels.get("plot", "Sin información...")
+        self.info = "[COLOR lemonchiffon]%s[/COLOR]" % self.infoLabels.get("plot", "Senza informazioni...")
         self.info_peli = xbmcgui.ControlTextBox(455, 120, 750, 234)
         self.addControl(self.info_peli)
 
@@ -842,7 +842,7 @@ class related(xbmcgui.WindowDialog):
             self.info_peli.autoScroll(7000, 6000, 30000)
         except:
             xbmc.executebuiltin(
-                'Notification([COLOR red][B]Actualiza Kodi a su última versión[/B][/COLOR], [COLOR skyblue]para mejor info[/COLOR],8000, "http://i.imgur.com/mHgwcn3.png")')
+                'Notification([COLOR red][B]Aggiorna Kodi alla sua ultima versione[/B][/COLOR], [COLOR skyblue]per maggiori info[/COLOR],8000, "http://i.imgur.com/mHgwcn3.png")')
         self.info_peli.setText(self.info)
         if set_animation:
            self.info_peli.setAnimations(
@@ -859,9 +859,9 @@ class related(xbmcgui.WindowDialog):
                                         ('WindowClose', 'effect=zoom end=0% time=1000 condition=true',)])
 
         if self.infoLabels.get("status") == "Ended" and self.item.contentType != "movie":
-            status = "[COLOR aquamarine][B]Finalizada %s[/B][/COLOR]"
+            status = "[COLOR aquamarine][B]Completata %s[/B][/COLOR]"
         elif self.infoLabels.get("status") and self.item.contentType != "movie":
-            status = "[COLOR aquamarine][B]En emisión %s[/B][/COLOR]"
+            status = "[COLOR aquamarine][B]In Uscita %s[/B][/COLOR]"
         else:
             status = "[COLOR aquamarine][B]%s[/B][/COLOR]"
 
@@ -891,7 +891,7 @@ class related(xbmcgui.WindowDialog):
 
         self.gt_peli = xbmcgui.ControlTextBox(210, 385, 1100, 60, self.fonts["12"])
         self.addControl(self.gt_peli)
-        self.gt_peli.setText("[COLOR limegreen][B]Género: [/B][/COLOR]")
+        self.gt_peli.setText("[COLOR limegreen][B]Genere: [/B][/COLOR]")
         if set_animation:
             self.gt_peli.setAnimations(
             [('conditional', 'effect=slide start=0,-7000 delay=5750 time=700 condition=true tween=circle easing=in',),
@@ -907,7 +907,7 @@ class related(xbmcgui.WindowDialog):
 
         self.pt_peli = xbmcgui.ControlTextBox(210, 410, 307, 60, self.fonts["12"])
         self.addControl(self.pt_peli)
-        self.pt_peli.setText("[COLOR limegreen][B]Productora: [/B][/COLOR]")
+        self.pt_peli.setText("[COLOR limegreen][B]Produzione: [/B][/COLOR]")
         if set_animation:
             self.pt_peli.setAnimations(
             [('conditional', 'effect=slide start=0,-7000 delay=5700 time=700 condition=true tween=circle easing=in',),
@@ -915,7 +915,7 @@ class related(xbmcgui.WindowDialog):
 
         self.productora_peli = xbmcgui.ControlFadeLabel(320, 410, 400, 60, self.fonts["12"])
         self.addControl(self.productora_peli)
-        self.productora_peli.addLabel("[COLOR yellowgreen][B]%s[/B][/COLOR]" % self.infoLabels.get("studio", "---"))
+        self.productora_peli.addLabel("  [COLOR yellowgreen][B]%s[/B][/COLOR]" % self.infoLabels.get("studio", "---"))
         if set_animation:
             self.productora_peli.setAnimations(
             [('conditional', 'effect=slide start=0,-700 delay=5700 time=700 condition=true tween=circle easing=in',),
@@ -923,13 +923,13 @@ class related(xbmcgui.WindowDialog):
 
         self.paist_peli = xbmcgui.ControlTextBox(210, 435, 400, 60, self.fonts["12"])
         self.addControl(self.paist_peli)
-        self.paist_peli.setText("[COLOR limegreen][B]País: [/B][/COLOR]")
+        self.paist_peli.setText("[COLOR limegreen][B]Paese: [/B][/COLOR]")
         if set_animation:
             self.paist_peli.setAnimations(
             [('conditional', 'effect=slide start=0,-700 delay=5650 time=700 condition=true tween=circle easing=in',),
              ('WindowClose', 'effect=slide end=0,-7000% delay=200 time=700 condition=true',)])
 
-        self.pais_peli = xbmcgui.ControlFadeLabel(247, 435, 400, 60, self.fonts["12"])
+        self.pais_peli = xbmcgui.ControlFadeLabel(260, 435, 400, 60, self.fonts["12"])
         self.addControl(self.pais_peli)
         self.pais_peli.addLabel("  [COLOR yellowgreen][B]%s[/B][/COLOR]" % self.infoLabels.get("country", "---"))
         if set_animation:
@@ -939,13 +939,13 @@ class related(xbmcgui.WindowDialog):
 
         self.ft_peli = xbmcgui.ControlTextBox(210, 460, 1100, 60, self.fonts["12"])
         self.addControl(self.ft_peli)
-        self.ft_peli.setText("[COLOR limegreen][B]Estreno: [/B][/COLOR]")
+        self.ft_peli.setText("[COLOR limegreen][B]Prima: [/B][/COLOR]")
         if set_animation:
             self.ft_peli.setAnimations(
             [('conditional', 'effect=slide start=0,-700 delay=5600 time=700 condition=true tween=circle easing=in',),
              ('WindowClose', 'effect=slide end=0,-7000% delay=300 time=700 condition=true',)])
 
-        self.fecha_peli = xbmcgui.ControlFadeLabel(280, 460, 400, 60, self.fonts["12"])
+        self.fecha_peli = xbmcgui.ControlFadeLabel(260, 460, 400, 60, self.fonts["12"])
         self.addControl(self.fecha_peli)
         release_date = "  [COLOR yellowgreen][B]%s[/B][/COLOR]" % self.infoLabels.get("release_date",
                                                                                       self.infoLabels.get("premiered",
@@ -959,7 +959,7 @@ class related(xbmcgui.WindowDialog):
         if self.infoLabels.get("number_of_seasons"):
             self.seasons_txt = xbmcgui.ControlTextBox(210, 485, 200, 60, self.fonts["12"])
             self.addControl(self.seasons_txt)
-            self.seasons_txt.setText("[COLOR limegreen][B]Temporadas/Episodios: [/B][/COLOR]")
+            self.seasons_txt.setText("[COLOR limegreen][B]Stagioni/Episodi: [/B][/COLOR]")
             if set_animation:
                 self.seasons_txt.setAnimations([('conditional',
                                              'effect=slide start=0,-700 delay=5600 time=700 condition=true tween=circle easing=in',),
@@ -1234,11 +1234,11 @@ class Busqueda(xbmcgui.WindowXMLDialog):
         except:
             pass
         if self.item.contentType != "movie":
-            self.getControl(1).setLabel("[COLOR orange][B]¿Está la serie que buscas?[/B][/COLOR]")
+            self.getControl(1).setLabel("[COLOR orange][B] E questa la Serie che stai cercando?[/B][/COLOR]")
         else:
-            self.getControl(1).setLabel("[COLOR orange][B]¿Está la película que buscas?[/B][/COLOR]")
+            self.getControl(1).setLabel("[COLOR orange][B]E questo il Film che stai cercando?[/B][/COLOR]")
 
-        self.getControl(5).setLabel("[COLOR tomato][B]Cerrar[/B][/COLOR]")
+        self.getControl(5).setLabel("[COLOR tomato][B]Chiudi[/B][/COLOR]")
         self.control_list.reset()
         items = []
         for item_l in self.lista:
@@ -1256,7 +1256,7 @@ class Busqueda(xbmcgui.WindowXMLDialog):
     def onAction(self, action):
         global BusquedaWindow
         if (action == ACTION_SELECT_ITEM or action == 100) and self.getFocusId() == 6:
-            dialog = platformtools.dialog_progress_bg("Cargando resultados", "Espere........")
+            dialog = platformtools.dialog_progress_bg("Ricerca risultati", "Attentedere........")
             selectitem = self.getControl(6).getSelectedItem()
             item = Item().fromurl(selectitem.getProperty("item_copy"))
             exec "import channels." + item.channel + " as channel"
@@ -1289,8 +1289,8 @@ class GlobalSearch(xbmcgui.WindowXMLDialog):
         except:
             pass
 
-        self.getControl(1).setLabel("[COLOR orange][B]Selecciona...[/B][/COLOR]")
-        self.getControl(5).setLabel("[COLOR tomato][B]Cerrar[/B][/COLOR]")
+        self.getControl(1).setLabel("[COLOR orange][B]Selezione...[/B][/COLOR]")
+        self.getControl(5).setLabel("[COLOR tomato][B]Chiudi[/B][/COLOR]")
         self.control_list.reset()
         if not self.lista:
             global SearchWindows
@@ -1327,7 +1327,7 @@ class GlobalSearch(xbmcgui.WindowXMLDialog):
                         item = itemlist[0]
                     else:
                         ventana_error = xbmcgui.Dialog()
-                        ok = ventana_error.ok("plugin", "No hay nada para reproducir")
+                        ok = ventana_error.ok("plugin", "Nulla da riprodurre")
                         return
 
                 global BusquedaWindow, exit_loop, mainWindow, ActorInfoWindow, relatedWindow, ActoresWindow
@@ -1375,7 +1375,7 @@ class GlobalSearch(xbmcgui.WindowXMLDialog):
 
             else:
                 try:
-                    dialog = platformtools.dialog_progress_bg("Cargando resultados", "Espere........")
+                    dialog = platformtools.dialog_progress_bg("Ricerca risultati", "Attendere........")
                     itemlist = getattr(channel, item.action)(item)
                     window = GlobalSearch('DialogSelect.xml', config.get_runtime_path(), itemlist=itemlist,
                                           dialog=dialog)
@@ -1417,7 +1417,7 @@ class Actores(xbmcgui.WindowXMLDialog):
         except:
             pass
         self.getControl(1).setLabel("[COLOR orange][B]Reparto[/B][/COLOR]")
-        self.getControl(5).setLabel("[COLOR red][B]Cerrar[/B][/COLOR]")
+        self.getControl(5).setLabel("[COLOR red][B]Chiudi[/B][/COLOR]")
         self.control_list.reset()
         items = []
 
@@ -1470,8 +1470,8 @@ class Actores(xbmcgui.WindowXMLDialog):
             name_info = selectitem.getProperty("name_info")
             thumbnail = selectitem.getProperty("thumbnail")
             job = selectitem.getProperty("job")
-            dialog = platformtools.dialog_progress("Cargando nuevos datos",
-                                                   "Obteniendo datos del %s..." % job.lower())
+            dialog = platformtools.dialog_progress("Ricerca nuovi dati",
+                                                   "Acquisizione dati per %s..." % job.lower())
 
             global ActorInfoWindow
             ActorInfoWindow = ActorInfo(id=id_actor, name=name_info, thumbnail=thumbnail, item=self.item,
@@ -1500,10 +1500,10 @@ class ActorInfo(xbmcgui.WindowDialog):
         self.dialog = kwargs.get('dialog')
         if self.item.contentType == "movie":
             tipo = "movie"
-            search = {'url': 'person/%s' % self.id, 'language': 'es', 'append_to_response': 'movie_credits,images'}
+            search = {'url': 'person/%s' % self.id, 'language': 'it', 'append_to_response': 'movie_credits,images'}
         else:
             tipo = "tv"
-            search = {'url': 'person/%s' % self.id, 'language': 'es', 'append_to_response': 'tv_credits,images'}
+            search = {'url': 'person/%s' % self.id, 'language': 'it', 'append_to_response': 'tv_credits,images'}
 
         actor_tmdb = tmdb.Tmdb(discover=search)
         if not actor_tmdb.result.get("biography") and actor_tmdb.result.get("imdb_id"):
@@ -1519,7 +1519,7 @@ class ActorInfo(xbmcgui.WindowDialog):
                     bio = []
                     threads = {}
                     for i, info_ in enumerate(info_list):
-                        t = Thread(target=translate, args=[info_, "es", "en", i, bio])
+                        t = Thread(target=translate, args=[info_, "it", "en", i, bio])
                         t.setDaemon(True)
                         t.start()
                         threads[i] = t
@@ -1542,9 +1542,9 @@ class ActorInfo(xbmcgui.WindowDialog):
                     bio = dhe(scrapertools.htmlclean(info.strip()))
                     actor_tmdb.result["biography"] = bio
             else:
-                actor_tmdb.result["biography"] = "Sin información"
+                actor_tmdb.result["biography"] = "Senza informazioni"
         elif not actor_tmdb.result.get("biography"):
-            actor_tmdb.result["biography"] = "Sin información"
+            actor_tmdb.result["biography"] = "Senza informazioni"
 
         self.setCoordinateResolution(2)
         self.background = xbmcgui.ControlImage(30, -5, 1250, 730, 'http://imgur.com/7ccBX3g.png')
@@ -1577,9 +1577,9 @@ class ActorInfo(xbmcgui.WindowDialog):
             self.info_actor.autoScroll(7000, 6000, 30000)
         except:
             xbmc.executebuiltin(
-                'Notification([COLOR red][B]Actualiza Kodi a su última versión[/B][/COLOR], [COLOR skyblue]para mejor info[/COLOR],8000, "http://i.imgur.com/mHgwcn3.png")')
+                'Notification([COLOR red][B]Aggiorna Kodi alla sua ultima versione[/B][/COLOR], [COLOR skyblue]per maggiori info[/COLOR],8000, "http://i.imgur.com/mHgwcn3.png")')
         self.info_actor.setText(
-            "[COLOR coral][B]%s[/B][/COLOR]" % actor_tmdb.result.get("biography", "Sin información"))
+            "[COLOR coral][B]%s[/B][/COLOR]" % actor_tmdb.result.get("biography", "Senza informazioni"))
 
         self.titulos = []
         tipo_busqueda = "cast"
@@ -1601,7 +1601,7 @@ class ActorInfo(xbmcgui.WindowDialog):
             else:
                 self.titulos.append([entradas["id"], entradas.get("title", entradas.get("original_title", "")), thumb])
 
-        self.dialog.update(40, '[COLOR rosybrown]Obteniendo filmografía...[/COLOR]')
+        self.dialog.update(40, '[COLOR rosybrown]Ricerca filmografía...[/COLOR]')
         self.mas_pelis = 8
         self.idps = []
         self.botones = []
@@ -1673,7 +1673,7 @@ class ActorInfo(xbmcgui.WindowDialog):
             self.botones.append(self.btn_right)
 
         xbmc.sleep(200)
-        self.dialog.update(80, '[COLOR plum]Recopilando imágenes...[/COLOR]')
+        self.dialog.update(80, '[COLOR plum]Raccolta immagini...[/COLOR]')
         self.images = []
         for images in actor_tmdb.result.get("images", {}).get("profiles", []):
             imagen = "https://image.tmdb.org/t/p/original" + images["file_path"]
@@ -1914,8 +1914,8 @@ class ActorInfo(xbmcgui.WindowDialog):
 
         for boton, peli, id, poster2 in self.idps:
             if control == boton:
-                dialog = platformtools.dialog_progress("Cargando nueva info",
-                                                       "Buscando en Tmdb.......")
+                dialog = platformtools.dialog_progress("Ricerca nuove info",
+                                                       "Ricerca in Tmdb.......")
                 tipo = self.item.contentType
                 if tipo != "movie":
                     tipo = "tv"
@@ -2178,7 +2178,7 @@ class Trailer(xbmcgui.WindowXMLDialog):
         self.setCoordinateResolution(0)
         if not self.video_url:
             platformtools.dialog_notification("[COLOR crimson][B]Error[/B][/COLOR]",
-                                              "[COLOR tomato]Vídeo no disponible[/COLOR]", 2)
+                                              "[COLOR tomato]Vídeo non disponibile[/COLOR]", 2)
             self.close()
         elif self.video_url == "no_video":
             self.close()
@@ -2231,8 +2231,8 @@ def get_recomendations(item, infoLabels, recomendaciones):
     tipo = item.contentType
     if tipo != "movie":
         tipo = "tv"
-    search = {'url': '%s/%s/recommendations' % (tipo, infoLabels['tmdb_id']), 'language': 'es', 'page': 1}
-    reco_tmdb = tmdb.Tmdb(discover=search, tipo=tipo, idioma_busqueda="es")
+    search = {'url': '%s/%s/recommendations' % (tipo, infoLabels['tmdb_id']), 'language': 'it', 'page': 1}
+    reco_tmdb = tmdb.Tmdb(discover=search, tipo=tipo, idioma_busqueda="it")
 
     for i in range(0, len(reco_tmdb.results)):
         titulo = reco_tmdb.results[i].get("title", reco_tmdb.results[i].get("original_title", ""))
@@ -2248,7 +2248,7 @@ def get_recomendations(item, infoLabels, recomendaciones):
 def get_filmaf(item, infoLabels):
     title = infoLabels["title"].replace(" ", "+")
     year = str(infoLabels.get("year", ""))
-    url = "http://www.filmaffinity.com/es/advsearch.php?stext={0}&stype%5B%5D=title&country=&genre=&fromyear={1}&toyear={1}".format(
+    url = "http://www.filmaffinity.com/en/advsearch.php?stext={0}&stype%5B%5D=title&country=&genre=&fromyear={1}&toyear={1}".format(
         title, year)
     data = scrapertools.downloadpage(url)
 
@@ -2289,8 +2289,8 @@ def fanartv(item, infoLabels, images={}):
     headers = [['Content-Type', 'application/json']]
     id_search = infoLabels.get('tvdb_id')
     if item.contentType != "movie" and not id_search:
-        search = {'url': 'tv/%s/external_ids' % infoLabels['tmdb_id'], 'language': 'es'}
-        ob_tmdb = tmdb.Tmdb(discover=search, idioma_busqueda='es')
+        search = {'url': 'tv/%s/external_ids' % infoLabels['tmdb_id'], 'language': 'it'}
+        ob_tmdb = tmdb.Tmdb(discover=search, idioma_busqueda='it')
         id_search = ob_tmdb.result.get("tvdb_id")
     elif item.contentType == "movie":
         id_search = infoLabels.get('tmdb_id')
