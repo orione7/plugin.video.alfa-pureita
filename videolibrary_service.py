@@ -28,7 +28,7 @@ def update(path, p_dialog, i, t, serie, overwrite):
 
         if channel_enabled:
 
-            heading = 'Aggiornamento Libreria Video....'
+            heading = 'Aggiornamento libreria video....'
             p_dialog.update(int(math.ceil((i + 1) * t)), heading, "%s: %s" % (serie.contentSerieName,
                                                                               serie.channel.capitalize()))
             try:
@@ -81,7 +81,7 @@ def check_for_update(overwrite=True):
         if config.get_setting("update", "videolibrary") != 0 or overwrite:
             config.set_setting("updatelibrary_last_check", hoy.strftime('%Y-%m-%d'), "videolibrary")
 
-            heading = 'Actualizando videoteca....'
+            heading = 'Aggiornamento libreria video....'
             p_dialog = platformtools.dialog_progress_bg('alfa', heading)
             p_dialog.update(0, '')
             show_list = []
