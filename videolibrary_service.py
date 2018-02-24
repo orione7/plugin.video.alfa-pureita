@@ -28,7 +28,7 @@ def update(path, p_dialog, i, t, serie, overwrite):
 
         if channel_enabled:
 
-            heading = 'Actualizando videoteca....'
+            heading = 'Aggiornamento Libreria Video....'
             p_dialog.update(int(math.ceil((i + 1) * t)), heading, "%s: %s" % (serie.contentSerieName,
                                                                               serie.channel.capitalize()))
             try:
