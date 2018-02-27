@@ -96,7 +96,7 @@ def run(item=None):
         elif item.action == "script":
             from core import tmdb
             if tmdb.drop_bd():
-                platformtools.dialog_notification("Alfa", "caché eliminada", time=2000, sound=False)
+                platformtools.dialog_notification("Alfa-PureITA", "caché eliminata", time=2000, sound=False)
 
         # Action in certain channel specified in "action" and "channel" parameters
         else:
@@ -108,7 +108,7 @@ def run(item=None):
                 # Parental control
                 # If it is an adult channel, and user has configured pin, asks for it
                 if channeltools.is_adult(item.channel) and config.get_setting("adult_request_password"):
-                    tecleado = platformtools.dialog_input("", "Contraseña para canales de adultos", True)
+                    tecleado = platformtools.dialog_input("", "Password per i canali Adulti", True)
                     if tecleado is None or tecleado != config.get_setting("adult_password"):
                         return
 
@@ -158,7 +158,7 @@ def run(item=None):
 
                     # If not, shows user an error message
                     else:
-                        platformtools.dialog_ok("alfa", "No hay nada para reproducir")
+                        platformtools.dialog_ok("Alfa-PureITA", "Nulla da riprodurre")
 
                 # If player don't have a "play" function, not uses the standard play from platformtools
                 else:
@@ -254,13 +254,13 @@ def run(item=None):
         if hasattr(e, 'reason'):
             logger.error("Razon del error, codigo: %s | Razon: %s" % (str(e.reason[0]), str(e.reason[1])))
             texto = config.get_localized_string(30050)  # "No se puede conectar con el sitio web"
-            platformtools.dialog_ok("alfa", texto)
+            platformtools.dialog_ok("Alfa-PureITA", texto)
 
         # Grab server response errors
         elif hasattr(e, 'code'):
             logger.error("Codigo de error HTTP : %d" % e.code)
             # "El sitio web no funciona correctamente (error http %d)"
-            platformtools.dialog_ok("alfa", config.get_localized_string(30051) % e.code)
+            platformtools.dialog_ok("Alfa-PureITA", config.get_localized_string(30051) % e.code)
     except WebErrorException, e:
         import traceback
         logger.error(traceback.format_exc())
