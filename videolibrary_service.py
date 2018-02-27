@@ -82,7 +82,7 @@ def check_for_update(overwrite=True):
             config.set_setting("updatelibrary_last_check", hoy.strftime('%Y-%m-%d'), "videolibrary")
 
             heading = 'Aggiornamento libreria video....'
-            p_dialog = platformtools.dialog_progress_bg('alfa', heading)
+            p_dialog = platformtools.dialog_progress_bg('alfa-pureita', heading)
             p_dialog.update(0, '')
             show_list = []
 
