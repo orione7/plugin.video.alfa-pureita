@@ -148,8 +148,8 @@ def peliculas(item):
                     dialog = xbmcgui.Dialog()
                     if dialog.yesno(
                                             '[COLOR crimson][B]Sin resultados en[/B][/COLOR]' + '[COLOR gold][B] Mil[/B][/COLOR]' + '[COLOR floralwhite][B]torrents[/B][/COLOR]',
-                            '[COLOR cadetblue]¿Quieres hacer una busqueda en Alfa?[/COLOR]',
-                            '', "", '[COLOR crimson][B]No,gracias[/B][/COLOR]',
+                            '[COLOR cadetblue]Vuoi fare una ricerca in Alfa-PureITA?[/COLOR]',
+                            '', "", '[COLOR crimson][B]No,Grazie[/B][/COLOR]',
                             '[COLOR yellow][B]Si[/B][/COLOR]'):
                         item.extra = "serie" + "|" + item.extra.split("|")[2]
                         return busqueda(item)
@@ -179,9 +179,9 @@ def peliculas(item):
                 if len(matches) == 0:
                     dialog = xbmcgui.Dialog()
                     if dialog.yesno(
-                                            '[COLOR crimson][B]Sin resultados en[/B][/COLOR]' + '[COLOR gold][B] Mil[/B][/COLOR]' + '[COLOR floralwhite][B]torrents[/B][/COLOR]',
-                            '[COLOR cadetblue]¿Quieres hacer una busqueda en Alfa?[/COLOR]',
-                            '', "", '[COLOR crimson][B]No,gracias[/B][/COLOR]',
+                                            '[COLOR crimson][B]Nessun risultato in[/B][/COLOR]' + '[COLOR gold][B] Mil[/B][/COLOR]' + '[COLOR floralwhite][B]torrents[/B][/COLOR]',
+                            '[COLOR cadetblue]Vuoi fare una ricerca in Alfa-Pureita?[/COLOR]',
+                            '', "", '[COLOR crimson][B]No,Grazie[/B][/COLOR]',
                             '[COLOR yellow][B]Si[/B][/COLOR]'):
                         item.extra = "movie" + "|" + item.extra.split("|")[2]
 
